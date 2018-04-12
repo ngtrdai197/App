@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AutheService } from '../authe.service';
+import { AutheService } from '../provider/authe.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
@@ -8,17 +8,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  routerLink = '[\'content\']';
   constructor(private autheService: AutheService, private router: Router) { }
 
   ngOnInit() {
+
   }
   onSubmit(userName: string, passWords: string) {
     this.autheService.Login().subscribe((isAuthe) => {
+      if (userName === 'admin' && passWords === 'admin') {
         if (isAuthe === true) {
           this.router.navigate(['content']);
-          console.log('Truy cập files thành công');
         }
+      } else {
+        alert('Kiểm tra lại thông tin!');
+      }
     });
   }
 

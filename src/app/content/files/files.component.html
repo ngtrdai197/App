@@ -1,0 +1,118 @@
+<div class="content-files">
+    <div class="header">
+        <div class="content-left">
+            <div class="new float" title="Tạo thư mục mới hoặc tài liệu ở vị trí này">
+                <div class="dropdown">
+                    <span class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="true">
+                        <span class="glyphicon glyphicon-plus
+                                " aria-hidden="true"></span> Mới
+                        <span class="glyphicon glyphicon-menu-down
+                          "></span>
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li>
+                            Thư mục
+                        </li>
+                        <li>
+                            Tài liệu word</li>
+                        <li>
+                            Làm việc với Excel
+                        </li>
+                        <li>
+                            Tài liệu văn bản thuần
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="updates float" title="Tải tệp từ máy tính của bạn lên, ở vị trí này">
+                <div class="dropdown">
+                    <span class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="true">
+                        <span class="glyphicon glyphicon-cloud-upload
+                " aria-hidden="true"></span> Tải lên
+                        <span class="glyphicon glyphicon-menu-down
+                              "></span>
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li>
+                            Tệp
+                        </li>
+                        <li>
+                            Thư mục
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content-right">
+            <div class="sapxep float" title="Sắp xếp - hiển thị thư mục">
+                <!-- <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"> </span>Sắp xếp
+                <span class="glyphicon glyphicon-menu-down
+                " aria-hidden="true"></span> -->
+                <div class="dropdown">
+                    <span class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="true">
+                        <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"> </span> Sắp xếp
+                        <span class="glyphicon glyphicon-menu-down
+                                  "></span>
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li>
+                            Tên
+                        </li>
+                        <li>
+                            Đã sửa đổi
+                        </li>
+                        <li>
+                            Kích cỡ
+                        </li>
+                        <li>
+                            Tăng dần giảm dần
+                        </li>
+                        <li>
+                            Lưu thứ tự sắp xếp
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="xemtuychon float" title="Xem tùy chọn">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"> </span>
+
+            </div>
+            <div class="thongtin float" title="Thông tin file">
+                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> </span>
+            </div>
+        </div>
+    </div>
+    <div class="loadfiles">
+        <div class="timkiem">
+            <span class="glyphicon glyphicon-search
+                    " (click)="search(keyWord)" style="cursor: pointer;"></span>
+            <input type="text" placeholder="Tìm kiếm ..." [(ngModel)]="keyWord">
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 files" *ngFor="let item of filteredFiles" >
+                    <div class="div">
+                        <span *ngIf="item.type === 'folder'">
+                            <div class="cover">
+                                <img class="img1" src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/foldericons/folder-large_backplate.svg">
+                                <div class="wrapp">
+                                    <img class="img2" src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/foldericons/folder-large_frontplate_nopreview.svg">
+                                </div>
+                            </div>
+                        </span>
+                        <span *ngIf="item.type !== 'folder'" class="glyphicon glyphicon-file">
+                        </span>
+                    </div>
+                    <div class="folder-name">
+                        {{item.name}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

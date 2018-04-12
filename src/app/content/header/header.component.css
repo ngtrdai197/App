@@ -1,0 +1,17 @@
+.thongtin-user{
+    height: 8%;
+    background: #333;
+}
+.thongtin-user p {
+    color: #fff;
+    font-size: 20px;
+    margin: 0;
+    position: relative;
+    width: 100px;
+}
+.exit{
+    /* float: right; */
+    position: absolute;
+    top: 12px;
+    right: 25px;
+}

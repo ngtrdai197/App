@@ -1,0 +1,60 @@
+{
+  "sources": [
+    {
+      "id": 1,
+      "name": "Angular 5",
+      "type":"folder"
+    },
+    {
+      "id": 2,
+      "name": "NodeJs",
+      "type":"folder"
+    },
+    {
+      "id": 3,
+      "name": "Hướng đối tượng",
+      "type":"folder"
+    },
+    {
+      "id": 4,
+      "name": "Reactive",
+      "type":"folder"
+    },
+    {
+      "id": 5,
+      "name": "Trí tuệ nhân tạo",
+      "type":"docx"
+    },
+    {
+      "id": 6,
+      "name": "VueJs",
+      "type":"folder"
+    },
+    {
+      "id": 7,
+      "name": "Java",
+      "type":"docx"
+    },
+    {
+      "id": 8,
+      "name": "Mạng máy tính",
+      "type":"docx"
+    },
+    {
+      "id": 9,
+      "name": "C Sharp",
+      "type":"folder"
+    },
+    {
+      "id": 10,
+      "name": "Tiếng anh",
+      "type":"docx"
+    },
+    {
+      "id": 11,
+      "name": "Công nghệ phần mềm",
+      "type":"folder"
+    }
+  ]
+
+}

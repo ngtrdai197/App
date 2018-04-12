@@ -1,0 +1,96 @@
+.content-files{
+    width: 80%;
+    float: left;
+    height: 92%;
+    background: #fff;
+    .files {
+        cursor: pointer;
+    }
+    .header{
+        height: 8%;
+        background: #e7e7e775;
+        border-bottom: 1px solid transparent;
+        .content-left{
+            float: left;
+            line-height: 47px;
+            margin-left: 25px;
+            span.glyphicon {
+                padding: 3px;
+            }
+            .float{
+                display: inline-block;
+                padding: 0 15px;
+                cursor: pointer;
+                .btn-default{
+                    background: none;
+                    border: none;
+                }
+            }
+            ul.dropdown-menu li{
+                padding: 0 10px;
+            }
+            ul.dropdown-menu{
+                padding: 0;
+                    li:hover{
+                        background: #e7e7e7;
+                    }
+            }
+            .float:hover{
+               background: #e7e7e7;
+            }
+        }
+        .content-right{
+            float: right;
+            line-height: 47px;
+            span.glyphicon {
+                padding-right: 5px;
+            }
+            .float{
+                padding: 0 15px;
+                display: inline-block;
+                cursor: pointer;
+                .btn-default{
+                    background: none;
+                    border: none;
+                }
+            }
+            ul.dropdown-menu li{
+                padding: 0 10px;
+            }
+            ul.dropdown-menu{
+                padding: 0;
+                    li:hover{
+                        background: #e7e7e7;
+                    }
+            }
+           .float:hover{
+              background: #e7e7e7;
+            }
+        }
+    }
+    .loadfiles{
+        position: relative;
+        height: 92%;
+        .row{
+            margin: 0;
+            .div{
+                span{
+                    img.img2{
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                    }
+                    .cover{
+                        position: relative;
+                    }
+                }
+                span.glyphicon.glyphicon-file {
+                    font-size: 87px;
+                }
+            }
+            .folder-name{
+                font-size: 20px;
+            }
+        }
+    }
+}

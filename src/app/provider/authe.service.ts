@@ -8,9 +8,9 @@ export class AutheService {
     return new Observable(subscriber => {
       setTimeout(() => {
         this.isLogin = true;
-        subscriber.next(true);
+        subscriber.next(this.isLogin);
         subscriber.complete();
-      }, 1000);
+      }, 500);
     });
   }
 }
