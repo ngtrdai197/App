@@ -11,14 +11,14 @@
         left: 50%;
         transform: translate(-50%,-50%);
         width: 400px;
-        height: 450px;
+        height: 100%;
         background: #fff;
         transition: all 0.3s ease-in-out;
         .logo{
             position: absolute;
-            top: 10%;
+            top: 3%;
             left: 18%;
-            transform: translate(-18%,-10%);
+            transform: translate(-18%,-3%);
             img{
                 max-width: 40px;
             }
@@ -30,19 +30,28 @@
         }
         .form-dangnhap{
             position: absolute;
-            top: 60%;
+            top: 57%;
             left: 50%;
-            transform: translate(-50%, -58%);
+            transform: translate(-50%, -55%);
             // margin-left: 40px;
+            .check{
+                span{
+                    color: #333333b3;
+                    font-size: 17px;
+                }
+            }
             .click-dangnhap{
                 width: 315px;
                 background: #1010abb5;
                 text-align: center;
                 margin: 20px 0;
                 cursor: pointer;
-                p{
-                    color: #fff;
-                    font-size: 17px;
+                button {
+                    width: 100%;
+                    background: #1010abb5;
+                    color: #ffffff;
+                    border: none;
+                    font-size: 21px;
                 }
                 
             }
@@ -61,9 +70,10 @@
                     margin-left: 1px;
                     font-size: 14px;
                     outline: none;
+                    border: none;
+                    border-bottom: 2px solid #696969;
                 }
                 input:focus{
-                    border: none;
                     border-bottom: 2px solid blue;
                 }
                 p{
@@ -72,11 +82,36 @@
                     font-size: 18px;
                 }
             }
+            .signin-google{
+                width: 100%;
+                background: #0000ffbf;
+                margin: 0;
+                cursor: pointer;
+                a{
+                    text-align: center;
+                    font-size: 16px;
+                    color: #ffffff;
+                }
+                span{
+                    color: #ffffff;
+                    font-size: 15px;
+                    padding: 11px 28px;
+                    overflow: hidden;
+                    border-right: 1px solid;
+                }
+            }
+            .signin-google:hover{
+                background: #1d1dec;
+            }
         }
     }
     .dangnhap:hover{
-        box-shadow: 7px 7px 15px #dddddda3;
+        box-shadow: 7px 7px 15px #333;
         transition: all 0.4s ease-in-out;
-        margin-top: -10px;
+        margin-top: -5px;
+    }
+    .alert{
+        margin: 5px 0 0 0;
+        padding: 5px;
     }
 }

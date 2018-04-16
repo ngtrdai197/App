@@ -1,6 +1,11 @@
+:host{
+    display: flex;
+    line-height: 53px;
+    background: #333;
+    
+}
 .thongtin-user{
     height: 8%;
-    background: #333;
 }
 .thongtin-user p {
     color: #fff;
@@ -9,9 +14,23 @@
     position: relative;
     width: 100px;
 }
-.exit{
-    /* float: right; */
-    position: absolute;
-    top: 12px;
-    right: 25px;
+.container{
+    display: flex;
+    justify-content: flex-end;
+}
+.right{
+    display: flex;
+}
+.item{
+    width: 90px;
+    padding: 0 15px;
+    cursor: pointer;
+    color: #ffffff;
+    border-bottom: 2px solid transparent;
+    box-sizing: border-box;
+    text-align: center;
+}
+.item:hover{
+    border-bottom: 2px solid orangered;
+    
 }

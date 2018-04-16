@@ -1,4 +1,61 @@
-<p>
-  register works!
-</p>
-<button routerLink="/">Back Home</button>
+<div class="container-fluid">
+    <div class="dangnhap">
+        <div class="logo">
+            <img src="../../assets/logo_cloud.PNG">
+            <span>DCloud</span>
+        </div>
+        <div class="form-dangnhap">
+            <form [formGroup]="registerForm">
+                <div class="taikhoan">
+                    <div class="the-p">
+                        <!-- <p>Nhập tài khoản</p> -->
+                        <input type="text" id="userName" placeholder="Nhập tài khoản ..." formControlName="userName" #user>
+                        <div *ngIf="registerForm.get('userName').invalid && registerForm.get('userName').touched" class="alert alert-danger">Tài khoản không hợp lệ</div>
+
+                    </div>
+                </div>
+                <div class="email">
+                    <div class="the-p">
+                        <!-- <p>Nhập email</p> -->
+                        <input type="email" name="" id="email" placeholder="Nhập địa chỉ email của bạn ... " formControlName="email" #email>
+                        <div *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched" class="alert alert-danger">Email không hợp lệ</div>
+
+                    </div>
+                </div>
+                <div class="matkhau">
+                    <div class="the-p">
+                        <!-- <p>Nhập mật khẩu</p> -->
+                        <input type="password" id="passWord" placeholder="Nhập mật khẩu ..." formControlName="passWord" #pass>
+                        <div *ngIf="registerForm.get('passWord').invalid && registerForm.get('passWord').touched" class="alert alert-danger">Mật khẩu không hợp lệ</div>
+
+                    </div>
+                    <div class="the-p">
+                        <!-- <p>Nhập lại mật khẩu</p> -->
+                        <input type="password" id="passWordConfirm" placeholder="Nhập lại mật khẩu ..." formControlName="passWordConfirm" #passWordConfirm>
+                        <div *ngIf="registerForm.get('passWordConfirm').invalid && registerForm.get('passWordConfirm').touched" class="alert alert-danger">Mật khẩu nhập lại không hợp lệ</div>
+
+                    </div>
+                </div>
+                <div class="check">
+                    <input type="checkbox" [name]="checked" (click)="checkedBox()">
+                    <span>Tôi đồng ý</span>
+                    <span>
+                        <a href="" class="btn btn-1" [routerLink]="['/']">Đăng nhập</a>
+                    </span>
+
+                </div>
+                <div class="click-dangnhap">
+                    <!-- <p class="btn">Create an account</p> -->
+                    <button [disabled]="registerForm.invalid">Create an account</button>
+                </div>
+                <a href="" class="btn btn-1">Đăng nhập bằng tài khoản DCloud khác</a>
+                <p class="signin-google">
+                    <span>
+                        <i class="fab fa-google"></i>
+                    </span>
+                    <a href="" class="btn btn-1 google">Sign in with Google</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

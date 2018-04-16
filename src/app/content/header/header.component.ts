@@ -17,4 +17,7 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['']);
     }, 700);
   }
+  userLogin() {
+    this.router.navigate(['user']);
+  }
 }

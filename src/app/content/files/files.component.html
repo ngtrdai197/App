@@ -45,12 +45,14 @@
                     </ul>
                 </div>
             </div>
+            <div class="timkiem float">
+                <input type="text" placeholder="Tìm kiếm ..." [(ngModel)]="keyWord">
+                <span class="glyphicon glyphicon-search
+                        " (click)="search(keyWord)" style="cursor: pointer;"></span>
+            </div>
         </div>
         <div class="content-right">
             <div class="sapxep float" title="Sắp xếp - hiển thị thư mục">
-                <!-- <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"> </span>Sắp xếp
-                <span class="glyphicon glyphicon-menu-down
-                " aria-hidden="true"></span> -->
                 <div class="dropdown">
                     <span class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="true">
@@ -88,14 +90,10 @@
         </div>
     </div>
     <div class="loadfiles">
-        <div class="timkiem">
-            <span class="glyphicon glyphicon-search
-                    " (click)="search(keyWord)" style="cursor: pointer;"></span>
-            <input type="text" placeholder="Tìm kiếm ..." [(ngModel)]="keyWord">
-        </div>
+
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 files" *ngFor="let item of filteredFiles" >
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 files" *ngFor="let item of filteredFiles">
                     <div class="div">
                         <span *ngIf="item.type === 'folder'">
                             <div class="cover">

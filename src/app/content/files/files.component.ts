@@ -22,7 +22,6 @@ export class FilesComponent implements OnInit {
       this.filteredFiles = data;
     });
   }
-
   search(keyWord) {
     const match = new RegExp(keyWord, 'g');
     this.filteredFiles = this.allFiles.filter(file => match.test(file.name) );

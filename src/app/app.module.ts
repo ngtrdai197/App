@@ -16,13 +16,16 @@ import { MenuBarComponent } from './content/menu-bar/menu-bar.component';
 import { HeaderComponent } from './content/header/header.component';
 import { FilesService } from './provider/files.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterService } from './register/register.service';
+import { UserComponent } from './user/user.component';
 
 
 const appRoutes: Routes = [
   { path: 'home', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'user', component: UserComponent },
   {
     canActivate: [AutheGuard],
     path: 'content',
@@ -50,19 +53,22 @@ const appRoutes: Routes = [
     ContentComponent,
     RegisterComponent,
     MenuBarComponent,
-    HeaderComponent
+    HeaderComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AutheGuard,
     AutheService,
     FilesService,
-    HttpClient
+    HttpClient,
+    RegisterService
   ],
   bootstrap: [AppComponent]
 })
