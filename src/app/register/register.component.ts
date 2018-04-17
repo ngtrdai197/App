@@ -42,8 +42,7 @@ export class RegisterComponent implements OnInit {
       passWordConfirm: ['', [
         Validators.required, Validators.minLength(8), Validators.maxLength(16), this.matchPassWord,
       ]]
-    },
-    );
+    });
     this.registerForm.valueChanges.subscribe(() => {
       this.formValidate();
     });

@@ -1,25 +1,24 @@
 <header>
-  <div class="logo item" [routerLink]="['/home']">
+  <div class="logo item  wow slideInDown" [routerLink]="['/home']">
     DCloud
   </div>
   <div class="container">
-    <div class="menu item2">
+    <div class="menu item2 wow slideInDown" data-wow-delay="1s">
       <ul>
-        <li>How it works</li>
-        <li>Find savings</li>
-        <li>Support</li>
-        <li>Blog</li>
+        <li>Sử dụng DCloud</li>
+        <li>Định giá</li>
+        <li>Tải xuống</li>
+        <li>Dành cho công việc</li>
+        <li>Trợ giúp</li>
       </ul>
     </div>
-    <div class="login-logout item">
+    <div class="login-logout item wow slideInDown" data-wow-delay="1s">
       <ul>
         <li [routerLink]="['/login']">Login</li>
       </ul>
-      <!-- <div>Login</div>
-    <div></div> -->
     </div>
     <div class="descreption">
-      <p class="animated infinite bounce">Tất cả mọi tệp của bạn khả dụng ở mọi nơi</p>
+      <p class="animated rollIn">Tất cả mọi tệp của bạn khả dụng ở mọi nơi</p>
     </div>
     <div class="btnaccess" [routerLink]="['/login']">
       Truy cập DCloud
@@ -32,43 +31,43 @@
       <div class="wrapper">
         <ul class="row1">
           <li>
-            <img src="../../assets/ai.jpg" alt="">
+            <img class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="0.4s" src="../../assets/ai.jpg" alt="">
           </li>
           <li>
-            <img src="../../assets/ps.jpg" alt="">
+            <img class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="0.2s" src="../../assets/ps.jpg" alt="">
           </li>
           <li>
-            <img src="../../assets/excel.png" alt="">
-          </li>
-        </ul>
-        <ul class="row2">
-          <li>
-            <img src="../../assets/video.png" alt="">
-          </li>
-          <li>
-            <img src="../../assets/amthanh.png" alt="">
-          </li>
-          <li>
-            <img src="../../assets/word.png" alt="">
+            <img class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="0s" src="../../assets/excel.png" alt="">
           </li>
         </ul>
         <ul class="row2">
           <li>
-            <img src="../../assets/pp.png" alt="">
+            <img class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="1s" src="../../assets/video.png" alt="">
           </li>
           <li>
-            <img src="../../assets/zip.png" alt="">
+            <img class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="0.8s" src="../../assets/amthanh.png" alt="">
           </li>
           <li>
-            <img src="../../assets/pdf.png" alt="">
+            <img class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="0.6s" src="../../assets/word.png" alt="">
+          </li>
+        </ul>
+        <ul class="row2">
+          <li>
+            <img class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="1.6s" src="../../assets/pp.png" alt="">
+          </li>
+          <li>
+            <img class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="1.4s" src="../../assets/zip.png" alt="">
+          </li>
+          <li>
+            <img class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="1.2s" src="../../assets/pdf.png" alt="">
           </li>
         </ul>
       </div>
     </div>
     <div class="right item">
-      <p class="title animated fadeInDown">Lưu trữ mọi tệp
+      <p class="title wow bounceInDown" data-wow-duration="2s" data-wow-delay="0s">Lưu trữ mọi tệp
       </p>
-      <p class="des animated fadeInUp">Drive cấp cho bạn 15 GB bộ nhớ trực tuyến miễn phí của DCloud để bạn có thể lưu giữ ảnh, câu chuyện, thiết kế, bản
+      <p class="des wow bounceInUp" data-wow-duration="2s" data-wow-delay="1s">Drive cấp cho bạn 15 GB bộ nhớ trực tuyến miễn phí của DCloud để bạn có thể lưu giữ ảnh, câu chuyện, thiết kế, bản
         vẽ, bản ghi, video – mọi thứ.</p>
     </div>
   </div>
@@ -76,47 +75,48 @@
 <section class="xemnoidung">
   <div class="container">
     <div class="contetnt-left">
-      <p class="title2 animated fadeInUp">Xem nội dung của bạn ở mọi nơi
+      <p class="title2 wow bounceInDown" data-wow-duration="1s">Xem nội dung của bạn ở mọi nơi
       </p>
-      <p class="des2  animated fadeInDown">Tệp của bạn trong Drive có thể truy cập được từ mọi điện thoại thông minh, máy tính bảng hoặc máy tính. Nhờ đó, tệp
+      <p class="des2 wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.7s">Tệp của bạn trong Drive có thể truy cập được từ mọi điện thoại thông minh, máy tính bảng hoặc máy tính. Nhờ đó, tệp
         của bạn luôn đồng hành bạn.
 
       </p>
     </div>
-    <div class="content-right">
+    <div class="content-right wow slideInRight">
       <img src="../../assets/phonetablet.jpg" alt="">
     </div>
     <!-- <div class="fix"></div> -->
   </div>
 </section>
 <section class="travel">
-  <p>Bắt đầu sử dung DCloud miễn phí</p>
-  <div class="btnaccess" style="color:#ffffff;" [routerLink]="['/login']">
-    Truy cập DCloud
-  </div>
-  <div class="taixuong">
-    Tải xuống sao lưu và đồng bộ hóa   >
-  </div>
+    <p class="tit3">Bắt đầu sử dung DCloud miễn phí</p>
+    <div [routerLink]="['/login']">
+      <p class="btnaccess2" style="color:#ffffff;">Truy cập DCloud</p>
+    </div>
+    <div class="taixuong">
+      Tải xuống sao lưu và đồng bộ hóa  >
+    </div>
 </section>
 <footer>
   <div class="container">
     <div class="descrepsiton-footer">
-       Chia sẻ trang web DCloud App
-      <span style="padding-left: 10px;"><i class="fas fa-cloud"></i> :
+      Chia sẻ trang web DCloud App
+      <span style="padding-left: 10px;">
+        <i class="fas fa-cloud"></i> :
       </span>
       <div class="wrap">
-        Theo dõi: 
+        Theo dõi:
         <span>
-        <i class="fab fa-facebook-square"></i>
-      </span>
-      <span>
+          <i class="fab fa-facebook-square"></i>
+        </span>
+        <span>
           <i class="fab fa-twitter-square"></i>
-      </span>
-      <span>
+        </span>
+        <span>
           <i class="fab fa-google-plus"></i>
-      </span>
+        </span>
       </div>
-      
+
     </div>
     <p class="duongke"></p>
     <div class="line1">
