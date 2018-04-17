@@ -1,0 +1,234 @@
+:host{
+    font-family: Arial, Helvetica, sans-serif;
+}
+header{
+    display: flex;
+    padding-top: 20px;
+    color: #ffffff;
+    background: url(../../assets/intro-1024.jpg) no-repeat;
+    height: 100vh;
+    width: 100%;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.logo{
+    cursor: pointer;
+    text-align: center;
+    font-size: 25px;
+    border: 1px solid;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 85px;
+}
+.logo:hover{
+    border: 1px solid #ed3737;
+}
+header .container{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    text-align: center;
+}
+
+.login-logout ul li{
+    font-weight: 50px;
+    cursor: pointer;
+    text-transform: uppercase;
+    display: inline-flex;
+}
+.login-logout ul li:hover{
+    border-bottom: 2px solid orangered;
+}
+ul{
+    padding: 0;
+}
+.menu ul li{
+    display: inline-flex;
+    padding: 5px 20px;
+    font-size: 15x;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+.menu ul li:hover{
+    border-bottom: 2px solid orangered;
+}
+.item{
+    width: 200px;
+}
+.item2{
+    flex-grow: 1;
+}
+.descreption{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.descreption p{
+    font-size: 45px;
+    font-weight: 600;
+}
+.btnaccess{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%,-70%);
+    background: #4386fc;
+    padding: 20px 30px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+content{
+    height: 450px;
+    background: #ed3737;
+    display: block;
+    position: relative;
+    background: url(../../assets/pexels-photo-234527.jpeg) no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    color: #ffffff;
+}
+
+.right h2{
+    margin-top: 0;
+}
+content .container{
+    display: flex;
+    position: absolute;
+    top: 15%;
+}
+content .container .item{
+    flex: 1;
+}
+.wrapper ul li img{
+    max-width: 100px;
+}
+ul.row1 li{
+    display: inline-block;
+    padding: 0 15px;
+}
+ul.row2 li{
+    padding: 0 15px;
+    display: inline-block;
+}
+.left{
+    text-align: center;
+}
+.title{
+    font-size: 70px;
+}
+.des{
+    font-size: 25px;
+    line-height: 55px;
+}
+section.xemnoidung{
+    height: 500px;
+    width: 100%;
+    position: relative;
+    background-color:#ffffff;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow: hidden;
+}
+section.xemnoidung .container{
+    display: flex;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.contetnt-left{
+    width: 35%;
+}
+.content-right{
+    width: 65%;
+    text-align: right;
+}
+.content-right img{
+    max-width: 625px;
+}
+.title2{
+    font-size: 45px;
+}
+.des2{
+    font-size: 20px;
+    line-height: 45px;
+}
+section.travel{
+    height: 500px;
+    background: url(../../assets/photo-3-1600.jpg) no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+}
+.travel p{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 28px;
+    color: #ffff;
+}
+.taixuong {
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -83%);
+    font-size: 21px;
+    color: #ffffff !important;
+    cursor: pointer;
+}
+.taixuong:hover{
+    color: blue !important;
+}
+footer{
+    height: 300px;
+    background: #e8e8e8;
+    position: relative;
+}
+footer .container .line1{
+    display: flex;
+    justify-content: space-between;
+}
+footer .container .line1 ul li{
+    list-style: none;
+    line-height: 30px;
+    color: blue;
+}
+.source{
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.descrepsiton-footer{
+    height: 60px;
+    line-height: 60px;
+    font-size: 19px;
+    display: flex;
+}
+.descrepsiton-footer span{
+    padding: 0 3px;
+    font-size: 23px
+}
+.wrap{
+    margin-left: 35px;
+}
+.duongke{
+    height: 3px;
+    width: 100%;
+    background: #ffffff;
+    margin: 10px 0 20px 0;
+}
+li.title-footer {
+    font-size: 21px;
+    margin-bottom: 8px;
+    color: #000 !important;
+}

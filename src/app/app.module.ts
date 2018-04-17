@@ -19,11 +19,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterService } from './register/register.service';
 import { UserComponent } from './user/user.component';
+import { LoginComponent } from './login/login.component';
 
 
 const appRoutes: Routes = [
   { path: 'home', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'user', component: UserComponent },
   {
@@ -54,7 +56,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     MenuBarComponent,
     HeaderComponent,
-    UserComponent
+    UserComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
