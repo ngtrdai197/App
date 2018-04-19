@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AutheGuard } from './provider/authe.guard';
@@ -20,7 +20,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterService } from './register/register.service';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { FolderComponent } from './content/files/folder.component';
+import { ThongTinUserService } from './provider/thongtinuser.service';
 
 const appRoutes: Routes = [
   { path: 'home', redirectTo: '/', pathMatch: 'full' },
@@ -57,22 +60,33 @@ const appRoutes: Routes = [
     MenuBarComponent,
     HeaderComponent,
     UserComponent,
-    LoginComponent
+    LoginComponent,
+    FolderComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     AutheGuard,
     AutheService,
     FilesService,
     HttpClient,
-    RegisterService
+    RegisterService,
+    ThongTinUserService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    FolderComponent,
+  ]
 })
 export class AppModule { }

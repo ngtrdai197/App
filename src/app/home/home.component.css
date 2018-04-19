@@ -84,16 +84,19 @@ ul{
     cursor: pointer;
     border-radius: 5px;
 }
+.btnaccess:hover{
+    background: #124296;
+}
 content{
     height: 450px;
     background: #ed3737;
     display: block;
     position: relative;
-    background: url(../../assets/pexels-photo-234527.jpeg) no-repeat;
+    background: url(../../assets/01.jpg) no-repeat;
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
-    color: #ffffff;
+    color: floralwhite;
 }
 
 .right h2{
@@ -219,6 +222,7 @@ footer .container .line1 ul li{
     list-style: none;
     line-height: 30px;
     color: blue;
+    cursor: pointer;
 }
 .source{
     position: absolute;

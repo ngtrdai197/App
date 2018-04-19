@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ThongTinUserService } from '../../provider/thongtinuser.service';
 
 @Component({
   selector: 'app-header',
@@ -8,16 +9,21 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  user: '';
+  constructor(private router: Router, private thongTinUser: ThongTinUserService) { }
 
   ngOnInit() {
+    this.userLogin();
   }
   backToHome() {
     setTimeout(() => {
       this.router.navigate(['']);
-    }, 700);
+    }, 5000);
   }
   userLogin() {
-    this.router.navigate(['user']);
+    // this.router.navigate(['user']);
+    this.thongTinUser.getThongTin().subscribe(user => {
+      this.user = user;
+    });
   }
 }

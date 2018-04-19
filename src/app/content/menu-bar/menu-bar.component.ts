@@ -12,22 +12,20 @@ export class MenuBarComponent implements OnInit {
 
   filteredFiles: IFile[];
   allFiles: IFile[];
-  keyWord: string;
-  temp: Subscription;
+  // keyWord: string;
   constructor(private fileService: FilesService) { }
 
   ngOnInit() {
-    this.fileService.getFiles().subscribe(data => {
+    this.fileService.postFiles().subscribe(data => {
       this.allFiles = data;
       this.filteredFiles = data;
     });
   }
 
-  search(keyWord) {
-    // const match = new RegExp(keyWord, 'g');
-    // this.filteredFiles = this.allFiles.filter(file => match.test(file.name) );
-    // this.temp = this.fileService.search(keyWord);
-    this.fileService.search(keyWord);
+  search(value) {
+    const match = new RegExp(value, 'i');
+    this.filteredFiles = this.allFiles.filter(file => match.test(file.name));
+    this.fileService.search(this.filteredFiles);
+    // console.log(this.filteredFiles);
   }
-
 }

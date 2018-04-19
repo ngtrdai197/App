@@ -11,10 +11,10 @@
                           "></span>
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li>
+                        <li (click)="openDiaLog();">
                             Thư mục
                         </li>
-                        <li>
+                        <li (click)=deleteFolder();>
                             Tài liệu word</li>
                         <li>
                             Làm việc với Excel
@@ -44,11 +44,6 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div class="timkiem float">
-                <input type="text" placeholder="Tìm kiếm ..." [(ngModel)]="keyWord">
-                <span class="glyphicon glyphicon-search
-                        " (click)="search(keyWord)" style="cursor: pointer;"></span>
             </div>
         </div>
         <div class="content-right">
@@ -93,7 +88,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 files" *ngFor="let item of filteredFiles">
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 files" *ngFor="let item of allFiles">
                     <div class="div">
                         <span *ngIf="item.type === 'folder'">
                             <div class="cover">

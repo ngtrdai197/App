@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FilesService } from '../../provider/files.service';
 import { IFile } from '../../interface/IFile';
 import { Subscription } from 'rxjs/Subscription';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material';
+import { FolderComponent } from '../files/folder.component';
+
 @Component({
   selector: 'app-files',
   templateUrl: './files.component.html',
@@ -12,18 +16,44 @@ export class FilesComponent implements OnInit {
   filteredFiles: IFile[];
   keyWord: string;
 
-  constructor(private fileService: FilesService) { }
+  constructor(private fileService: FilesService, private diaLog: MatDialog) { }
   ngOnInit() {
     this.loadFiles();
+    this.fileService.getThongTinSearch().subscribe(data => {
+      this.allFiles = data;
+    });
+
   }
   loadFiles() {
-    this.fileService.getFiles().subscribe(data => {
+    this.fileService.getFile().subscribe(data => {
       this.allFiles = data;
-      this.filteredFiles = data;
     });
   }
-  search(keyWord) {
-    const match = new RegExp(keyWord, 'g');
-    this.filteredFiles = this.allFiles.filter(file => match.test(file.name) );
+
+  deleteFolder() {
+    this.fileService.deleteFolder(13).subscribe(data => {
+      this.allFiles.splice(12, 1);
+    });
   }
+
+  public openDiaLog() {
+    const dialogRef = this.diaLog.open(FolderComponent, {
+      width: '300px',
+    });
+    dialogRef.afterClosed().subscribe((isConfirm) => {
+      if (isConfirm) {
+        this.fileService.getNameFolder().subscribe(folderName => {
+          console.log(folderName);
+          const newFolder: IFile = {
+            name: folderName,
+            type: 'folder'
+          };
+          this.fileService.addFolder(newFolder).subscribe(data => {
+            this.allFiles.push(newFolder);
+          });
+        });
+      }
+    });
+  }
+
 }

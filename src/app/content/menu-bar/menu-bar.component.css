@@ -37,8 +37,8 @@ li:hover{
 }
 .timkiem{
     border-bottom: 1px solid #696969;
-    padding: 0 33px;    
-    
+    padding: 0 10px;    
+    position: relative;
 }
 .timkiem input {
     width: 80%;
@@ -47,6 +47,13 @@ li:hover{
     height: 45px;
 }
 span.glyphicon.glyphicon-search {
-    width: 20%;
+    padding: 0 10px 0 5px;
     font-size: 18px;
+}
+span.delete {
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translateY(-50%);
+    cursor: pointer;
 }

@@ -1,13 +1,14 @@
 .content-files{
     width: 80%;
     float: left;
-    height: 92%;
+    height: 90%;
     background: #fff;
     .files {
         cursor: pointer;
+        margin: 10px 0;
     }
     .header{
-        height: 8%;
+        height: 7%;
         background: #e7e7e775;
         border-bottom: 1px solid transparent;
         .content-left{
@@ -74,6 +75,7 @@
     .loadfiles{
         position: relative;
         height: 92%;
+        padding: 20px 0;
         .row{
             margin: 0;
             .div{

@@ -4,12 +4,13 @@
     background: #333;
     
 }
-.thongtin-user{
-    height: 8%;
+.user{
+    color: #ffffff;
 }
 .thongtin-user p {
     color: #fff;
     font-size: 20px;
+    line-height: 59px;
     margin: 0;
     position: relative;
     width: 100px;
@@ -25,7 +26,8 @@
 }
 .item{
     width: 90px;
-    padding: 0 15px;
+    /* padding: 0 15px; */
+    line-height: 59px;
     cursor: pointer;
     color: #ffffff;
     border-bottom: 2px solid transparent;
