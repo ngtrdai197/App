@@ -24,10 +24,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FolderComponent } from './content/files/folder.component';
 import { ThongTinUserService } from './provider/thongtinuser.service';
+import {MatTableModule} from '@angular/material/table';
+import { DeleteFileService } from './provider/delete.service';
+import { UserFireBaseService } from './provider/usersfirebase.service';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from 'angularfire2';
 
 const appRoutes: Routes = [
   { path: 'home', redirectTo: '/', pathMatch: 'full' },
-  { path: '', component: HomeComponent },
+  { path: '', component: ContentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'user', component: UserComponent },
@@ -74,7 +80,10 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule,
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [
     AutheGuard,
@@ -82,7 +91,9 @@ const appRoutes: Routes = [
     FilesService,
     HttpClient,
     RegisterService,
-    ThongTinUserService
+    ThongTinUserService,
+    DeleteFileService,
+    UserFireBaseService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

@@ -76,6 +76,33 @@
         position: relative;
         height: 92%;
         padding: 20px 0;
+        .example-container {
+            display: flex;
+            flex-direction: column;
+            min-width: 300px;
+          }
+          .example-header {
+            min-height: 64px;
+            padding: 8px 24px 0;
+          }
+          .mat-form-field {
+            font-size: 14px;
+            width: 100%;
+          }
+          mat-row.mat-row:hover{
+            background: lightblue;
+            color: #ffffff;
+        }
+        // .active{
+        //     background: lightblue;
+        // }
+          .mat-header-cell{
+            font-size: 24px;
+          }
+          .mat-table {
+            overflow: auto;
+            max-height: 590px;
+          }
         .row{
             margin: 0;
             .div{

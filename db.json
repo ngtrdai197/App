@@ -56,11 +56,6 @@
       "type": "folder"
     },
     {
-      "name": "Document",
-      "type": "folder",
-      "id": 12
-    },
-    {
       "name": "Từ điển Anh Văn",
       "type": "folder",
       "id": 13
@@ -76,14 +71,14 @@
       "id": 15
     },
     {
-      "name": "Quân Kul",
+      "name": "Coffee",
       "type": "folder",
-      "id": 16
+      "id": 18
     },
     {
-      "name": "Cafe  đá",
+      "name": "OneDrive",
       "type": "folder",
-      "id": 17
+      "id": 19
     }
   ]
 }

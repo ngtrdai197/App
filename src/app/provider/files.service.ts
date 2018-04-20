@@ -21,10 +21,10 @@ export class FilesService {
     constructor(private http: HttpClient) {
     }
 
-    postFiles(): any {
-        this.http.post(this.API, this.newFolder);
-        return this.http.get(this.API);
-    }
+    // postFiles(): any {
+    //     // this.http.post(this.API, this.newFolder);
+    //     return this.http.get(this.API);
+    // }
     getFile(): any {
         return this.http.get(this.API);
     }
@@ -34,7 +34,7 @@ export class FilesService {
         return this.http.post<IFile>(this.API, newFolder, httpOptions);
     }
 
-    deleteFolder(id: number): Observable<{}> {
+    deleteFolder(id): Observable<{}> {
         const url = `${this.API}/${id}`;
         return this.http.delete(url, httpOptions);
     }

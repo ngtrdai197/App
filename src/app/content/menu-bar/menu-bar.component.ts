@@ -16,9 +16,12 @@ export class MenuBarComponent implements OnInit {
   constructor(private fileService: FilesService) { }
 
   ngOnInit() {
-    this.fileService.postFiles().subscribe(data => {
+    this.fileService.getFile().subscribe(data => {
       this.allFiles = data;
-      this.filteredFiles = data;
+      // this.filteredFiles = data;
+      console.log('tim kiem');
+      console.log(data);
+
     });
   }
 
@@ -26,6 +29,5 @@ export class MenuBarComponent implements OnInit {
     const match = new RegExp(value, 'i');
     this.filteredFiles = this.allFiles.filter(file => match.test(file.name));
     this.fileService.search(this.filteredFiles);
-    // console.log(this.filteredFiles);
   }
 }

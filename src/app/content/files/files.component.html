@@ -1,5 +1,5 @@
 <div class="content-files">
-    <div class="header">
+    <div class="header" (click)="changeStatus()">
         <div class="content-left">
             <div class="new float" title="Tạo thư mục mới hoặc tài liệu ở vị trí này">
                 <div class="dropdown">
@@ -46,7 +46,11 @@
                 </div>
             </div>
         </div>
+
         <div class="content-right">
+            <div *ngIf="statusDelete === true" class="delete float" style="border-radius: 50%;" (click)="deleteFolder()">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </div>
             <div class="sapxep float" title="Sắp xếp - hiển thị thư mục">
                 <div class="dropdown">
                     <span class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
@@ -87,7 +91,7 @@
     <div class="loadfiles">
 
         <div class="container-fluid">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 files" *ngFor="let item of allFiles">
                     <div class="div">
                         <span *ngIf="item.type === 'folder'">
@@ -105,7 +109,39 @@
                         {{item.name}}
                     </div>
                 </div>
+            </div> -->
+
+            <div class="example-container mat-elevation-z8">
+                <mat-table #table [dataSource]="allFiles">
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="position">
+                        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef> Tên </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="type">
+                        <mat-header-cell *matHeaderCellDef>Loại </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="owner">
+                        <mat-header-cell *matHeaderCellDef> Sở hữu </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;" class="active bgrrow" (click)="getID(row)"></mat-row>
+                </mat-table>
             </div>
+
         </div>
     </div>
 </div>
