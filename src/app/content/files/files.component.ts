@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FilesService } from '../../provider/files.service';
 import { IFile } from '../../interface/IFile';
 import { Subscription } from 'rxjs/Subscription';
@@ -23,7 +23,8 @@ export class FilesComponent implements OnInit {
   statusDelete = false;
   usersArr: User[];
   idFolder: any;
-  displayedColumns = ['position', 'name', 'type', 'owner'];
+  dem: number;
+  displayedColumns = ['position', 'name', 'type', 'date'];
   constructor(
     private fileService: FilesService,
     private diaLog: MatDialog,
@@ -49,25 +50,53 @@ export class FilesComponent implements OnInit {
     });
   }
 
-  public openDiaLog() {
+  public openDiaLogFolder() {
     const dialogRef = this.diaLog.open(FolderComponent, {
       width: '300px',
     });
     dialogRef.afterClosed().subscribe((isConfirm) => {
       if (isConfirm) {
         this.fileService.getNameFolder().subscribe(folderName => {
+          if (this.allFiles.length === 0) {
+            this.dem = 1;
+          } else {
+            this.dem = this.allFiles.length + 1;
+          }
           const newFolder: IFile = {
             name: folderName,
-            type: 'folder'
+            type: 'folder',
+            date: new Date(Date.now()),
+            stt: this.dem,
           };
           this.fileService.addFolder(newFolder).subscribe(data => {
             this.allFiles = this.allFiles.concat(data);
-            // this.allFiles = [...this.allFiles, newFolder];
-            this.fileService.getFile().subscribe(f => {
-              // this.filteredFiles = f;
-              console.log('them 1 folder');
-              console.log(f);
-            });
+          });
+        });
+      }
+    });
+  }
+
+  public openDiaLogFile() {
+    const dialogRef = this.diaLog.open(FolderComponent, {
+      width: '300px',
+    });
+    dialogRef.afterClosed().subscribe((isConfirm) => {
+      if (isConfirm) {
+        this.fileService.getNameFolder().subscribe(folderName => {
+          if (this.allFiles.length === 0) {
+            this.dem = 1;
+          } else {
+            this.dem = this.allFiles.length + 1;
+          }
+          const newFolder: IFile = {
+            name: folderName,
+            type: 'docx',
+            date: new Date(Date.now()),
+            stt: this.dem,
+          };
+          this.fileService.addFolder(newFolder);
+          this.fileService.getFile().subscribe(data => {
+            this.allFiles = data;
           });
         });
       }

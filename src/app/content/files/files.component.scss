@@ -8,12 +8,12 @@
         margin: 10px 0;
     }
     .header{
-        height: 7%;
+        height: 8%;
         background: #e7e7e775;
         border-bottom: 1px solid transparent;
         .content-left{
             float: left;
-            line-height: 47px;
+            line-height: 53px;
             margin-left: 25px;
             span.glyphicon {
                 padding: 3px;
@@ -45,7 +45,8 @@
         }
         .content-right{
             float: right;
-            line-height: 47px;
+            line-height: 53px;
+            margin-right: 25px;
             span.glyphicon {
                 padding-right: 5px;
             }
@@ -74,12 +75,13 @@
     }
     .loadfiles{
         position: relative;
-        height: 92%;
+        height: 90%;
         padding: 20px 0;
         .example-container {
             display: flex;
             flex-direction: column;
             min-width: 300px;
+            height: 595px;
           }
           .example-header {
             min-height: 64px;

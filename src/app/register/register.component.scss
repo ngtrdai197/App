@@ -11,7 +11,7 @@
         left: 50%;
         transform: translate(-50%,-50%);
         width: 400px;
-        height: 100%;
+        height: 80%;
         background: #fff;
         transition: all 0.3s ease-in-out;
         .logo{
@@ -30,15 +30,19 @@
         }
         .form-dangnhap{
             position: absolute;
-            top: 57%;
+            top: 50%;
             left: 50%;
-            transform: translate(-50%, -55%);
+            transform: translate(-50%, -50%);
             // margin-left: 40px;
             .check{
                 span{
-                    color: #333333b3;
-                    font-size: 17px;
+                    color: gray;
+                    font-size: 14px;
+                    margin-left: 7px;
                 }
+            }
+            .taikhoan,.email,.matkhau,.matkhauconfirm{
+                margin: 25px 0;
             }
             .click-dangnhap{
                 width: 315px;

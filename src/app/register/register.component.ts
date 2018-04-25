@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { RegisterService } from './register.service';
 import { element } from 'protractor';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ToastrService } from '../provider/toastr.service';
 
 @Component({
   selector: 'app-register',
@@ -18,11 +20,33 @@ export class RegisterComponent implements OnInit {
     passWord: '',
     passWordConfirm: '',
   };
-  constructor(private formBuilder: FormBuilder, private registerService: RegisterService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private registerService: RegisterService,
+    private toastrService: ToastrService,
+  ) { }
 
   ngOnInit() {
     this.buildForm();
     console.log(this.checked);
+  }
+
+  creatAccount() {
+    if (this.registerForm.get('userName').invalid && this.registerForm.get('userName').touched) {
+      this.toastrService.Error('User name nhập vào có độ dài từ 8 - 24 kí tự');
+    } else if (this.registerForm.get('email').invalid && this.registerForm.get('email').touched) {
+      this.toastrService.Error('Email nhập vào không hợp lệ. Và cần phải có kí tự @');
+    } else if (this.registerForm.get('passWord').invalid && this.registerForm.get('passWord').touched) {
+      this.toastrService.Error('Mật khẩu nhập vào có độ dài từ 8 - 16 kí tự');
+    } else if (this.registerForm.get('passWordConfirm').invalid && this.registerForm.get('passWordConfirm').touched) {
+      this.toastrService.Error('Mật khẩu nhập lại không trùng khớp với mật khẩu cũ');
+    } else {
+      if (this.checked === false) {
+        this.toastrService.Error('Check vào đồng ý với điều khoản của chúng tôi !');
+      } else {
+        this.toastrService.Success('Đăng kí thành công !');
+      }
+    }
   }
 
   private buildForm() {

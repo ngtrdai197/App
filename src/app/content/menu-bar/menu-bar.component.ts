@@ -18,14 +18,13 @@ export class MenuBarComponent implements OnInit {
   ngOnInit() {
     this.fileService.getFile().subscribe(data => {
       this.allFiles = data;
-      // this.filteredFiles = data;
-      console.log('tim kiem');
-      console.log(data);
-
     });
   }
 
   search(value) {
+    this.fileService.getFile().subscribe(data => {
+      this.allFiles = data;
+    });
     const match = new RegExp(value, 'i');
     this.filteredFiles = this.allFiles.filter(file => match.test(file.name));
     this.fileService.search(this.filteredFiles);

@@ -11,10 +11,10 @@
                           "></span>
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li (click)="openDiaLog();">
+                        <li (click)="openDiaLogFolder();">
                             Thư mục
                         </li>
-                        <li (click)=deleteFolder();>
+                        <li (click)="openDiaLogFile()">
                             Tài liệu word</li>
                         <li>
                             Làm việc với Excel
@@ -90,7 +90,7 @@
     </div>
     <div class="loadfiles">
 
-        <div class="container-fluid">
+        <!-- <div class="container-fluid"> -->
             <!-- <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 files" *ngFor="let item of allFiles">
                     <div class="div">
@@ -110,18 +110,19 @@
                     </div>
                 </div>
             </div> -->
-
+  
             <div class="example-container mat-elevation-z8">
-                <mat-table #table [dataSource]="allFiles">
+                <mat-table #table [dataSource]="allFiles" matSort>
                     <!-- Position Column -->
                     <ng-container matColumnDef="position">
-                        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                        <mat-header-cell *matHeaderCellDef> Stt </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.stt}} </mat-cell>
+                        <!-- <mat-cell *ngFor="let item of allFiles.length">{{item.allFiles.length}}</mat-cell> -->
                     </ng-container>
 
                     <!-- Name Column -->
                     <ng-container matColumnDef="name">
-                        <mat-header-cell *matHeaderCellDef> Tên </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef mat-sort-header="name"> Tên </mat-header-cell>
                         <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
                     </ng-container>
 
@@ -132,9 +133,9 @@
                     </ng-container>
 
                     <!-- Symbol Column -->
-                    <ng-container matColumnDef="owner">
-                        <mat-header-cell *matHeaderCellDef> Sở hữu </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+                    <ng-container matColumnDef="date">
+                        <mat-header-cell *matHeaderCellDef> Ngày đăng </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.date | date: 'medium'}} </mat-cell>
                     </ng-container>
 
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -142,6 +143,6 @@
                 </mat-table>
             </div>
 
-        </div>
+        <!-- </div> -->
     </div>
 </div>

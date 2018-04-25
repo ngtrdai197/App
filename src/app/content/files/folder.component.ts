@@ -14,7 +14,7 @@ import { log } from 'util';
   template: `
       <h2 mat-dialog-title>Thư mục</h2>
       <mat-form-field>
-      <input id="folderName" #folder matInput [(ngModel)]="name" placeholder="Nhập tên folder của bạn ...">
+      <input id="folderName" #folder matInput [(ngModel)]="name" placeholder="Nhập tên thư mục của bạn ...">
     </mat-form-field>
     <mat-dialog-actions>
       <button mat-button mat-raised-button [mat-dialog-close]="false">No</button>

@@ -3,7 +3,6 @@
         <div class="logo">
             <img src="../../assets/logo_cloud.PNG">
             <span>DCloud</span>
-
         </div>
         <div class="form-dangnhap">
             <form>
@@ -27,14 +26,13 @@
                 <div class="click-dangnhap" (click)="onSubmit(user.value,pass.value);">
                     <p class="btn">Đăng nhập</p>
                 </div>
-                <a href="" class="btn btn-1">Quên mật khẩu</a>
+                <a class="btn btn-1" (click)="Warning()">Quên mật khẩu</a>
                 <span>
                     <!-- <button [routerLink]="['/register']">Đăng kí ngay</button> -->
                     <a href="" style="text-decoration: underline;" class="btn btn-1" [routerLink]="['/register']">Đăng kí ngay</a>
                 </span>
                 <a href="" class="btn btn-1">Đăng nhập bằng tài khoản DCloud khác</a>
             </form>
-
         </div>
     </div>
 </div>

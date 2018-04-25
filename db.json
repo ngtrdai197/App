@@ -1,84 +1,32 @@
 {
   "sources": [
     {
-      "id": 1,
       "name": "Angular 5",
-      "type": "folder"
+      "type": "folder",
+      "date": "2018-04-25T06:19:19.022Z",
+      "stt": 1,
+      "id": 1
     },
     {
-      "id": 2,
       "name": "NodeJs",
-      "type": "folder"
+      "type": "folder",
+      "date": "2018-04-25T06:19:29.132Z",
+      "stt": 2,
+      "id": 2
     },
     {
-      "id": 3,
-      "name": "Hướng đối tượng",
-      "type": "folder"
-    },
-    {
-      "id": 4,
-      "name": "Reactive",
-      "type": "folder"
-    },
-    {
-      "id": 5,
-      "name": "Trí tuệ nhân tạo",
-      "type": "docx"
-    },
-    {
-      "id": 6,
-      "name": "VueJs",
-      "type": "folder"
-    },
-    {
-      "id": 7,
-      "name": "Java",
-      "type": "docx"
-    },
-    {
-      "id": 8,
-      "name": "Mạng máy tính",
-      "type": "docx"
-    },
-    {
-      "id": 9,
-      "name": "C Sharp",
-      "type": "folder"
-    },
-    {
-      "id": 10,
-      "name": "Tiếng anh",
-      "type": "docx"
-    },
-    {
-      "id": 11,
       "name": "Công nghệ phần mềm",
-      "type": "folder"
+      "type": "folder",
+      "date": "2018-04-25T06:20:20.157Z",
+      "stt": 3,
+      "id": 3
     },
     {
-      "name": "Từ điển Anh Văn",
+      "name": "VueJS",
       "type": "folder",
-      "id": 13
-    },
-    {
-      "name": "SamSung Galaxy",
-      "type": "folder",
-      "id": 14
-    },
-    {
-      "name": "C2 Trà Chanh",
-      "type": "folder",
-      "id": 15
-    },
-    {
-      "name": "Coffee",
-      "type": "folder",
-      "id": 18
-    },
-    {
-      "name": "OneDrive",
-      "type": "folder",
-      "id": 19
+      "date": "2018-04-25T06:22:12.092Z",
+      "stt": 4,
+      "id": 4
     }
   ]
 }
