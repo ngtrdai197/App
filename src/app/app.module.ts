@@ -34,7 +34,7 @@ import { ToastrService } from './provider/toastr.service';
 
 const appRoutes: Routes = [
   { path: 'home', redirectTo: '/', pathMatch: 'full' },
-  { path: '', component: HomeComponent },
+  { path: '', component: ContentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'user', component: UserComponent },

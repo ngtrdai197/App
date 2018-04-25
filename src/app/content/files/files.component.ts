@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FilesService } from '../../provider/files.service';
 import { IFile } from '../../interface/IFile';
 import { Subscription } from 'rxjs/Subscription';
@@ -29,19 +29,12 @@ export class FilesComponent implements OnInit {
     private fileService: FilesService,
     private diaLog: MatDialog,
     private deleteService: DeleteFileService,
-    private renderer: Renderer2,
     private usersService: UserFireBaseService,
   ) { }
   ngOnInit() {
     this.loadFiles();
     this.fileService.getThongTinSearch().subscribe(data => {
       this.allFiles = data;
-    });
-    this.usersService.getUsers().subscribe(u => {
-      this.usersArr = u;
-      this.usersArr.forEach(user => {
-        console.log(user.userName);
-      });
     });
   }
   loadFiles() {
@@ -82,19 +75,19 @@ export class FilesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((isConfirm) => {
       if (isConfirm) {
-        this.fileService.getNameFolder().subscribe(folderName => {
+        this.fileService.getNameFolder().subscribe(fileName => {
           if (this.allFiles.length === 0) {
             this.dem = 1;
           } else {
             this.dem = this.allFiles.length + 1;
           }
-          const newFolder: IFile = {
-            name: folderName,
+          const newFile: IFile = {
+            name: fileName,
             type: 'docx',
             date: new Date(Date.now()),
             stt: this.dem,
           };
-          this.fileService.addFolder(newFolder);
+          this.fileService.addFolder(newFile);
           this.fileService.getFile().subscribe(data => {
             this.allFiles = data;
           });
@@ -104,7 +97,6 @@ export class FilesComponent implements OnInit {
   }
 
   getID(idFolder) {
-    console.log(idFolder.id);
     this.idFolder = idFolder.id;
     this.statusDelete = true;
     this.deleteService.statusDelete(this.statusDelete);

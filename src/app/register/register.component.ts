@@ -4,6 +4,8 @@ import { RegisterService } from './register.service';
 import { element } from 'protractor';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ToastrService } from '../provider/toastr.service';
+import { UserFireBaseService } from '../provider/usersfirebase.service';
+import { User } from '../interface/user';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +16,10 @@ export class RegisterComponent implements OnInit {
   checked: any = false;
   public registerForm: FormGroup;
   public isSubmitting = false;
+  user: '';
+  email: '';
+  pass: '';
+  passConfirm: '';
   public formErrors = {
     email: '',
     userName: '',
@@ -24,6 +30,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private registerService: RegisterService,
     private toastrService: ToastrService,
+    private userFBService: UserFireBaseService
   ) { }
 
   ngOnInit() {
@@ -44,7 +51,17 @@ export class RegisterComponent implements OnInit {
       if (this.checked === false) {
         this.toastrService.Error('Check vào đồng ý với điều khoản của chúng tôi !');
       } else {
+        const user: User = {
+          userName: this.user,
+          email: this.email,
+          passWord: this.pass,
+        };
+        this.userFBService.addUser(user);
         this.toastrService.Success('Đăng kí thành công !');
+        this.user = '';
+        this.pass = '';
+        this.email = '';
+        this.passConfirm = '';
       }
     }
   }

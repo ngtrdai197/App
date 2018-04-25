@@ -8,22 +8,22 @@
             <form [formGroup]="registerForm">
                 <div class="taikhoan">
                     <div class="the-p">
-                        <input type="text" id="userName" placeholder="Nhập tài khoản ..." formControlName="userName" #user>
+                        <input type="text" id="userName" placeholder="Nhập tài khoản ..." formControlName="userName" [(ngModel)]="user">
                     </div>
                 </div>
                 <div class="email">
                     <div class="the-p">
-                        <input type="email" name="" id="email" placeholder="Nhập địa chỉ email của bạn ... " formControlName="email" #email>
+                        <input type="email" name="" id="email" placeholder="Nhập địa chỉ email của bạn ... " formControlName="email" [(ngModel)]="email">
                     </div>
                 </div>
                 <div class="matkhau">
                     <div class="the-p">
-                        <input type="password" id="passWord" placeholder="Nhập mật khẩu ..." formControlName="passWord" #pass>
+                        <input type="password" id="passWord" placeholder="Nhập mật khẩu ..." formControlName="passWord" [(ngModel)]="pass">
                     </div>
                 </div>
                 <div class="matkhauconfirm">
                     <div class="the-p">
-                        <input type="password" id="passWordConfirm" placeholder="Nhập lại mật khẩu ..." formControlName="passWordConfirm" #passWordConfirm>
+                        <input type="password" id="passWordConfirm" placeholder="Nhập lại mật khẩu ..." formControlName="passWordConfirm" [(ngModel)]="passConfirm">
                     </div>
                 </div>
                 <div class="check">

@@ -9,9 +9,17 @@ export class UserFireBaseService {
     users$: Observable<User[]>;
     constructor(private afs: AngularFirestore) {
         this.userCollection = this.afs.collection('users');
-        this.users$ = this.userCollection.valueChanges();
+        this.users$ = this.afs.collection('users').snapshotChanges().map(changes => {
+            return changes.map(a => {
+                const data = a.payload.doc.data() as User;
+                return data;
+            });
+        });
     }
     getUsers() {
         return this.users$;
+    }
+    addUser(user: User) {
+        this.userCollection.add(user);
     }
 }

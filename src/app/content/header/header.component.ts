@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThongTinUserService } from '../../provider/thongtinuser.service';
 import { AutheService } from '../../provider/authe.service';
+import { User } from '@firebase/auth-types';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import { AutheService } from '../../provider/authe.service';
 })
 export class HeaderComponent implements OnInit {
 
-  user: '';
+  user: User[];
   constructor(
     private router: Router,
     private thongTinUser: ThongTinUserService,
@@ -26,7 +27,6 @@ export class HeaderComponent implements OnInit {
     }, 500);
   }
   userLogin() {
-    // this.router.navigate(['user']);
     this.thongTinUser.getThongTin().subscribe(user => {
       this.user = user;
     });

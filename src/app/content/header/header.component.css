@@ -57,7 +57,8 @@
     box-sizing: border-box;
     text-align: center;
 }
-/* .item:hover{
-    border-bottom: 2px solid orangered;
-    
-} */
+.item:hover{
+    background: #e7e7e7;  
+    color: #000;
+}
+

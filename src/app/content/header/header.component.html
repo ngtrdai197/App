@@ -27,13 +27,12 @@
     <!-- <div class="exit item" (click)="backToHome()">Log out</div> -->
   </div>
   <div class="user" (click)="displayUser()">
-    <span style="font-size: 45px;line-height: 59px;"><i class="fas fa-user-circle"></i></span>
+    <span style="font-size: 45px;line-height: 59px;"><i class="fas fa-user-circle"></i></span> Hello: {{user.email}}
     <div class="details">
       <p>Tài khoản của tôi</p>
-      <p>Xin chào: {{user}}</p>
-      <p>Địa chỉ Email</p>
-      <p>Tài khoản của tôi</p>
-      <p [routerLink]="['']">Đăng xuất</p>
+      <p>Xin chào: {{user.userName}}</p>
+      <p>Địa chỉ Email: {{user.email}}</p>
+      <p (click)="backToHome()">Đăng xuất</p>
     </div>
   </div>
 

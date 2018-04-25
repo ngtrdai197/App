@@ -25,7 +25,9 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.usersService.getUsers().subscribe(data => {
+      this.usersArr = data;
+    });
   }
   Warning() {
     this.toastrService.Error('Thông tin không hợp lệ. Kiểm tra lại!');
@@ -35,46 +37,22 @@ export class LoginComponent implements OnInit {
     let kiemtra = 0;
     this.usersService.getUsers().subscribe(data => {
       this.usersArr = data;
-      for (let i = 0; i < this.usersArr.length; i++) {
-        // console.log(this.usersArr);
-        if (this.usersArr[i].userName === userName && this.usersArr[i].passWord === passWords) {
-          this.autheService.Login().subscribe((isAuthe) => {
-            if (isAuthe === true) {
-              this.router.navigate(['content']);
-              this.thongTinUser.thongTin(userName);
-            }
-          });
-          kiemtra = 1;
-        } else {
-          this.autheService.status(this.checkStatus);
-        }
-      }
-      if (kiemtra === 0) {
-        this.Warning();
-      }
     });
-
-    // this.usersArr.forEach(item => {
-    //   if (item.userName === userName && item.passWord === passWords) {
-    //     this.autheService.Login().subscribe((isAuthe) => {
-    //       if (isAuthe === true) {
-    //         this.router.navigate(['content']);
-    //         this.thongTinUser.thongTin(userName);
-    //       }
-    //     });
-    //   } else if (item.userName !== userName || item.passWord !== passWords) {
-    //     this.autheService.status(this.checkStatus);
-    //   }
-    // });
-    this.usersService.getUsers().subscribe(data => {
-      this.usersArr = data;
-    });
-    this.autheService.getStatus().subscribe(status => {
-      this.checkStatus = status;
-      if (this.checkStatus === false) {
-        console.log('Kiem tra lai thong tin');
-        this.autheService.status(false);
+    for (let i = 0; i < this.usersArr.length; i++) {
+      if (this.usersArr[i].userName === userName && this.usersArr[i].passWord === passWords) {
+        this.autheService.Login().subscribe((isAuthe) => {
+          if (isAuthe === true) {
+            this.router.navigate(['content']);
+            this.thongTinUser.thongTin(this.usersArr[i]);
+          }
+        });
+        kiemtra = 1;
+      } else {
+        this.autheService.status(this.checkStatus);
       }
-    });
+    }
+    if (kiemtra === 0) {
+      this.Warning();
+    }
   }
 }

@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class ThongTinUserService {
-    private thongtin = new BehaviorSubject(null);
+    private thongtin = new BehaviorSubject([]);
 
     constructor() { }
 
