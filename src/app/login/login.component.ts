@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AutheService } from '../provider/authe.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ThongTinUserService } from '../provider/thongtinuser.service';
 import { User } from '../interface/user';
 import { UserFireBaseService } from '../provider/usersfirebase.service';
-import { stat } from 'fs';
 import { ToastrService } from '../provider/toastr.service';
 @Component({
   selector: 'app-login',
@@ -13,7 +12,6 @@ import { ToastrService } from '../provider/toastr.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  routerLink = '[\'content\']';
   checkStatus: false;
   usersArr: User[];
   constructor(
@@ -21,7 +19,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private thongTinUser: ThongTinUserService,
     private usersService: UserFireBaseService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -29,6 +28,8 @@ export class LoginComponent implements OnInit {
       this.usersArr = data;
     });
   }
+
+
   Warning() {
     this.toastrService.Error('Thông tin không hợp lệ. Kiểm tra lại!');
   }
