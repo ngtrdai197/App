@@ -1,39 +1,34 @@
-<div class="thongtin-user">
-  <p>DCloud</p>
-</div>
-<div class="container">
-  <div class="right">
-    <div class="message item" style="border-left: 1px solid #ffffff;">
-      <span>
-        <i class="fas fa-envelope"></i>
-      </span>
-    </div>
-    <div class="settings item">
-      <span>
-        <i class="fas fa-cogs"></i>
-      </span>
-    </div>
-    <div class="notify item">
-      <span>
-        <i class="fas fa-bell"></i>
-      </span>
-    </div>
-    <div class="ques item">
-      <span>
-        <i class="fas fa-question"></i>
-      </span>
-    </div>
-
-    <!-- <div class="exit item" (click)="backToHome()">Log out</div> -->
+  <div class="thongtin-user">
+    <p>DCloud</p>
   </div>
-  <div class="user" (click)="displayUser()">
-    <span style="font-size: 45px;line-height: 59px;"><i class="fas fa-user-circle"></i></span> Hello: {{user.email}}
-    <div class="details">
-      <p>Tài khoản của tôi</p>
-      <p>Xin chào: {{user.userName}}</p>
-      <p>Địa chỉ Email: {{user.email}}</p>
-      <p (click)="backToHome()">Đăng xuất</p>
+  <div class="container">
+    <div class="right">
+      <div class="message item" style="border-left: 1px solid #ffffff;">
+        <span>
+          <i class="fas fa-envelope"></i>
+        </span>
+      </div>
+      <div class="settings item">
+        <span>
+          <i class="fas fa-cogs"></i>
+        </span>
+      </div>
+      <div class="notify item">
+        <span>
+          <i class="fas fa-bell"></i>
+        </span>
+      </div>
+      <div class="ques item">
+        <span>
+          <i class="fas fa-question"></i>
+        </span>
+      </div>
+
+      <!-- <div class="exit item" (click)="backToHome()">Log out</div> -->
+      <div (click)="displayUser()" style="color: #ffffff;">
+        <span style="font-size: 45px;line-height: 59px;cursor: pointer;">
+          <i class="fa fa-user-circle"></i>
+        </span>
+      </div>
     </div>
   </div>
-
-</div>

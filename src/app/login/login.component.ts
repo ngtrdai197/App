@@ -12,21 +12,20 @@ import { ToastrService } from '../provider/toastr.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  // Check file delete
   checkStatus: false;
   usersArr: User[];
+  pathLogin: '';
   constructor(
     private autheService: AutheService,
     private router: Router,
     private thongTinUser: ThongTinUserService,
     private usersService: UserFireBaseService,
     private toastrService: ToastrService,
-    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.usersService.getUsers().subscribe(data => {
-      this.usersArr = data;
-    });
+    
   }
 
 
@@ -38,22 +37,24 @@ export class LoginComponent implements OnInit {
     let kiemtra = 0;
     this.usersService.getUsers().subscribe(data => {
       this.usersArr = data;
-    });
-    for (let i = 0; i < this.usersArr.length; i++) {
-      if (this.usersArr[i].userName === userName && this.usersArr[i].passWord === passWords) {
-        this.autheService.Login().subscribe((isAuthe) => {
-          if (isAuthe === true) {
-            this.router.navigate(['content']);
-            this.thongTinUser.thongTin(this.usersArr[i]);
-          }
-        });
-        kiemtra = 1;
-      } else {
-        this.autheService.status(this.checkStatus);
+      console.log('ok');
+      for (let i = 0; i < this.usersArr.length; i++) {
+        if (this.usersArr[i].userName === userName && this.usersArr[i].passWord === passWords) {
+          this.autheService.Login().subscribe((isAuthe) => {
+            if (isAuthe === true) {
+              this.router.navigate(['content']);
+              this.thongTinUser.thongTin(this.usersArr[i]);
+            }
+          });
+          kiemtra = 1;
+        } else {
+          this.autheService.status(this.checkStatus);
+        }
       }
-    }
-    if (kiemtra === 0) {
-      this.Warning();
-    }
+      if (kiemtra === 0) {
+        this.Warning();
+      }
+    });
+    // day la vong lap de duyet user
   }
 }

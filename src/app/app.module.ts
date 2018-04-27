@@ -31,10 +31,11 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { ToastrService } from './provider/toastr.service';
+import { ShowAccountService } from './provider/showaccount.service';
 
 const appRoutes: Routes = [
   { path: 'home', redirectTo: '/', pathMatch: 'full' },
-  { path: '', component: HomeComponent },
+  { path: '', component: ContentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'user', component: UserComponent },
@@ -85,7 +86,6 @@ const appRoutes: Routes = [
     MatTableModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
-
   ],
   providers: [
     AutheGuard,
@@ -96,7 +96,8 @@ const appRoutes: Routes = [
     ThongTinUserService,
     DeleteFileService,
     UserFireBaseService,
-    ToastrService
+    ShowAccountService,
+    ToastrService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

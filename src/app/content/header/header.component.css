@@ -11,38 +11,24 @@
     position: relative;
     margin-left: 10px;
 }
-.details{
-    display: none;
-}
 
-.show{
-    display: block;
-    position: absolute;
-    bottom: -586%;
-    left: -162px;
-    color: #ffffff;
-    width: 285px;
-    background: #333;
-    z-index: 1000;
-    text-align: center;
-}
 .item span{
     font-size: 18px;
 }
 .thongtin-user p {
     color: #fff;
     font-size: 20px;
-    line-height: 59px;
     margin: 0;
     position: relative;
-    width: 100px;
-    top: 0;
-    left: 50px;
+    width: 200px;
+    margin-left: 30px;
+    
 }
+
 .container{
     display: flex;
     justify-content: flex-end;
-    margin: 0;
+    margin-right: 30px;
     padding: 0;
 }
 .right{

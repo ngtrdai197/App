@@ -91,7 +91,7 @@
     <div class="loadfiles">
 
         <!-- <div class="container-fluid"> -->
-            <!-- <div class="row">
+        <!-- <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 files" *ngFor="let item of allFiles">
                     <div class="div">
                         <span *ngIf="item.type === 'folder'">
@@ -110,39 +110,48 @@
                     </div>
                 </div>
             </div> -->
-  
-            <div class="example-container mat-elevation-z8">
-                <mat-table #table [dataSource]="allFiles" matSort>
-                    <!-- Position Column -->
-                    <ng-container matColumnDef="position">
-                        <mat-header-cell *matHeaderCellDef> Stt </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.stt}} </mat-cell>
-                        <!-- <mat-cell *ngFor="let item of allFiles.length">{{item.allFiles.length}}</mat-cell> -->
-                    </ng-container>
 
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="name">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header="name"> Tên </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-                    </ng-container>
+        <div class="example-container mat-elevation-z8">
+            <mat-table #table [dataSource]="allFiles" matSort>
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                    <mat-header-cell *matHeaderCellDef> Stt </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.stt}} </mat-cell>
+                    <!-- <mat-cell *ngFor="let item of allFiles.length">{{item.allFiles.length}}</mat-cell> -->
+                </ng-container>
 
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="type">
-                        <mat-header-cell *matHeaderCellDef>Loại </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
-                    </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header="name"> Tên </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                </ng-container>
 
-                    <!-- Symbol Column -->
-                    <ng-container matColumnDef="date">
-                        <mat-header-cell *matHeaderCellDef> Ngày đăng </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.date | date: 'medium'}} </mat-cell>
-                    </ng-container>
+                <!-- Weight Column -->
+                <ng-container matColumnDef="type">
+                    <mat-header-cell *matHeaderCellDef>Loại </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+                </ng-container>
 
-                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns;" class="active bgrrow" (click)="getID(row)"></mat-row>
-                </mat-table>
-            </div>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="date">
+                    <mat-header-cell *matHeaderCellDef> Ngày đăng </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.date | date: 'medium'}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="active bgrrow" (click)="getID(row)"></mat-row>
+            </mat-table>
+        </div>
 
         <!-- </div> -->
+    </div>
+</div>
+
+<div class="details-user">
+    <div class="details">
+        <p>Tài khoản của tôi</p>
+        <p>Xin chào: {{user.userName}}</p>
+        <p>Địa chỉ Email: {{user.email}}</p>
+        <p (click)="backToHome()" style="cursor: pointer;">Đăng xuất</p>
     </div>
 </div>

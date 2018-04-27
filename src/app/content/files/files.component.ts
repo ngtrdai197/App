@@ -9,6 +9,9 @@ import { MatTableDataSource } from '@angular/material';
 import { DeleteFileService } from '../../provider/delete.service';
 import { UserFireBaseService } from '../../provider/usersfirebase.service';
 import { User } from '../../interface/user';
+import { ThongTinUserService } from '../../provider/thongtinuser.service';
+import { ShowAccountService } from '../../provider/showaccount.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,20 +25,26 @@ export class FilesComponent implements OnInit {
   keyWord: string;
   statusDelete = false;
   usersArr: User[];
+  user: User[];
   idFolder: any;
   dem: number;
   displayedColumns = ['position', 'name', 'type', 'date'];
   constructor(
     private fileService: FilesService,
     private diaLog: MatDialog,
+    private router: Router,
     private deleteService: DeleteFileService,
     private usersService: UserFireBaseService,
+    private thongTinUser: ThongTinUserService,
+    private showAcc: ShowAccountService,
   ) { }
   ngOnInit() {
     this.loadFiles();
     this.fileService.getThongTinSearch().subscribe(data => {
       this.allFiles = data;
     });
+    this.userLogin();
+    this.showAccount();
   }
   loadFiles() {
     this.fileService.getFile().subscribe(data => {
@@ -115,5 +124,26 @@ export class FilesComponent implements OnInit {
   changeStatus() {
     this.statusDelete = false;
     this.deleteService.statusDelete(this.statusDelete);
+  }
+  userLogin() {
+    this.thongTinUser.getThongTin().subscribe(user => {
+      this.user = user;
+    });
+  }
+  backToHome() {
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 500);
+  }
+  showAccount() {
+    this.showAcc.getShowAccount().subscribe(s => {
+      const temp = s;
+      if (temp === 'show') {
+        const temp2 = document.querySelectorAll('.details-user');
+        temp2[0].classList.toggle('show');
+        const temp3 = document.querySelectorAll('.content-files');
+        temp3[0].classList.toggle('hien');
+      }
+    });
   }
 }

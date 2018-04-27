@@ -8,4 +8,5 @@ app-header{
 }
 app-files{
     height: 92%;
+    overflow: hidden;
 }

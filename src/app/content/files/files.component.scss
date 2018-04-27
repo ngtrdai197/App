@@ -8,9 +8,10 @@
         margin: 10px 0;
     }
     .header{
-        height: 8%;
+        height: 9%;
         background: #e7e7e775;
         border-bottom: 1px solid transparent;
+        width: 100%;
         .content-left{
             float: left;
             line-height: 53px;
@@ -81,7 +82,7 @@
             display: flex;
             flex-direction: column;
             min-width: 300px;
-            height: 595px;
+            height: 485px;
           }
           .example-header {
             min-height: 64px;
@@ -127,4 +128,19 @@
             }
         }
     }
+}
+.hien{
+    width: 60%;
+    height: 90%;
+}
+.details-user{
+    width: 20%;
+    float:right;
+    background: #696969;
+    height: 92%;
+    color: #ffffff;
+    display: none;
+}
+.show{
+    display: block;
 }
