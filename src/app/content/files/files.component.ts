@@ -4,15 +4,19 @@ import { IFile } from '../../interface/IFile';
 import { Subscription } from 'rxjs/Subscription';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material';
-import { FolderComponent } from '../files/folder.component';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatSort, MatSortable } from '@angular/material';
+import { Router } from '@angular/router';
+import { SelectionModel } from '@angular/cdk/collections';
+
 import { DeleteFileService } from '../../provider/delete.service';
 import { UserFireBaseService } from '../../provider/usersfirebase.service';
 import { User } from '../../interface/user';
 import { ThongTinUserService } from '../../provider/thongtinuser.service';
+import { FolderComponent } from '../files/folder.component';
 import { ShowAccountService } from '../../provider/showaccount.service';
-import { Router } from '@angular/router';
+import { FileData } from '../../interface/filedata';
 
+declare var $: any;
 
 @Component({
   selector: 'app-files',
@@ -20,15 +24,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./files.component.scss']
 })
 export class FilesComponent implements OnInit {
-  allFiles: IFile[];
-  filteredFiles: IFile[];
-  keyWord: string;
+  allFiles: any;
   statusDelete = false;
   usersArr: User[];
   user: User[];
   idFolder: any;
-  dem: number;
-  displayedColumns = ['position', 'name', 'type', 'date'];
+  checkRecycle = false;
+  kt = 1; // kiểm tra để ẩn hiện chi tiết user
+  fileData: FileData[]; // mảng chứa data đổ từ server xuống, thực hiện tìm kiếm folder/file theo id trên server
+  recycleBinTemp: IFile[];
+  displayedColumns = ['name', 'date', 'type', 'daterepair'];
+  @ViewChild(MatSort) sort: MatSort;
+
   constructor(
     private fileService: FilesService,
     private diaLog: MatDialog,
@@ -38,18 +45,46 @@ export class FilesComponent implements OnInit {
     private thongTinUser: ThongTinUserService,
     private showAcc: ShowAccountService,
   ) { }
+
   ngOnInit() {
     this.loadFiles();
+    this.reLoadFiles();
     this.fileService.getThongTinSearch().subscribe(data => {
-      this.allFiles = data;
+      this.allFiles = new MatTableDataSource(data);
+      this.allFiles.sort = this.sort;
     });
     this.userLogin();
     this.showAccount();
   }
   loadFiles() {
     this.fileService.getFile().subscribe(data => {
-      this.allFiles = data;
+      this.allFiles = new MatTableDataSource(data);
     });
+    this.deleteService.getStatusRecycleBin().subscribe(stt => {
+      const _kt = stt;
+      if (_kt === true) {
+        this.fileService.getRecycleBin().subscribe(data => {
+          this.allFiles = new MatTableDataSource(data);
+          console.log(data);
+        });
+      }
+    });
+
+  }
+
+  reLoadFiles() {
+    this.deleteService.getStatusAllFiles().subscribe(stt => {
+      const _kt = stt;
+      if (_kt === true) {
+        this.fileService.getFile().subscribe(data => {
+          this.allFiles = new MatTableDataSource(data);
+        });
+      }
+    });
+  }
+
+  sortName() {
+    this.allFiles.sort = this.sort;
   }
 
   public openDiaLogFolder() {
@@ -58,23 +93,23 @@ export class FilesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((isConfirm) => {
       if (isConfirm) {
-        this.fileService.getNameFolder().subscribe(folderName => {
-          if (this.allFiles.length === 0) {
-            this.dem = 1;
-          } else {
-            this.dem = this.allFiles.length + 1;
-          }
+        const subscription = this.fileService.getNameFolder().subscribe(folderName => {
           const newFolder: IFile = {
             name: folderName,
             type: 'folder',
             date: new Date(Date.now()),
-            stt: this.dem,
+            daterepair: new Date(Date.now()),
           };
-          this.fileService.addFolder(newFolder).subscribe(data => {
-            this.allFiles = this.allFiles.concat(data);
+          this.fileService.addFolder(newFolder).subscribe(() => {
+            this.fileService.getFile().subscribe(data => {
+              this.allFiles = new MatTableDataSource(data);
+              this.allFiles.sort = this.sort;
+            });
           });
         });
+        subscription.unsubscribe();
       }
+      this.allFiles.sort = this.sort;
     });
   }
 
@@ -84,47 +119,107 @@ export class FilesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((isConfirm) => {
       if (isConfirm) {
-        this.fileService.getNameFolder().subscribe(fileName => {
-          if (this.allFiles.length === 0) {
-            this.dem = 1;
-          } else {
-            this.dem = this.allFiles.length + 1;
-          }
+        const subscription = this.fileService.getNameFolder().subscribe(fileName => {
           const newFile: IFile = {
             name: fileName,
             type: 'docx',
             date: new Date(Date.now()),
-            stt: this.dem,
+            daterepair: new Date(Date.now()),
           };
-          this.fileService.addFolder(newFile);
-          this.fileService.getFile().subscribe(data => {
-            this.allFiles = data;
+          this.fileService.addFolder(newFile).subscribe(() => {
+            this.fileService.getFile().subscribe(data => {
+              this.allFiles = new MatTableDataSource(data);
+              this.allFiles.sort = this.sort;
+            });
           });
         });
+        subscription.unsubscribe();
+      }
+      this.allFiles.sort = this.sort;
+    });
+  }
+
+  getID(dataRow) {
+    this.idFolder = dataRow.id;
+    this.statusDelete = true;
+    this.deleteService.statusDelete(this.statusDelete);
+    if (dataRow.id) {
+      $('.statusDelete').removeClass('active');
+      $('#dele' + dataRow.id).addClass('active');
+    }
+    this.fileService.nameFolder(dataRow.name);
+    this.fileService._idFolder(dataRow.id);
+  }
+
+  renameFolder() {
+    const dialogRef = this.diaLog.open(FolderComponent, {
+      width: '300px',
+    });
+    dialogRef.afterClosed().subscribe((isConfirm) => {
+      if (isConfirm) {
+        const subscription = this.fileService.getNameFolder().subscribe(fileName => {
+          this.fileService.getFile().subscribe(data => {
+            // mảng filData chứa data từ server
+            this.fileData = data;
+            const subscriptionRename = this.fileService.getIdFolder().subscribe(dataID => {
+              // mảng filData chứa data từ server, chứa id của từng object => duyệt mảng để xóa đúng folder chọn
+              this.fileData.forEach(items => {
+                if (items.id === dataID) {
+                  items.name = fileName;
+                  items.daterepair = new Date(Date.now());
+                  this.fileService.updateNameFolder(items, dataID).subscribe(() => {
+                    this.fileService.getFile().subscribe(datFolder => {
+                      this.allFiles = new MatTableDataSource(datFolder);
+                      this.allFiles.sort = this.sort;
+                    });
+                  });
+                  return;
+                }
+              });
+            });
+            // unsubscribe sau mỗi lần rename tránh cho liên tục cập nhật tên folder tự động rename khi chưa chọn rename
+            subscriptionRename.unsubscribe();
+          });
+        });
+        subscription.unsubscribe();
       }
     });
   }
 
-  getID(idFolder) {
-    this.idFolder = idFolder.id;
-    this.statusDelete = true;
-    this.deleteService.statusDelete(this.statusDelete);
-  }
-
-
   deleteFolder() {
-    this.fileService.deleteFolder(this.idFolder).subscribe(() => {
-      this.allFiles.splice(this.idFolder - 1, 1);
-      this.fileService.getFile().subscribe(data => {
-        this.allFiles = data;
-      });
+    let check = false;
+    const subscription = this.fileService.getFile().subscribe(data => {
+      this.fileData = data;
+      this.recycleBinTemp = data;
+      for (let index = 0; index < this.fileData.length; index++) {
+        if (this.idFolder === this.fileData[index].id) {
+          this.recycleBinTemp[0] = this.fileData[index];
+          this.recycleBinTemp.splice(1, this.recycleBinTemp.length - 1);
+          this.fileService._recycleBin(this.recycleBinTemp[0]);
+          check = true;
+          return;
+        }
+      }
+      subscription.unsubscribe();
     });
+    if (check = true) {
+      this.fileService.deleteFolder(this.idFolder).subscribe(() => {
+        this.fileService.getFile().subscribe(data => {
+          this.allFiles = new MatTableDataSource(data);
+          this.allFiles.sort = this.sort;
+        });
+      });
+    }
   }
 
+  // check row được chọn và đánh dấu để xóa
   changeStatus() {
     this.statusDelete = false;
     this.deleteService.statusDelete(this.statusDelete);
+    $('.statusDelete').removeClass('active');
   }
+
+  // lấy thông tin của user đăng nhập vào để hiển thị chi tiết thông tin user
   userLogin() {
     this.thongTinUser.getThongTin().subscribe(user => {
       this.user = user;
@@ -135,15 +230,35 @@ export class FilesComponent implements OnInit {
       this.router.navigate(['/login']);
     }, 500);
   }
+
+  // đóng-mở thông tin chi tiết của user
   showAccount() {
     this.showAcc.getShowAccount().subscribe(s => {
       const temp = s;
       if (temp === 'show') {
-        const temp2 = document.querySelectorAll('.details-user');
-        temp2[0].classList.toggle('show');
-        const temp3 = document.querySelectorAll('.content-files');
-        temp3[0].classList.toggle('hien');
+        if (this.kt === 1) {
+          $('.details-user').addClass('show');
+          $('.content-files').addClass('hien');
+          this.kt = 2;
+        } else {
+          $('.details-user').removeClass('show');
+          $('.content-files').removeClass('hien');
+          this.kt = 1;
+        }
       }
     });
   }
+  // đóng thông tin chi tiết user
+  closeDetailUsers() {
+    if (this.kt === 1) {
+      $('.details-user').addClass('show');
+      $('.content-files').addClass('hien');
+      this.kt = 2;
+    } else {
+      $('.details-user').removeClass('show');
+      $('.content-files').removeClass('hien');
+      this.kt = 1;
+    }
+  }
+
 }

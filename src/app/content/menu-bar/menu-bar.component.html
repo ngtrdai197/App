@@ -1,15 +1,15 @@
 <div class="menu-bar">
     <div class="timkiem">
-        <input type="text" #input (keyup)="search(input.value)" placeholder="Tìm kiếm ...">
+        <input type="text" #input (keyup)="search(input.value)" placeholder="Tìm kiếm mọi thứ ...">
         <span style="font-size: 20px;"><i class="fa fa-search"></i></span>
     </div>
     <div class="menus">
         <ul>
-            <li>Tệp</li>
+            <li (click)="processFolder()">Tệp</li>
             <li>Gần đây</li>
             <li>Ảnh</li>
             <li>Đã chia sẻ</li>
-            <li>Thùng giác</li>
+            <li (click)="recycleBin()">Thùng giác</li>
             <li>PC</li>
         </ul>
     </div>

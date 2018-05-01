@@ -17,21 +17,24 @@ export class FilesService {
 
     newFolder: IFile;
     private nameFolderAdd = new BehaviorSubject(null);
+    private idFolder = new BehaviorSubject(null);
     private filesArrKeyWord = new BehaviorSubject([]);
+    private recycleBin = new BehaviorSubject([]);
+
     constructor(private http: HttpClient) {
     }
 
-    // postFiles(): any {
-    //     // this.http.post(this.API, this.newFolder);
-    //     return this.http.get(this.API);
-    // }
     getFile(): any {
         return this.http.get(this.API);
     }
-
+    // thêm 1 folder
     addFolder(newFolder: IFile): Observable<IFile> {
-        this.newFolder = newFolder;
         return this.http.post<IFile>(this.API, newFolder, httpOptions);
+    }
+
+    // thay đổi tên của file/folder
+    updateNameFolder(renameFolder: IFile, id: number): Observable<any> {
+        return this.http.put<IFile>(`${this.API}/${id}`, renameFolder, httpOptions);
     }
 
     deleteFolder(id): Observable<{}> {
@@ -39,19 +42,38 @@ export class FilesService {
         return this.http.delete(url, httpOptions);
     }
 
-    public getThongTinSearch() {
+    getThongTinSearch() {
         return this.filesArrKeyWord.asObservable();
     }
 
-    public search(filteredFiles) {
+    search(filteredFiles) {
         this.filesArrKeyWord.next(filteredFiles);
     }
-
-    public nameFolder(folderN) {
+    // lấy tên của folder bên component FolderComponent
+    nameFolder(folderN) {
         this.nameFolderAdd.next(folderN);
     }
-    public getNameFolder() {
+    getNameFolder() {
         return this.nameFolderAdd.asObservable();
     }
 
+    // lấy ID của folder/file được chọn
+    _idFolder(id) {
+        this.idFolder.next(id);
+    }
+    // trả về ID của folder/file được chọn.
+    getIdFolder() {
+        return this.idFolder.asObservable();
+    }
+
+    // lấy folder/file được chọn để xóa
+    _recycleBin(folder) {
+        const danhSachFolderXoa = this.recycleBin.getValue();
+        danhSachFolderXoa.push(folder);
+        this.recycleBin.next(danhSachFolderXoa);
+    }
+    // trả về mảng chứa các folder/file đã xóa
+    getRecycleBin() {
+        return this.recycleBin.asObservable();
+    }
 }

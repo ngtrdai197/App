@@ -1,34 +1,37 @@
-  <div class="thongtin-user">
-    <p>DCloud</p>
-  </div>
-  <div class="container">
-    <div class="right">
-      <div class="message item" style="border-left: 1px solid #ffffff;">
-        <span>
-          <i class="fas fa-envelope"></i>
-        </span>
-      </div>
-      <div class="settings item">
-        <span>
-          <i class="fas fa-cogs"></i>
-        </span>
-      </div>
-      <div class="notify item">
+<div class="thongtin-user">
+  <p style="cursor: pointer;" [routerLink]="['/home']" title="Quay về trang chủ" class="wow infinite bounceInLeft">DCloud</p>
+</div>
+<div class="container">
+  <div class="right">
+    <div class="message item" style="border-left: 1px solid #ffffff;">
+      <span>
+        <i class="fas fa-envelope"></i>
+      </span>
+    </div>
+    <div class="settings item">
+      <span>
+        <i class="fas fa-cogs"></i>
+      </span>
+    </div>
+    <div class="notify item">
+      <div class="wow infinite swing" data-wow-iteration="10">
         <span>
           <i class="fas fa-bell"></i>
         </span>
       </div>
-      <div class="ques item">
-        <span>
-          <i class="fas fa-question"></i>
-        </span>
-      </div>
 
-      <!-- <div class="exit item" (click)="backToHome()">Log out</div> -->
-      <div (click)="displayUser()" style="color: #ffffff;">
-        <span style="font-size: 45px;line-height: 59px;cursor: pointer;">
-          <i class="fa fa-user-circle"></i>
-        </span>
-      </div>
+    </div>
+    <div class="ques item">
+      <span>
+        <i class="fas fa-question"></i>
+      </span>
+    </div>
+
+    <!-- <div class="exit item" (click)="backToHome()">Log out</div> -->
+    <div class="item2" (click)="displayUser()" style="color: #ffffff;">
+      <span style="font-size: 45px;line-height: 59px;cursor: pointer;padding-left: 7px;" title="Thông tin của bạn">
+        <i class="fa fa-user-circle"></i>
+      </span>
     </div>
   </div>
+</div>

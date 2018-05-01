@@ -25,9 +25,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
-  }
 
+  }
 
   Warning() {
     this.toastrService.Error('Thông tin không hợp lệ. Kiểm tra lại!');
@@ -35,26 +34,25 @@ export class LoginComponent implements OnInit {
 
   onSubmit(userName, passWords) {
     let kiemtra = 0;
-    this.usersService.getUsers().subscribe(data => {
+    const subscription = this.usersService.getUsers().subscribe(data => {
       this.usersArr = data;
-      console.log('ok');
-      for (let i = 0; i < this.usersArr.length; i++) {
-        if (this.usersArr[i].userName === userName && this.usersArr[i].passWord === passWords) {
-          this.autheService.Login().subscribe((isAuthe) => {
+      this.usersArr.forEach(user => {
+        if (user.userName === userName && user.passWord === passWords) {
+          this.autheService.Login().subscribe(isAuthe => {
             if (isAuthe === true) {
-              this.router.navigate(['content']);
-              this.thongTinUser.thongTin(this.usersArr[i]);
+              this.thongTinUser.thongTin(user);
+              this.router.navigate(['file_root']);
             }
           });
           kiemtra = 1;
         } else {
           this.autheService.status(this.checkStatus);
         }
-      }
+      });
+      subscription.unsubscribe();
       if (kiemtra === 0) {
         this.Warning();
       }
     });
-    // day la vong lap de duyet user
   }
 }

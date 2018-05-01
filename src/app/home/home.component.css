@@ -42,6 +42,7 @@ header .container{
 }
 .login-logout ul li:hover{
     border-bottom: 2px solid orangered;
+    color: #fff;
 }
 ul{
     padding: 0;

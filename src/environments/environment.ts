@@ -6,11 +6,11 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyD7vLgTYq6RD5pSbmgqnLwSRFw-lhuE4FY',
-    authDomain: 'usernamedatabase-e7a85.firebaseapp.com',
-    databaseURL: 'https://usernamedatabase-e7a85.firebaseio.com',
-    projectId: 'usernamedatabase-e7a85',
-    storageBucket: '',
-    messagingSenderId: '790703720500'
+    apiKey: 'AIzaSyBDNs0N0wOcIm2LLARp_blDZYhCCnlcwJQ',
+    authDomain: 'dcloud-bdb23.firebaseapp.com',
+    databaseURL: 'https://dcloud-bdb23.firebaseio.com',
+    projectId: 'dcloud-bdb23',
+    storageBucket: 'dcloud-bdb23.appspot.com',
+    messagingSenderId: '921680197536'
   },
 };

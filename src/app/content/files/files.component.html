@@ -36,20 +36,31 @@
                               "></span>
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li>
+                        <li (click)="uploadFile.click()">
                             Tệp
                         </li>
-                        <li>
+                        <li (click)="uploadFolder.click()">
                             Thư mục
                         </li>
                     </ul>
+                    <!-- Choose upload file -->
+                    <input type="file" #uploadFile style="display: none;">
+                    <input type="file" #uploadFolder style="display: none;">
+
                 </div>
             </div>
         </div>
 
         <div class="content-right">
-            <div *ngIf="statusDelete === true" class="delete float" style="border-radius: 50%;" (click)="deleteFolder()">
-                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            <div *ngIf="statusDelete === true" class="delete float" (click)="deleteFolder()">
+                <span class="btn btn-default glyphicon glyphicon-trash" aria-hidden="true">
+                    <span style="margin-left: 10px;">Xóa</span>
+                </span>
+            </div>
+            <div *ngIf="statusDelete === true" class="float" (click)="renameFolder()">
+                <span class="btn btn-default glyphicon glyphicon-pencil" aria-hidden="true" style="padding-right: 10px;">
+                    <span style="margin-left: 10px;">Đổi tên</span>
+                </span>
             </div>
             <div class="sapxep float" title="Sắp xếp - hiển thị thư mục">
                 <div class="dropdown">
@@ -60,11 +71,11 @@
                                   "></span>
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li>
+                        <li (click)="sortName()">
                             Tên
                         </li>
-                        <li>
-                            Đã sửa đổi
+                        <li (click)="sortName()">
+                            Sắp xếp theo loại
                         </li>
                         <li>
                             Kích cỡ
@@ -79,7 +90,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="xemtuychon float" title="Xem tùy chọn">
+            <div class="xemtuychon float" title="Chế độ hiển thị">
                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"> </span>
 
             </div>
@@ -89,57 +100,34 @@
         </div>
     </div>
     <div class="loadfiles">
-
-        <!-- <div class="container-fluid"> -->
-        <!-- <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 files" *ngFor="let item of allFiles">
-                    <div class="div">
-                        <span *ngIf="item.type === 'folder'">
-                            <div class="cover">
-                                <img class="img1" src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/foldericons/folder-large_backplate.svg">
-                                <div class="wrapp">
-                                    <img class="img2" src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/foldericons/folder-large_frontplate_nopreview.svg">
-                                </div>
-                            </div>
-                        </span>
-                        <span *ngIf="item.type !== 'folder'" class="glyphicon glyphicon-file">
-                        </span>
-                    </div>
-                    <div class="folder-name">
-                        {{item.name}}
-                    </div>
-                </div>
-            </div> -->
-
         <div class="example-container mat-elevation-z8">
-            <mat-table #table [dataSource]="allFiles" matSort>
-                <!-- Position Column -->
-                <ng-container matColumnDef="position">
-                    <mat-header-cell *matHeaderCellDef> Stt </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.stt}} </mat-cell>
-                    <!-- <mat-cell *ngFor="let item of allFiles.length">{{item.allFiles.length}}</mat-cell> -->
-                </ng-container>
-
+            <mat-table #table [dataSource]="allFiles" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header="name"> Tên </mat-header-cell>
                     <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
                 </ng-container>
 
-                <!-- Weight Column -->
-                <ng-container matColumnDef="type">
-                    <mat-header-cell *matHeaderCellDef>Loại </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
-                </ng-container>
-
-                <!-- Symbol Column -->
+                <!-- Date Column -->
                 <ng-container matColumnDef="date">
-                    <mat-header-cell *matHeaderCellDef> Ngày đăng </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Ngày đăng </mat-header-cell>
                     <mat-cell *matCellDef="let element"> {{element.date | date: 'medium'}} </mat-cell>
                 </ng-container>
 
+                <!-- Type Column -->
+                <ng-container matColumnDef="type">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Loại </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+                </ng-container>
+
+                <!-- Date Repair Column -->
+                <ng-container matColumnDef="daterepair">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Ngày sửa </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.daterepair| date: 'medium'}} </mat-cell>
+                </ng-container>
+
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;" class="active bgrrow" (click)="getID(row)"></mat-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class=" statusDelete" id="dele{{row.id}}" (click)="getID(row)"></mat-row>
             </mat-table>
         </div>
 
@@ -149,9 +137,16 @@
 
 <div class="details-user">
     <div class="details">
-        <p>Tài khoản của tôi</p>
-        <p>Xin chào: {{user.userName}}</p>
-        <p>Địa chỉ Email: {{user.email}}</p>
-        <p (click)="backToHome()" style="cursor: pointer;">Đăng xuất</p>
+        <div class="div">
+            <p class="taikhoan">Tài khoản của tôi</p>
+            <p (click)="closeDetailUsers()">
+                <button>X</button>
+            </p>
+        </div>
+        <p class="xinchao">Xin chào: {{user.userName}}</p>
+        <p class="email">Địa chỉ Email: {{user.email}}</p>
+        <p class="hoso">Hồ sơ của tôi</p>
+        <p class="taikhoancuatoi">Tài khoản của tôi</p>
+        <p class="dangxuat" (click)="backToHome()">Đăng xuất</p>
     </div>
 </div>
