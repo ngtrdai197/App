@@ -12,15 +12,15 @@
         <li>Trợ giúp</li>
       </ul>
     </div>
-    <!-- <div class="login-logout item wow slideInDown" data-wow-delay="1s">
+    <div class="login-logout wow slideInDown" data-wow-delay="1s">
       <ul>
-        <li [routerLink]="['/login']">Login</li>
+        <li (click)="processFiles()">Đến DCloud của tôi</li>
       </ul>
-    </div> -->
+    </div>
     <div class="descreption">
       <p class="animated rollIn">Tất cả mọi tệp của bạn khả dụng ở mọi nơi</p>
     </div>
-    <div class="btnaccess" [routerLink]="['/login']">
+    <div class="btnaccess" (click)="processFiles()">
       Truy cập DCloud
     </div>
   </div>

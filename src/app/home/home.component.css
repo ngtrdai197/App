@@ -35,7 +35,7 @@ header .container{
 .login-logout ul li{
     font-weight: bold;
     cursor: pointer;
-    padding: 10px 20px;
+    padding: 7px 20px;
     font-size: 15px;
     text-transform: uppercase;
     display: inline-flex;

@@ -20,7 +20,6 @@ export class FilesService {
     private idFolder = new BehaviorSubject(null);
     private filesArrKeyWord = new BehaviorSubject([]);
     private recycleBin = new BehaviorSubject([]);
-
     constructor(private http: HttpClient) {
     }
 

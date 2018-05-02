@@ -15,6 +15,7 @@ import { ThongTinUserService } from '../../provider/thongtinuser.service';
 import { FolderComponent } from '../files/folder.component';
 import { ShowAccountService } from '../../provider/showaccount.service';
 import { FileData } from '../../interface/filedata';
+import { AutheService } from '../../provider/authe.service';
 
 declare var $: any;
 
@@ -44,6 +45,7 @@ export class FilesComponent implements OnInit {
     private usersService: UserFireBaseService,
     private thongTinUser: ThongTinUserService,
     private showAcc: ShowAccountService,
+    private autheService: AutheService,
   ) { }
 
   ngOnInit() {
@@ -227,7 +229,8 @@ export class FilesComponent implements OnInit {
   }
   backToHome() {
     setTimeout(() => {
-      this.router.navigate(['/login']);
+      localStorage.removeItem('currentUser');
+      this.router.navigate(['home']);
     }, 500);
   }
 

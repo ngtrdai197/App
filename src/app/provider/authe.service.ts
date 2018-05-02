@@ -12,7 +12,7 @@ export class AutheService {
         this.isLogin = true;
         subscriber.next(this.isLogin);
         subscriber.complete();
-      }, 0);
+      }, 500);
     });
   }
   getStatus() {

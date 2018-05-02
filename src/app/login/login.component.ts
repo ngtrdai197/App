@@ -6,6 +6,7 @@ import { ThongTinUserService } from '../provider/thongtinuser.service';
 import { User } from '../interface/user';
 import { UserFireBaseService } from '../provider/usersfirebase.service';
 import { ToastrService } from '../provider/toastr.service';
+import { Observable } from 'rxjs/observable';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -41,6 +42,7 @@ export class LoginComponent implements OnInit {
           this.autheService.Login().subscribe(isAuthe => {
             if (isAuthe === true) {
               this.thongTinUser.thongTin(user);
+              localStorage.setItem('currentUser', JSON.stringify({ token: 'jwt will come later', nam: user.userName }));
               this.router.navigate(['file_root']);
             }
           });
