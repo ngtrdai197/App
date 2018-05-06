@@ -16,6 +16,7 @@ import { FolderComponent } from '../files/folder.component';
 import { ShowAccountService } from '../../provider/showaccount.service';
 import { FileData } from '../../interface/filedata';
 import { AutheService } from '../../provider/authe.service';
+import { ToastrService } from '../../provider/toastr.service';
 
 declare var $: any;
 
@@ -46,6 +47,7 @@ export class FilesComponent implements OnInit {
     private thongTinUser: ThongTinUserService,
     private showAcc: ShowAccountService,
     private autheService: AutheService,
+    private toaStrService: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -96,22 +98,36 @@ export class FilesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((isConfirm) => {
       if (isConfirm) {
         const subscription = this.fileService.getNameFolder().subscribe(folderName => {
-          const newFolder: IFile = {
-            name: folderName,
-            type: 'folder',
-            date: new Date(Date.now()),
-            daterepair: new Date(Date.now()),
-          };
-          this.fileService.addFolder(newFolder).subscribe(() => {
-            this.fileService.getFile().subscribe(data => {
-              this.allFiles = new MatTableDataSource(data);
-              this.allFiles.sort = this.sort;
+          this.fileService.getFile().subscribe(data => {
+            this.allFiles = data;
+            // kiểm tra tên folder đã tồn tại chưa
+            let checkName = true;
+            this.allFiles.forEach(e => {
+              if (e.name.toLowerCase() === folderName.toLowerCase()) {
+                checkName = false; // tên folder đã tồn tại => trả về false
+              }
             });
+            // nếu tên folder chưa tồn tại => true => thêm folder
+            if (checkName === true) {
+              const newFolder: IFile = {
+                name: folderName,
+                type: 'folder',
+                date: new Date(Date.now()),
+                daterepair: new Date(Date.now()),
+              };
+              this.fileService.addFolder(newFolder).subscribe(() => {
+                this.fileService.getFile().subscribe(data => {
+                  this.allFiles = new MatTableDataSource(data);
+                  this.allFiles.sort = this.sort;
+                });
+              });
+            } else {
+              this.toaStrService.Error('Tên folder nhập đã trùng. Vui lòng kiểm tra lại !');
+            }
           });
         });
         subscription.unsubscribe();
       }
-      this.allFiles.sort = this.sort;
     });
   }
 
@@ -122,22 +138,36 @@ export class FilesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((isConfirm) => {
       if (isConfirm) {
         const subscription = this.fileService.getNameFolder().subscribe(fileName => {
-          const newFile: IFile = {
-            name: fileName,
-            type: 'docx',
-            date: new Date(Date.now()),
-            daterepair: new Date(Date.now()),
-          };
-          this.fileService.addFolder(newFile).subscribe(() => {
-            this.fileService.getFile().subscribe(data => {
-              this.allFiles = new MatTableDataSource(data);
-              this.allFiles.sort = this.sort;
+          this.fileService.getFile().subscribe(data => {
+            this.allFiles = data;
+            // kiểm tra tên folder đã tồn tại chưa
+            let checkName = true;
+            this.allFiles.forEach(e => {
+              if (e.name.toLowerCase() === fileName.toLowerCase()) {
+                checkName = false; // tên folder đã tồn tại => trả về false
+              }
             });
+            // nếu tên folder chưa tồn tại => true => thêm folder
+            if (checkName === true) {
+              const newFolder: IFile = {
+                name: fileName,
+                type: 'docx',
+                date: new Date(Date.now()),
+                daterepair: new Date(Date.now()),
+              };
+              this.fileService.addFolder(newFolder).subscribe(() => {
+                this.fileService.getFile().subscribe(data => {
+                  this.allFiles = new MatTableDataSource(data);
+                  this.allFiles.sort = this.sort;
+                });
+              });
+            } else {
+              this.toaStrService.Error('Tên file nhập đã trùng. Vui lòng kiểm tra lại !');
+            }
           });
         });
         subscription.unsubscribe();
       }
-      this.allFiles.sort = this.sort;
     });
   }
 
