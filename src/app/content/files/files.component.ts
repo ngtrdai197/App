@@ -229,6 +229,7 @@ export class FilesComponent implements OnInit {
   }
   backToHome() {
     setTimeout(() => {
+      this.autheService.logOut();
       localStorage.removeItem('currentUser');
       this.router.navigate(['home']);
     }, 500);

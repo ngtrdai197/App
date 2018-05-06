@@ -1,24 +1,43 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import * as firebase from 'firebase';
 
 @Injectable()
 export class AutheService {
-  isLogin = false;
-  checkStatus = new BehaviorSubject(null);
-  public Login() {
-    return new Observable(subscriber => {
-      setTimeout(() => {
-        this.isLogin = true;
-        subscriber.next(this.isLogin);
-        subscriber.complete();
-      }, 500);
+  firebaseAuth: firebase.auth.Auth;
+
+  constructor() {
+    console.log('Authentication Service starting!');
+    this.firebaseAuth = firebase.auth();
+  }
+
+  logIn(
+    email: string,
+    password: string,
+    onSuccess: (userCred: firebase.auth.UserCredential) => any,
+    onFailure: (error: firebase.auth.Error) => any,
+  ) {
+    try {
+      this.firebaseAuth.signInAndRetrieveDataWithEmailAndPassword(email, password)
+        .then(userCred => onSuccess(userCred))
+        .catch(error => onFailure(error));
+    } catch (error) {
+      onFailure(error);
+    }
+  }
+
+  getCurrentUser(): Promise<firebase.User> {
+    return new Promise((res, rej) => {
+      this.firebaseAuth.onAuthStateChanged((user: firebase.User) => {
+        res(user);
+      });
     });
   }
-  getStatus() {
-    return this.checkStatus.asObservable();
+
+  isLoggedIn(): Promise<boolean> {
+    return this.getCurrentUser().then(user => user !== null);
   }
-  public status(status) {
-    this.checkStatus.next(status);
+
+  logOut() {
+    return this.firebaseAuth.signOut();
   }
 }

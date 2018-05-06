@@ -20,16 +20,14 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
 
   }
+
   processFiles() {
-    const local = localStorage.getItem('currentUser');
-    if (local) {
-      this.autheService.isLogin = true;
-      if (this.autheService) {
-        this.router.navigate(['file_root']);
-      }
-    } else {
-      this.router.navigate(['login']);
-    }
+    this.autheService.isLoggedIn().then(isLoggedIn => {
+      isLoggedIn ? (
+        this.router.navigate(['file_root'])
+      ) : (
+          this.router.navigate(['login'])
+        );
+    });
   }
 }
-
