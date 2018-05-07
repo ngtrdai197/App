@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           this.autheService.Login().subscribe(isAuthe => {
             if (isAuthe === true) {
               this.thongTinUser.thongTin(user);
-              localStorage.setItem('currentUser', JSON.stringify({ token: 'jwt will come later', nam: user.userName }));
+              localStorage.setItem('currentUser', JSON.stringify({ token: 'jwt will come later', name: user.userName }));
               this.router.navigate(['file_root']);
             }
           });

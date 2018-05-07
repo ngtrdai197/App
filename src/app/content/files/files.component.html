@@ -16,11 +16,11 @@
                         </li>
                         <li (click)="openDiaLogFile()">
                             Tài liệu word</li>
-                        <li>
+                        <li (click)="openDiaLogFileExcel()">
                             Làm việc với Excel
                         </li>
-                        <li>
-                            Tài liệu văn bản thuần
+                        <li (click)="openDiaLogFilePowerPoint()">
+                            Tài liệu PowerPoint
                         </li>
                     </ul>
                 </div>
@@ -103,9 +103,23 @@
         <div class="example-container mat-elevation-z8">
             <mat-table #table [dataSource]="allFiles" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
                 <!-- Name Column -->
-                <ng-container matColumnDef="name">
+                <ng-container matColumnDef="name" style="width: 250px;">
                     <mat-header-cell *matHeaderCellDef mat-sort-header="name"> Tên </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span *ngIf="element.type === 'docx'">
+                            <i class="far fa-file-word"></i>
+                        </span>
+                        <span *ngIf="element.type === 'excel'">
+                                <i class="far fa-file-excel"></i>
+                        </span>
+                        <span *ngIf="element.type === 'pp'">
+                            <i class="far fa-file-powerpoint"></i>
+                        </span>
+                        <span *ngIf="element.type === 'folder'">
+                            <i class="far fa-folder"></i>
+                        </span>
+                        {{element.name}}
+                    </mat-cell>
                 </ng-container>
 
                 <!-- Date Column -->
@@ -116,8 +130,12 @@
 
                 <!-- Type Column -->
                 <ng-container matColumnDef="type">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Loại </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <span class="buttonType">Loại</span>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="buttonType">{{element.type}}</span>
+                    </mat-cell>
                 </ng-container>
 
                 <!-- Date Repair Column -->
@@ -127,7 +145,7 @@
                 </ng-container>
 
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;" class=" statusDelete" id="dele{{row.id}}" (click)="getID(row)"></mat-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="statusDelete" id="dele{{row.id}}" (click)="getID(row)"></mat-row>
             </mat-table>
         </div>
 

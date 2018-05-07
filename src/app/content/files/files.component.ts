@@ -60,6 +60,7 @@ export class FilesComponent implements OnInit {
     this.userLogin();
     this.showAccount();
   }
+
   loadFiles() {
     this.fileService.getFile().subscribe(data => {
       this.allFiles = new MatTableDataSource(data);
@@ -170,7 +171,84 @@ export class FilesComponent implements OnInit {
       }
     });
   }
-
+  public openDiaLogFileExcel() {
+    const dialogRef = this.diaLog.open(FolderComponent, {
+      width: '300px',
+    });
+    dialogRef.afterClosed().subscribe((isConfirm) => {
+      if (isConfirm) {
+        const subscription = this.fileService.getNameFolder().subscribe(fileName => {
+          this.fileService.getFile().subscribe(data => {
+            this.allFiles = data;
+            // kiểm tra tên folder đã tồn tại chưa
+            let checkName = true;
+            this.allFiles.forEach(e => {
+              if (e.name.toLowerCase() === fileName.toLowerCase()) {
+                checkName = false; // tên folder đã tồn tại => trả về false
+              }
+            });
+            // nếu tên folder chưa tồn tại => true => thêm folder
+            if (checkName === true) {
+              const newFolder: IFile = {
+                name: fileName,
+                type: 'excel',
+                date: new Date(Date.now()),
+                daterepair: new Date(Date.now()),
+              };
+              this.fileService.addFolder(newFolder).subscribe(() => {
+                this.fileService.getFile().subscribe(data => {
+                  this.allFiles = new MatTableDataSource(data);
+                  this.allFiles.sort = this.sort;
+                });
+              });
+            } else {
+              this.toaStrService.Error('Tên file nhập đã trùng. Vui lòng kiểm tra lại !');
+            }
+          });
+        });
+        subscription.unsubscribe();
+      }
+    });
+  }
+  public openDiaLogFilePowerPoint(){
+    const dialogRef = this.diaLog.open(FolderComponent, {
+      width: '300px',
+    });
+    dialogRef.afterClosed().subscribe((isConfirm) => {
+      if (isConfirm) {
+        const subscription = this.fileService.getNameFolder().subscribe(fileName => {
+          this.fileService.getFile().subscribe(data => {
+            this.allFiles = data;
+            // kiểm tra tên folder đã tồn tại chưa
+            let checkName = true;
+            this.allFiles.forEach(e => {
+              if (e.name.toLowerCase() === fileName.toLowerCase()) {
+                checkName = false; // tên folder đã tồn tại => trả về false
+              }
+            });
+            // nếu tên folder chưa tồn tại => true => thêm folder
+            if (checkName === true) {
+              const newFolder: IFile = {
+                name: fileName,
+                type: 'pp',
+                date: new Date(Date.now()),
+                daterepair: new Date(Date.now()),
+              };
+              this.fileService.addFolder(newFolder).subscribe(() => {
+                this.fileService.getFile().subscribe(data => {
+                  this.allFiles = new MatTableDataSource(data);
+                  this.allFiles.sort = this.sort;
+                });
+              });
+            } else {
+              this.toaStrService.Error('Tên file nhập đã trùng. Vui lòng kiểm tra lại !');
+            }
+          });
+        });
+        subscription.unsubscribe();
+      }
+    });
+  }
   getID(dataRow) {
     this.idFolder = dataRow.id;
     this.statusDelete = true;
@@ -281,7 +359,7 @@ export class FilesComponent implements OnInit {
       }
     });
   }
-  // đóng thông tin chi tiết user
+  // đóng thông tin chi tiết user X
   closeDetailUsers() {
     if (this.kt === 1) {
       $('.details-user').addClass('show');

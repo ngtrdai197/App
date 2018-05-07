@@ -7,7 +7,7 @@
       <ul>
         <li>Sử dụng DCloud</li>
         <li>Định giá</li>
-        <li>Tải xuống</li>
+        <li (click)="taiXuong()">Tải xuống</li>
         <li>Dành cho công việc</li>
         <li>Trợ giúp</li>
       </ul>
@@ -23,9 +23,12 @@
     <div class="btnaccess" (click)="processFiles()">
       Truy cập DCloud
     </div>
+    <div class="dixuong" (click)="dixuong()">
+        <span><i class="fas fa-angle-double-down"></i></span>
+    </div>
   </div>
 </header>
-<content>
+<content class="main-content">
   <div class="container">
     <div class="left item">
       <div class="wrapper">
@@ -89,13 +92,13 @@
   </div>
 </section>
 <section class="travel">
-    <p class="tit3">Bắt đầu sử dung DCloud miễn phí</p>
-    <div [routerLink]="['/login']">
-      <p class="btnaccess2" style="color:#ffffff;">Truy cập DCloud</p>
-    </div>
-    <div class="taixuong">
-      Tải xuống sao lưu và đồng bộ hóa  >
-    </div>
+  <p class="tit3">Bắt đầu sử dung DCloud miễn phí</p>
+  <div [routerLink]="['/login']">
+    <p class="btnaccess2" style="color:#ffffff;">Truy cập DCloud</p>
+  </div>
+  <div class="taixuong">
+    Tải xuống sao lưu và đồng bộ hóa >
+  </div>
 </section>
 <footer>
   <div class="container">
@@ -151,3 +154,10 @@
     </p>
   </div>
 </footer>
+<div class="back-to-top" (click)="BackTop()">
+  <div class="nut">
+    <span>
+      <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+    </span>
+  </div>
+</div>

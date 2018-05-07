@@ -40,9 +40,9 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'user', component: UserComponent },
   {
-    canActivate: [AutheGuard],
     path: 'file_root',
     component: ContentComponent,
+    canActivate: [AutheGuard],
     children: [
       {
         path: 'files',

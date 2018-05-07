@@ -12,8 +12,10 @@
         background: #e7e7e775;
         border-bottom: 1px solid transparent;
         width: 100%;
+        display: flex;
+        justify-content: space-between;
         .content-left{
-            float: left;
+            // float: left;
             line-height: 54px;
             margin-left: 25px;
             span.glyphicon {
@@ -48,7 +50,7 @@
             }
         }
         .content-right{
-            float: right;
+            // float: right;
             line-height: 54px;
             margin-right: 25px;
             span.glyphicon {
@@ -87,6 +89,7 @@
             flex-direction: column;
             min-width: 300px;
             height: 100%;
+            overflow: auto;
           }
           .example-header {
             min-height: 64px;
@@ -102,20 +105,34 @@
         .active{
             background: #518abbeb;
         }
-          .mat-header-cell{
+        .mat-header-cell{
             font-size: 24px;
-          }
-          .mat-table {
+        }
+        .mat-table {
             overflow: auto;
             max-height: 100%;
-          }
-          mat-cell.mat-cell.cdk-column-name.mat-column-name.ng-star-inserted {
+        }
+        mat-cell.mat-cell.cdk-column-name.mat-column-name.ng-star-inserted {
             font-size: 20px;
             color: black;
+            span.ng-star-inserted{
+                font-size: 35px;
+            }
         }
         mat-header-row.mat-header-row.ng-star-inserted {
             background: #9edc9d;
             color: black !important;
+        }
+        mat-cell.mat-cell.cdk-column-name.mat-column-name.ng-star-inserted {
+            flex: 2.1;
+        }
+    
+        mat-header-cell.mat-header-cell.ng-tns-c7-0.cdk-column-name.mat-column-name.ng-star-inserted{
+            flex: 2.1;
+        }
+
+        span.buttonType {
+            padding: 0 35px;
         }
         .row{
             margin: 0;

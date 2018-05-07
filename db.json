@@ -22,13 +22,6 @@
       "id": 4
     },
     {
-      "name": "JavaScript",
-      "type": "folder",
-      "date": "2018-04-27T10:16:41.234Z",
-      "stt": 7,
-      "id": 7
-    },
-    {
       "name": "Angular 5",
       "type": "folder",
       "date": "2018-04-29T22:52:17.710Z",
@@ -66,10 +59,11 @@
       "id": 20
     },
     {
-      "name": "Angular 2",
+      "name": "AngularJs",
       "type": "folder",
       "date": "2018-04-30T12:30:32.783Z",
-      "id": 24
+      "id": 24,
+      "daterepair": "2018-05-06T12:24:51.998Z"
     },
     {
       "name": "Mongo DB",
@@ -79,17 +73,31 @@
       "id": 25
     },
     {
-      "name": "Authentication Email Fireabse",
+      "name": "Authentication Email",
       "type": "docx",
       "date": "2018-04-30T12:54:11.941Z",
-      "daterepair": "2018-04-30T12:54:11.941Z",
+      "daterepair": "2018-05-06T12:35:23.970Z",
       "id": 26
     },
     {
-      "name": "Folder mới thêm nè ~~",
-      "type": "folder",
-      "date": "2018-05-01T04:04:56.059Z",
-      "daterepair": "2018-05-01T04:04:56.059Z",
+      "name": "Danh sách",
+      "type": "excel",
+      "date": "2018-05-06T16:03:51.679Z",
+      "daterepair": "2018-05-06T16:03:51.679Z",
+      "id": 27
+    },
+    {
+      "name": "Thuyết trình đề tài",
+      "type": "pp",
+      "date": "2018-05-06T16:06:49.587Z",
+      "daterepair": "2018-05-06T16:06:49.587Z",
+      "id": 28
+    },
+    {
+      "name": "JavaScript",
+      "type": "docx",
+      "date": "2018-05-06T16:20:47.439Z",
+      "daterepair": "2018-05-06T16:20:47.439Z",
       "id": 29
     }
   ]
