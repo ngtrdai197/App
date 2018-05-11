@@ -15,9 +15,7 @@ import { ToastrService } from './provider/toastr.service';
 
 
 import { AppComponent } from './app.component';
-import { NotfoundComponent } from './notfound/notfound.component';
 import { FilesComponent } from './content/files/files.component';
-import { FileslistComponent } from './content/files/fileslist/fileslist.component';
 import { HomeComponent } from './home/home.component';
 import { ContentComponent } from './content/content.component';
 import { RegisterComponent } from './register/register.component';
@@ -25,51 +23,29 @@ import { MenuBarComponent } from './content/menu-bar/menu-bar.component';
 import { HeaderComponent } from './content/header/header.component';
 import { FilesService } from './provider/files.service';
 import { RegisterService } from './register/register.service';
-import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { FolderComponent } from './content/files/folder.component';
 import { ThongTinUserService } from './provider/thongtinuser.service';
 import { DeleteFileService } from './provider/delete.service';
 import { UserFireBaseService } from './provider/usersfirebase.service';
 import { ShowAccountService } from './provider/showaccount.service';
+import { appRoutes } from './app.routes';
+import { FiledetailsComponent } from './content/filedetails/filedetails.component';
 
-const appRoutes: Routes = [
-  { path: 'home', redirectTo: '/', pathMatch: 'full' },
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'user', component: UserComponent },
-  {
-    path: 'file_root',
-    component: ContentComponent,
-    canActivate: [AutheGuard],
-    children: [
-      {
-        path: 'files',
-        component: FilesComponent,
-        children: [
-          { path: 'folder/:folderName', component: FileslistComponent },
-        ]
-      }
-    ]
-  },
-  { path: '**', component: NotfoundComponent },
-];
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotfoundComponent,
     FilesComponent,
-    FileslistComponent,
     HomeComponent,
     ContentComponent,
     RegisterComponent,
     MenuBarComponent,
     HeaderComponent,
-    UserComponent,
     LoginComponent,
     FolderComponent,
+    FiledetailsComponent,
   ],
   imports: [
     BrowserModule,

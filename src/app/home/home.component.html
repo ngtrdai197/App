@@ -12,19 +12,16 @@
         <li>Trợ giúp</li>
       </ul>
     </div>
-    <div class="login-logout wow slideInDown" data-wow-delay="1s">
-      <ul>
-        <li (click)="processFiles()">Đến DCloud của tôi</li>
-      </ul>
-    </div>
     <div class="descreption">
       <p class="animated rollIn">Tất cả mọi tệp của bạn khả dụng ở mọi nơi</p>
     </div>
-    <div class="btnaccess" (click)="processFiles()">
+    <div class="btnaccess" (click)="accessFiles()">
       Truy cập DCloud
     </div>
     <div class="dixuong" (click)="dixuong()">
-        <span><i class="fas fa-angle-double-down"></i></span>
+      <span>
+        <i class="fas fa-angle-double-down"></i>
+      </span>
     </div>
   </div>
 </header>
@@ -88,12 +85,24 @@
     <div class="content-right wow slideInRight">
       <img src="../../assets/phonetablet.jpg" alt="">
     </div>
-    <!-- <div class="fix"></div> -->
+  </div>
+</section>
+<section class="share">
+  <div class="line-hinhanh">
+    <img src="../../assets//people1.jpg" alt="">
+  </div>
+  <div class="title-bottom">
+    <p>Share files and folders</p>
+  </div>
+  <div class="description-bottom">
+    <p>
+      You can quickly invite others to view, download, and collaborate on all the files you want–no email attachment needed.
+    </p>
   </div>
 </section>
 <section class="travel">
   <p class="tit3">Bắt đầu sử dung DCloud miễn phí</p>
-  <div [routerLink]="['/login']">
+  <div (click)="accessFiles()">
     <p class="btnaccess2" style="color:#ffffff;">Truy cập DCloud</p>
   </div>
   <div class="taixuong">

@@ -210,7 +210,7 @@ export class FilesComponent implements OnInit {
       }
     });
   }
-  public openDiaLogFilePowerPoint(){
+  public openDiaLogFilePowerPoint() {
     const dialogRef = this.diaLog.open(FolderComponent, {
       width: '300px',
     });
@@ -331,14 +331,16 @@ export class FilesComponent implements OnInit {
 
   // lấy thông tin của user đăng nhập vào để hiển thị chi tiết thông tin user
   userLogin() {
-    this.thongTinUser.getThongTin().subscribe(user => {
+    this.thongTinUser.getUser().subscribe(user => {
       this.user = user;
+
     });
   }
   backToHome() {
     setTimeout(() => {
-      localStorage.removeItem('currentUser');
-      this.router.navigate(['home']);
+      this.thongTinUser.deleteUser(1).subscribe(() => {
+        this.router.navigate(['home']);
+      });
     }, 500);
   }
 

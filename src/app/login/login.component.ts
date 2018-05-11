@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   // Check file delete
   checkStatus: false;
   usersArr: User[];
+  userTemp: User[];
   pathLogin: '';
   constructor(
     private autheService: AutheService,
@@ -35,26 +36,39 @@ export class LoginComponent implements OnInit {
 
   onSubmit(userName, passWords) {
     let kiemtra = 0;
-    const subscription = this.usersService.getUsers().subscribe(data => {
-      this.usersArr = data;
-      this.usersArr.forEach(user => {
-        if (user.userName === userName && user.passWord === passWords) {
-          this.autheService.Login().subscribe(isAuthe => {
-            if (isAuthe === true) {
-              this.thongTinUser.thongTin(user);
-              localStorage.setItem('currentUser', JSON.stringify({ token: 'jwt will come later', name: user.userName }));
-              this.router.navigate(['file_root']);
+    this.thongTinUser.getUser().subscribe(userData => {
+      this.userTemp = userData;
+      if (this.userTemp.length ===0) {
+        const subscription = this.usersService.getUsers().subscribe(data => {
+          this.usersArr = data;
+          this.usersArr.forEach(user => {
+            if (user.userName === userName && user.passWord === passWords) {
+              this.autheService.Login().subscribe(isAuthe => {
+                if (isAuthe === true) {
+                  this.thongTinUser.addUser(user).subscribe(tt => {
+                    this.router.navigate(['file_root']);
+                  });
+                }
+              });
+              kiemtra = 1;
+            } else {
+              this.autheService.status(this.checkStatus);
             }
           });
-          kiemtra = 1;
-        } else {
-          this.autheService.status(this.checkStatus);
-        }
-      });
-      subscription.unsubscribe();
-      if (kiemtra === 0) {
-        this.Warning();
+          subscription.unsubscribe();
+          if (kiemtra === 0) {
+            this.Warning();
+          }
+        });
+      } else {
+        this.autheService.Login().subscribe(stt =>{
+          if(stt){
+            this.router.navigate(['file_root']);
+          }
+        });
       }
     });
+
+
   }
 }

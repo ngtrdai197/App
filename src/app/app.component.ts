@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ThongTinUserService } from './provider/thongtinuser.service';
+import { AutheService } from './provider/authe.service';
+import { Router } from '@angular/router';
+import { User } from './interface/user';
 // import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -7,7 +11,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor() { }
+  arrUser: User[];
+  constructor(
+    private ttUserService: ThongTinUserService,
+    private autheService: AutheService,
+    private router: Router,
 
-  ngOnInit() {}
+  ) { }
+
+  ngOnInit() {
+    this.ttUserService.getUser().subscribe(user => {
+      this.arrUser = user;
+      if (this.arrUser.length !== 0) {
+        this.autheService.Login().subscribe(stt => {
+          if (stt) {
+            this.router.navigate(['file_root']);
+          }
+        });
+      }
+    });
+  }
 }

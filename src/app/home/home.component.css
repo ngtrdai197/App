@@ -32,18 +32,7 @@ header .container{
     text-align: center;
 }
 
-.login-logout ul li{
-    font-weight: bold;
-    cursor: pointer;
-    padding: 7px 20px;
-    font-size: 15px;
-    text-transform: uppercase;
-    display: inline-flex;
-}
-.login-logout ul li:hover{
-    border-bottom: 2px solid orangered;
-    color: #fff;
-}
+
 ul{
     padding: 0;
 }
@@ -181,6 +170,36 @@ section.xemnoidung .container{
 .des2{
     font-size: 20px;
     line-height: 45px;
+}
+
+section.share {
+    height: 500px;
+    position: relative;
+    border-top: 1px solid beige;
+}
+
+.line-hinhanh {
+    position: absolute;
+    top: 17%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.title-bottom {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 37px;
+}
+
+.description-bottom {
+    position: absolute;
+    top: 72%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 20px;
 }
 section.travel{
     height: 500px;

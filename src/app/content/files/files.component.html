@@ -110,7 +110,7 @@
                             <i class="far fa-file-word"></i>
                         </span>
                         <span *ngIf="element.type === 'excel'">
-                                <i class="far fa-file-excel"></i>
+                            <i class="far fa-file-excel"></i>
                         </span>
                         <span *ngIf="element.type === 'pp'">
                             <i class="far fa-file-powerpoint"></i>
@@ -161,10 +161,12 @@
                 <button>X</button>
             </p>
         </div>
-        <p class="xinchao">Xin chào: {{user.userName}}</p>
-        <p class="email">Địa chỉ Email: {{user.email}}</p>
-        <p class="hoso">Hồ sơ của tôi</p>
-        <p class="taikhoancuatoi">Tài khoản của tôi</p>
-        <p class="dangxuat" (click)="backToHome()">Đăng xuất</p>
+        <div *ngFor="let u of user">
+            <p class="xinchao">Xin chào: {{u.userName}}</p>
+            <p class="email">Địa chỉ Email: {{u.email}}</p>
+            <p class="hoso">Hồ sơ của tôi</p>
+            <p class="taikhoancuatoi">Tài khoản của tôi</p>
+            <p class="dangxuat" (click)="backToHome()">Đăng xuất</p>
+        </div>
     </div>
 </div>

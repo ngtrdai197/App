@@ -123,16 +123,27 @@
             background: #9edc9d;
             color: black !important;
         }
+        mat-header-cell.mat-header-cell.ng-tns-c7-2.cdk-column-type.mat-column-type.ng-star-inserted {
+            flex: 0.7;
+        }
+        
+        mat-cell.mat-cell.cdk-column-type.mat-column-type.ng-star-inserted {
+            flex: 0.7;
+        }
+        
+        mat-header-cell.mat-header-cell.ng-tns-c7-0.cdk-column-name.mat-column-name.ng-star-inserted {
+            flex: 2.2;
+        }
+        
         mat-cell.mat-cell.cdk-column-name.mat-column-name.ng-star-inserted {
-            flex: 2.1;
+            flex: 2.2;
         }
-    
-        mat-header-cell.mat-header-cell.ng-tns-c7-0.cdk-column-name.mat-column-name.ng-star-inserted{
-            flex: 2.1;
+        mat-header-cell.mat-header-cell.ng-tns-c7-1.cdk-column-date.mat-column-date.ng-star-inserted {
+            flex: 1.5;
         }
-
-        span.buttonType {
-            padding: 0 35px;
+        
+        mat-cell.mat-cell.cdk-column-date.mat-column-date.ng-star-inserted {
+            flex: 1.5;
         }
         .row{
             margin: 0;

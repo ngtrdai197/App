@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AutheService } from '../provider/authe.service';
 import { Router } from '@angular/router';
+
+import { AutheService } from '../provider/authe.service';
+import { ThongTinUserService } from '../provider/thongtinuser.service';
+import { User } from '../interface/user';
 
 declare var $: any;
 
@@ -10,10 +13,12 @@ declare var $: any;
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  vitri: any
+  vitri: any;
+  user: User[];
   constructor(
     private autheService: AutheService,
     private router: Router,
+    private thongTinUser: ThongTinUserService,
   ) { }
 
   ngOnInit() {
@@ -25,7 +30,20 @@ export class HomeComponent implements OnInit {
         $('.back-to-top').removeClass('showTop');
       }
     });
+  }
 
+  accessFiles() {
+    this.thongTinUser.getUser().subscribe(user => {
+      this.user = user;
+      if (this.user.length != 0) {
+        this.autheService.Login().subscribe(() => {
+          this.router.navigate(['file_root']);
+        });
+      } else {
+        this.router.navigate(['login']);
+      }
+
+    })
   }
 
   BackTop() {
@@ -39,16 +57,6 @@ export class HomeComponent implements OnInit {
     const temp = $('.travel').offset().top;
     $("html").animate({ scrollTop: temp }, 700);
   }
-  processFiles() {
-    const local = localStorage.getItem('currentUser');
-    if (local) {
-      this.autheService.isLogin = true;
-      if (this.autheService) {
-        this.router.navigate(['file_root']);
-      }
-    } else {
-      this.router.navigate(['login']);
-    }
-  }
+
 }
 
