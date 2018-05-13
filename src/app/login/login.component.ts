@@ -7,6 +7,7 @@ import { User } from '../interface/user';
 import { UserFireBaseService } from '../provider/usersfirebase.service';
 import { ToastrService } from '../provider/toastr.service';
 import { Observable } from 'rxjs/observable';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -34,38 +35,56 @@ export class LoginComponent implements OnInit {
     this.toastrService.Error('Thông tin không hợp lệ. Kiểm tra lại!');
   }
 
-  onSubmit(userName, passWords) {
-    let kiemtra = 0;
-    this.thongTinUser.getUser().subscribe(userData => {
-      this.userTemp = userData;
-      if (this.userTemp.length ===0) {
-        const subscription = this.usersService.getUsers().subscribe(data => {
-          this.usersArr = data;
-          this.usersArr.forEach(user => {
-            if (user.userName === userName && user.passWord === passWords) {
-              this.autheService.Login().subscribe(isAuthe => {
-                if (isAuthe === true) {
-                  this.thongTinUser.addUser(user).subscribe(tt => {
-                    this.router.navigate(['file_root']);
-                  });
-                }
-              });
-              kiemtra = 1;
-            } else {
-              this.autheService.status(this.checkStatus);
-            }
-          });
-          subscription.unsubscribe();
-          if (kiemtra === 0) {
+  // onSubmit(userName: string, passWords: string) {
+  //   let kiemtra = 0;
+  //   const subscription = this.usersService.getUsers().subscribe(data => {
+  //     console.log(data);
+  //     this.usersArr = data;
+  //     this.usersArr.forEach(user => {
+  //       if (user.userName === userName && user.passWord === passWords) {
+  //         this.autheService.Login().subscribe(isAuthe => {
+  //           if (isAuthe === true) {
+  //             this.thongTinUser.thongTin(user);
+  //             localStorage.setItem('currentUser', JSON.stringify({ token: 'jwt will come later', nam: user.userName }));
+  //             this.router.navigate(['file_root']);
+  //           }
+  //         });
+  //         kiemtra = 1;
+  //       } else {
+  //         this.autheService.status(this.checkStatus);
+  //       }
+  //     });
+  //     subscription.unsubscribe();
+  //     if (kiemtra === 0) {
+  //       this.Warning();
+  //     }
+  //   });
+  // }
+
+  onSubmit(username: string, password: string) {
+    this.autheService.isLoggedIn().then(isLoggedIn => {
+      if (isLoggedIn) {
+        this.router.navigate(['file_root']);
+      } else {
+        this.autheService.logIn(
+          username,
+          password,
+          (userCred) => {
+            console.log(userCred);
+            const sub = this.usersService.getUsers().subscribe(data => {
+              this.usersArr = data;
+              const user = this.usersArr.find(user => user.userName === userCred.user.email);
+              this.thongTinUser.thongTin(user);
+              localStorage.setItem('currentUser', JSON.stringify({ token: 'jwt will come later', nam: user.userName }));
+              this.router.navigate(['file_root']);
+            });
+            sub.unsubscribe();
+          },
+          (error) => {
+            console.log(error);
             this.Warning();
           }
-        });
-      } else {
-        this.autheService.Login().subscribe(stt =>{
-          if(stt){
-            this.router.navigate(['file_root']);
-          }
-        });
+        );
       }
     });
 

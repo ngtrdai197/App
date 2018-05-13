@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ThongTinUserService } from './provider/thongtinuser.service';
-import { AutheService } from './provider/authe.service';
-import { Router } from '@angular/router';
-import { User } from './interface/user';
+import { environment } from '../environments/environment';
+import * as firebase from 'firebase';
+
 // import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -11,24 +10,10 @@ import { User } from './interface/user';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  arrUser: User[];
-  constructor(
-    private ttUserService: ThongTinUserService,
-    private autheService: AutheService,
-    private router: Router,
-
-  ) { }
+  constructor() {
+  }
 
   ngOnInit() {
-    this.ttUserService.getUser().subscribe(user => {
-      this.arrUser = user;
-      if (this.arrUser.length !== 0) {
-        this.autheService.Login().subscribe(stt => {
-          if (stt) {
-            this.router.navigate(['file_root']);
-          }
-        });
-      }
-    });
+    firebase.initializeApp(environment.firebase);
   }
 }

@@ -370,9 +370,9 @@ export class FilesComponent implements OnInit {
   }
   backToHome() {
     setTimeout(() => {
-      this.thongTinUser.deleteUser(1).subscribe(() => {
-        this.router.navigate(['home']);
-      });
+      this.autheService.logOut();
+      localStorage.removeItem('currentUser');
+      this.router.navigate(['home']);
     }, 500);
   }
 

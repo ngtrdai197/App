@@ -32,22 +32,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  accessFiles() {
-    this.thongTinUser.getUser().subscribe(user => {
-      this.user = user;
-      if (this.user.length != 0) {
-        this.autheService.Login().subscribe(() => {
-          this.router.navigate(['file_root']);
-        });
-      } else {
-        this.router.navigate(['login']);
-      }
-
-    })
-  }
-
-  BackTop() {
-    $("html").animate({ scrollTop: 0 }, 700);
+  processFiles() {
+    this.autheService.isLoggedIn().then(isLoggedIn => {
+      isLoggedIn ? (
+        this.router.navigate(['file_root'])
+      ) : (
+          this.router.navigate(['login'])
+        );
+    });
   }
   dixuong() {
     const temp = $('.main-content').offset().top;
@@ -59,4 +51,3 @@ export class HomeComponent implements OnInit {
   }
 
 }
-
