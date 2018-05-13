@@ -1,111 +1,126 @@
 {
   "sources": [
     {
-      "name": "NodeJs",
+      "name": "Angular 5",
       "type": "folder",
-      "date": "2018-04-25T06:19:29.132Z",
-      "stt": 2,
+      "date": "2018-05-13T04:59:47.911Z",
+      "daterepair": "2018-05-13T04:59:47.911Z",
+      "parentId": 0,
+      "id": 1
+    },
+    {
+      "name": "Document",
+      "type": "folder",
+      "date": "2018-05-13T05:00:13.389Z",
+      "daterepair": "2018-05-13T05:00:13.389Z",
+      "parentId": 1,
       "id": 2
     },
     {
-      "name": "Công nghệ phần mềm",
-      "type": "folder",
-      "date": "2018-04-25T06:20:20.157Z",
-      "stt": 3,
+      "name": "Báo cáo đề tài công nghệ phần mềm.docx",
+      "type": "image",
+      "parentId": 2,
+      "date": "2018-05-13T05:00:24.634Z",
+      "daterepair": "2018-05-13T05:00:24.634Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FB%C3%A1o%20c%C3%A1o%20%C4%91%E1%BB%81%20t%C3%A0i%20c%C3%B4ng%20ngh%E1%BB%87%20ph%E1%BA%A7n%20m%E1%BB%81m.docx?alt=media&token=f43f58cd-3ed6-4f7e-8862-4757af396465",
       "id": 3
     },
     {
-      "name": "VueJS",
+      "name": "Docs",
       "type": "folder",
-      "date": "2018-04-25T06:22:12.092Z",
-      "stt": 4,
+      "date": "2018-05-13T05:01:09.560Z",
+      "daterepair": "2018-05-13T05:01:09.560Z",
+      "parentId": 0,
       "id": 4
     },
     {
-      "name": "Angular 5",
+      "name": "Báo cáo đề tài công nghệ phần mềm.docx",
+      "type": "image",
+      "parentId": 4,
+      "date": "2018-05-13T05:01:23.489Z",
+      "daterepair": "2018-05-13T05:01:23.489Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FB%C3%A1o%20c%C3%A1o%20%C4%91%E1%BB%81%20t%C3%A0i%20c%C3%B4ng%20ngh%E1%BB%87%20ph%E1%BA%A7n%20m%E1%BB%81m.docx?alt=media&token=ed89df8c-f300-4e19-9cf5-f05f48ad0330",
+      "id": 5
+    },
+    {
+      "name": "22",
       "type": "folder",
-      "date": "2018-04-29T22:52:17.710Z",
+      "date": "2018-05-13T05:04:55.518Z",
+      "daterepair": "2018-05-13T05:04:55.518Z",
+      "parentId": 4,
+      "id": 6
+    },
+    {
+      "name": "jH4ni9Y.jpg",
+      "type": "image",
+      "parentId": 6,
+      "date": "2018-05-13T05:05:18.267Z",
+      "daterepair": "2018-05-13T05:05:18.267Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FjH4ni9Y.jpg?alt=media&token=57c29cb3-6d0e-4bcc-a02a-9bf15e0c2b82",
+      "id": 7
+    },
+    {
+      "name": "thumb-1920-430918.jpg",
+      "type": "image",
+      "parentId": 6,
+      "date": "2018-05-13T05:05:19.817Z",
+      "daterepair": "2018-05-13T05:05:19.817Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2Fthumb-1920-430918.jpg?alt=media&token=c9bc86fe-6c96-4053-9019-a63ce1de1de9",
+      "id": 8
+    },
+    {
+      "name": "thumb-1920-665091.jpg",
+      "type": "image",
+      "parentId": 6,
+      "date": "2018-05-13T05:05:21.503Z",
+      "daterepair": "2018-05-13T05:05:21.503Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2Fthumb-1920-665091.jpg?alt=media&token=f8842da8-d63c-49cf-8452-b790d7475e48",
+      "id": 9
+    },
+    {
+      "name": "thumb-1920-889210.png",
+      "type": "image",
+      "parentId": 6,
+      "date": "2018-05-13T05:05:23.955Z",
+      "daterepair": "2018-05-13T05:05:23.955Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2Fthumb-1920-889210.png?alt=media&token=dd84a287-db23-490a-9afd-9c9e85e9a7e2",
+      "id": 10
+    },
+    {
+      "name": "jH4ni9Y.jpg",
+      "type": "image",
+      "parentId": 0,
+      "date": "2018-05-13T05:19:05.599Z",
+      "daterepair": "2018-05-13T05:19:05.600Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FjH4ni9Y.jpg?alt=media&token=5a3d26b4-20e4-4e40-af10-29d46d1ab21c",
+      "id": 11
+    },
+    {
+      "name": "thumb-1920-430918.jpg",
+      "type": "image",
+      "parentId": 0,
+      "date": "2018-05-13T05:19:06.849Z",
+      "daterepair": "2018-05-13T05:19:06.849Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2Fthumb-1920-430918.jpg?alt=media&token=40e3cbe7-0fbc-48ba-85eb-d471ace63ac3",
+      "id": 12
+    },
+    {
+      "name": "thumb-1920-665091.jpg",
+      "type": "image",
+      "parentId": 0,
+      "date": "2018-05-13T05:19:08.245Z",
+      "daterepair": "2018-05-13T05:19:08.245Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2Fthumb-1920-665091.jpg?alt=media&token=c9f41f70-1d69-475b-9c99-03b3efa24f05",
+      "id": 13
+    },
+    {
+      "name": "thumb-1920-889210.png",
+      "type": "image",
+      "parentId": 0,
+      "date": "2018-05-13T05:19:10.615Z",
+      "daterepair": "2018-05-13T05:19:10.615Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2Fthumb-1920-889210.png?alt=media&token=8a746b49-a088-4529-b47f-051788e38ed6",
       "id": 14
-    },
-    {
-      "name": "Java",
-      "type": "docx",
-      "date": "2018-04-29T23:15:38.131Z",
-      "id": 15
-    },
-    {
-      "name": "Music",
-      "type": "docx",
-      "date": "2018-04-29T23:37:00.337Z",
-      "id": 16,
-      "daterepair": "2018-04-30T12:48:55.880Z"
-    },
-    {
-      "name": "Ngôn ngữ lập trình C++",
-      "type": "folder",
-      "date": "2018-04-29T23:45:33.320Z",
-      "id": 18
-    },
-    {
-      "name": "Reactive",
-      "type": "folder",
-      "date": "2018-04-29T23:45:51.881Z",
-      "id": 19
-    },
-    {
-      "name": "Python",
-      "type": "folder",
-      "date": "2018-04-29T23:46:02.351Z",
-      "id": 20
-    },
-    {
-      "name": "AngularJs",
-      "type": "folder",
-      "date": "2018-04-30T12:30:32.783Z",
-      "id": 24,
-      "daterepair": "2018-05-06T12:24:51.998Z"
-    },
-    {
-      "name": "Mongo DB",
-      "type": "folder",
-      "date": "2018-04-30T12:47:50.480Z",
-      "daterepair": "2018-04-30T12:48:13.222Z",
-      "id": 25
-    },
-    {
-      "name": "Authentication Email",
-      "type": "docx",
-      "date": "2018-04-30T12:54:11.941Z",
-      "daterepair": "2018-05-06T12:35:23.970Z",
-      "id": 26
-    },
-    {
-      "name": "Danh sách điểm",
-      "type": "excel",
-      "date": "2018-05-06T16:03:51.679Z",
-      "daterepair": "2018-05-11T07:53:42.880Z",
-      "id": 27
-    },
-    {
-      "name": "Thuyết trình đề tài",
-      "type": "pp",
-      "date": "2018-05-06T16:06:49.587Z",
-      "daterepair": "2018-05-06T16:06:49.587Z",
-      "id": 28
-    },
-    {
-      "name": "JavaScript",
-      "type": "docx",
-      "date": "2018-05-06T16:20:47.439Z",
-      "daterepair": "2018-05-06T16:20:47.439Z",
-      "id": 29
-    },
-    {
-      "name": "Ruby",
-      "type": "docx",
-      "date": "2018-05-07T15:00:49.416Z",
-      "daterepair": "2018-05-07T15:00:49.416Z",
-      "id": 30
     }
   ],
   "users": [

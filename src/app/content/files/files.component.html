@@ -44,7 +44,7 @@
                         </li>
                     </ul>
                     <!-- Choose upload file -->
-                    <input type="file" #uploadFile style="display: none;">
+                    <input type="file" multiple directory="" webkitdirectory="" #uploadFile style="display: none;" (change)="onChooseFile($event)">
                     <input type="file" #uploadFolder style="display: none;">
 
                 </div>
@@ -99,7 +99,8 @@
             </div>
         </div>
     </div>
-    <div class="loadfiles">
+    <div class="loadfiles" (click)="onLeftClick()">
+        <!-- Contain data -->
         <div class="example-container mat-elevation-z8">
             <mat-table #table [dataSource]="allFiles" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
                 <!-- Name Column -->
@@ -117,6 +118,9 @@
                         </span>
                         <span *ngIf="element.type === 'folder'">
                             <i class="far fa-folder"></i>
+                        </span>
+                        <span *ngIf="element.type === 'image'">
+                            <i class="far fa-file-image"></i>
                         </span>
                         {{element.name}}
                     </mat-cell>
@@ -145,11 +149,22 @@
                 </ng-container>
 
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;" class="statusDelete" id="dele{{row.id}}" (click)="getID(row)"></mat-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="statusDelete" id="dele{{row.id}}" 
+                (click)="getID(row)" 
+                (contextmenu)="getID(row)"
+                (dblclick)="openFolder(row.id)" 
+                (contextmenu)="onRightClick($event, row)"></mat-row>
             </mat-table>
         </div>
-
-        <!-- </div> -->
+        <!-- Menu right -->
+        <div class="menu-right">
+            <ul>
+                <li (click)="deleteFolder()">Delete folder/file</li>
+                <li (click)="renameFolder()">Rename folder/file</li>
+                <li><a href="{{linkImage}}" target="_blank">Download</a></li>
+                <li>Details folder/file</li>
+            </ul>
+        </div>
     </div>
 </div>
 

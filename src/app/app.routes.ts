@@ -17,6 +17,14 @@ export const appRoutes: Routes = [
       canActivate: [AutheGuard],
       children: [
         {
+          path: '',
+          component: FilesComponent,
+        },
+        {
+          path: ':folderId',
+          component: FilesComponent,
+        },
+        {
           path: 'files/:fileName',
           component: FilesComponent,
           // children: [

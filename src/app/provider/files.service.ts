@@ -20,12 +20,19 @@ export class FilesService {
     private idFolder = new BehaviorSubject(null);
     private filesArrKeyWord = new BehaviorSubject([]);
     private recycleBin = new BehaviorSubject([]);
+
     constructor(private http: HttpClient) {
     }
 
-    getFile(): any {
+    getFile(parentId = 0): any {
+        const url =`${this.API}?parentId=${parentId}`;
+        return this.http.get(url);
+    }
+    
+    getAllFile(): any{
         return this.http.get(this.API);
     }
+
     // thêm 1 folder
     addFolder(newFolder: IFile): Observable<IFile> {
         return this.http.post<IFile>(this.API, newFolder, httpOptions);

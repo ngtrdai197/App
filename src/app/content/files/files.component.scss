@@ -166,6 +166,35 @@
                 font-size: 20px;
             }
         }
+        .menu-right{
+            display: none;
+            
+        }
+        .menu-right-active{
+            display: block;
+            position: absolute;
+            background: #e8e8e8;
+
+            ul{
+                padding: 0;
+                margin: 0;
+                li{
+                    list-style: none;
+                    padding: 15px 20px;
+                    cursor: pointer;
+                    a{
+                        color: #333;
+                    }
+                    a:hover{
+                        color: #ffffff !important;
+                    }
+                }
+                li:hover{
+                    background: #696969;
+                    color: #ffffff;
+                }
+            }
+        }
         
     }
     .example-container {

@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AngularFireStorage } from 'angularfire2/storage';
+
 import { FilesService } from '../../provider/files.service';
 import { IFile } from '../../interface/IFile';
 import { Subscription } from 'rxjs/Subscription';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material';
 import { MatTableDataSource, MatSort, MatSortable } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
 
 import { DeleteFileService } from '../../provider/delete.service';
@@ -32,11 +34,16 @@ export class FilesComponent implements OnInit {
   user: User[];
   idFolder: any;
   checkRecycle = false;
+  sttKeyUp: any;
+  linkImage = '';
+  // Menu right = false => ẩn đi
   kt = 1; // kiểm tra để ẩn hiện chi tiết user
   fileData: FileData[]; // mảng chứa data đổ từ server xuống, thực hiện tìm kiếm folder/file theo id trên server
   recycleBinTemp: IFile[];
   displayedColumns = ['name', 'date', 'type', 'daterepair'];
   @ViewChild(MatSort) sort: MatSort;
+
+  private parentId = 0;
 
   constructor(
     private fileService: FilesService,
@@ -48,9 +55,13 @@ export class FilesComponent implements OnInit {
     private showAcc: ShowAccountService,
     private autheService: AutheService,
     private toaStrService: ToastrService,
+    private activateRoute: ActivatedRoute,
+    private storage: AngularFireStorage,
   ) { }
 
   ngOnInit() {
+    this.paramsFunction();
+
     this.loadFiles();
     this.reLoadFiles();
     this.fileService.getThongTinSearch().subscribe(data => {
@@ -60,17 +71,26 @@ export class FilesComponent implements OnInit {
     this.userLogin();
     this.showAccount();
   }
+  // load file khi truy cap vao parentID (params thay doi)
+  paramsFunction() {
+    this.activateRoute.params.subscribe(params => {
+      // this.parentId = +params.get('folderId') || 0;
+      this.parentId = params['folderId'];
+
+      this.loadFiles();
+    });
+  }
 
   loadFiles() {
-    this.fileService.getFile().subscribe(data => {
+    this.fileService.getFile(this.parentId).subscribe(data => {
       this.allFiles = new MatTableDataSource(data);
     });
+    // load files recyclebin
     this.deleteService.getStatusRecycleBin().subscribe(stt => {
       const _kt = stt;
       if (_kt === true) {
         this.fileService.getRecycleBin().subscribe(data => {
           this.allFiles = new MatTableDataSource(data);
-          console.log(data);
         });
       }
     });
@@ -81,7 +101,7 @@ export class FilesComponent implements OnInit {
     this.deleteService.getStatusAllFiles().subscribe(stt => {
       const _kt = stt;
       if (_kt === true) {
-        this.fileService.getFile().subscribe(data => {
+        this.fileService.getFile(this.parentId).subscribe(data => {
           this.allFiles = new MatTableDataSource(data);
         });
       }
@@ -96,15 +116,16 @@ export class FilesComponent implements OnInit {
     const dialogRef = this.diaLog.open(FolderComponent, {
       width: '300px',
     });
+    this.fileService.nameFolder('');
     dialogRef.afterClosed().subscribe((isConfirm) => {
       if (isConfirm) {
         const subscription = this.fileService.getNameFolder().subscribe(folderName => {
-          this.fileService.getFile().subscribe(data => {
+          this.fileService.getFile(this.parentId).subscribe(data => {
             this.allFiles = data;
             // kiểm tra tên folder đã tồn tại chưa
             let checkName = true;
             this.allFiles.forEach(e => {
-              if (e.name.toLowerCase() === folderName.toLowerCase()) {
+              if ((e.name.toLowerCase() === folderName.toLowerCase()) || folderName === '') {
                 checkName = false; // tên folder đã tồn tại => trả về false
               }
             });
@@ -115,15 +136,18 @@ export class FilesComponent implements OnInit {
                 type: 'folder',
                 date: new Date(Date.now()),
                 daterepair: new Date(Date.now()),
+                parentId: this.parentId,
               };
+
               this.fileService.addFolder(newFolder).subscribe(() => {
-                this.fileService.getFile().subscribe(data => {
+                this.fileService.getFile(this.parentId).subscribe(data => {
                   this.allFiles = new MatTableDataSource(data);
                   this.allFiles.sort = this.sort;
                 });
+                this.toaStrService.Success('Thêm folder thành công !')
               });
             } else {
-              this.toaStrService.Error('Tên folder nhập đã trùng. Vui lòng kiểm tra lại !');
+              this.toaStrService.Error('Tên folder nhập không hợp lệ. Kiểm tra lại !');
             }
           });
         });
@@ -136,6 +160,7 @@ export class FilesComponent implements OnInit {
     const dialogRef = this.diaLog.open(FolderComponent, {
       width: '300px',
     });
+    this.fileService.nameFolder('');
     dialogRef.afterClosed().subscribe((isConfirm) => {
       if (isConfirm) {
         const subscription = this.fileService.getNameFolder().subscribe(fileName => {
@@ -171,10 +196,12 @@ export class FilesComponent implements OnInit {
       }
     });
   }
+
   public openDiaLogFileExcel() {
     const dialogRef = this.diaLog.open(FolderComponent, {
       width: '300px',
     });
+    this.fileService.nameFolder('');
     dialogRef.afterClosed().subscribe((isConfirm) => {
       if (isConfirm) {
         const subscription = this.fileService.getNameFolder().subscribe(fileName => {
@@ -210,10 +237,12 @@ export class FilesComponent implements OnInit {
       }
     });
   }
+
   public openDiaLogFilePowerPoint() {
     const dialogRef = this.diaLog.open(FolderComponent, {
       width: '300px',
     });
+    this.fileService.nameFolder('');
     dialogRef.afterClosed().subscribe((isConfirm) => {
       if (isConfirm) {
         const subscription = this.fileService.getNameFolder().subscribe(fileName => {
@@ -249,6 +278,7 @@ export class FilesComponent implements OnInit {
       }
     });
   }
+
   getID(dataRow) {
     this.idFolder = dataRow.id;
     this.statusDelete = true;
@@ -281,6 +311,7 @@ export class FilesComponent implements OnInit {
                     this.fileService.getFile().subscribe(datFolder => {
                       this.allFiles = new MatTableDataSource(datFolder);
                       this.allFiles.sort = this.sort;
+                      this.fileService.nameFolder('');
                     });
                   });
                   return;
@@ -293,6 +324,7 @@ export class FilesComponent implements OnInit {
         });
         subscription.unsubscribe();
       }
+      this.fileService.nameFolder('');
     });
   }
 
@@ -374,4 +406,76 @@ export class FilesComponent implements OnInit {
     }
   }
 
+  openFolder(id: any) {
+    this.router.navigate(['/file_root', id]);
+  }
+
+  public async onChooseFile(event) {
+    console.log(event);
+
+    if ('getFilesAndDirectories' in event) {
+      console.log(await event.getFilesAndDirectories());
+      return;
+    }
+
+    const files = Array.from(event.target.files) as File[];
+    if (files.length === 0) {
+      return 0;
+    }
+    for (const file of files) {
+      console.log(file);
+      console.log(file.name);
+
+      const uploadTask = this.storage.upload(`uploads/${file.name}`, file);
+      // wait for upload done
+      console.log(await uploadTask.then());
+
+      // tao file va luu vao db cua minh
+      // name,  parentId
+      // downloadUurlk
+      console.log(uploadTask.task.snapshot);
+      if (uploadTask.task.snapshot.state === 'success') {
+        const newImage: IFile = {
+          name: file.name,
+          type: 'image',
+          parentId: this.parentId,
+          date: new Date(Date.now()),
+          daterepair: new Date(Date.now()),
+          linkDownload: uploadTask.task.snapshot.downloadURL,
+        };
+        this.fileService.addFolder(newImage).subscribe(() => {
+          this.fileService.getFile().subscribe(data => {
+            this.allFiles = new MatTableDataSource(data);
+            this.allFiles.sort = this.sort;
+          });
+        });
+      }
+      // console.log(uploadTask.task.snapshot.downloadURL);
+
+    }
+  }
+
+  public onLeftClick() {
+    // event.preventDefault();
+    $('.menu-right').removeClass('menu-right-active');
+  }
+  public onRightClick(event, row) {
+    // lấy link download của file
+    this.fileService.getAllFile().subscribe(data => {
+      const temp = data;
+      temp.forEach(element => {
+        
+      });
+    });
+    // console.log('run');
+    event.preventDefault();
+    // width menu bar = 212px
+    const locateX = event.pageX - 212;
+    // height header = 100px
+    const locateY = event.pageY - 100;
+    $('.menu-right').addClass('menu-right-active');
+    $('.menu-right-active').css('top', locateY);
+    $('.menu-right-active').css('left', locateX);
+
+  }
 }
