@@ -3,4 +3,6 @@ export interface IFile {
     type: string;
     date: Date;
     daterepair: Date;
+    parentId?: number;
+    linkDownload?: string;
 }

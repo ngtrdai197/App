@@ -13,8 +13,6 @@ import { DeleteFileService } from '../../provider/delete.service';
 })
 export class MenuBarComponent implements OnInit {
 
-  filteredFiles: IFile[];
-  allFiles: IFile[];
   constructor(
     private fileService: FilesService,
     private statusDeleteService: DeleteFileService,
@@ -25,11 +23,13 @@ export class MenuBarComponent implements OnInit {
   }
 
   search(value) {
-    this.fileService.getFile().subscribe(data => {
-      this.allFiles = data;
+    this.fileService.getAllFile().subscribe(data => {
+      const allFiles = data;
       const match = new RegExp(value, 'i');
-      this.filteredFiles = this.allFiles.filter(file => match.test(file.name));
-      this.fileService.search(this.filteredFiles);
+      const filteredFiles = allFiles.filter(file => match.test(file.name));
+      this.fileService.search(filteredFiles);
+      // Đưa giá trị của thẻ input
+      this.fileService.valueSearchNull(value)
     });
   }
 

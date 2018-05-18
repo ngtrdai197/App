@@ -19,13 +19,22 @@ export class FilesService {
     private nameFolderAdd = new BehaviorSubject(null);
     private idFolder = new BehaviorSubject(null);
     private filesArrKeyWord = new BehaviorSubject([]);
+    private valueInputSearch = new BehaviorSubject(null);
+    
     private recycleBin = new BehaviorSubject([]);
+
     constructor(private http: HttpClient) {
     }
 
-    getFile(): any {
+    getFile(parentId = 0): any {
+        const url =`${this.API}?parentId=${parentId}`;
+        return this.http.get(url);
+    }
+    
+    getAllFile(): any{
         return this.http.get(this.API);
     }
+
     // thêm 1 folder
     addFolder(newFolder: IFile): Observable<IFile> {
         return this.http.post<IFile>(this.API, newFolder, httpOptions);
@@ -48,6 +57,15 @@ export class FilesService {
     search(filteredFiles) {
         this.filesArrKeyWord.next(filteredFiles);
     }
+
+    getValueSearchNull(){
+        return this.valueInputSearch.asObservable();
+    }
+    // kiểm tra value input có null để load data
+    valueSearchNull(valeSearchNull){
+        return this.valueInputSearch.next(valeSearchNull);
+    }
+
     // lấy tên của folder bên component FolderComponent
     nameFolder(folderN) {
         this.nameFolderAdd.next(folderN);

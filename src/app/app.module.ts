@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 import { ToastrService } from './provider/toastr.service';
 
 
@@ -31,7 +32,7 @@ import { UserFireBaseService } from './provider/usersfirebase.service';
 import { ShowAccountService } from './provider/showaccount.service';
 import { appRoutes } from './app.routes';
 import { FiledetailsComponent } from './content/filedetails/filedetails.component';
-
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { FiledetailsComponent } from './content/filedetails/filedetails.componen
     LoginComponent,
     FolderComponent,
     FiledetailsComponent,
+    PagenotfoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +65,7 @@ import { FiledetailsComponent } from './content/filedetails/filedetails.componen
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
     MatSortModule,
+    AngularFireStorageModule,
   ],
   providers: [
     AutheGuard,

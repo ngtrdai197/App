@@ -14,7 +14,7 @@ import { log } from 'util';
   template: `
       <h2 mat-dialog-title>Thư mục</h2>
       <mat-form-field>
-      <input id="folderName" #folder [(ngModel)]="dataFolder" matInput placeholder="Nhập tên thư mục của bạn ...">
+      <input id="folderName" #folder [(ngModel)]="dataFolder" matInput placeholder="Enter your folder name ...">
     </mat-form-field>
     <mat-dialog-actions>
       <button mat-button mat-raised-button [mat-dialog-close]="false">No</button>
@@ -26,13 +26,15 @@ import { log } from 'util';
 
 export class FolderComponent implements OnInit {
   dataFolder: any; // lấy giá trị của thẻ input
-  constructor(private dialogRef: MatDialogRef<FolderComponent>, private fileService: FilesService) { }
+  constructor(
+    private dialogRef: MatDialogRef<FolderComponent>,
+    private fileService: FilesService,
+    ) { }
   ngOnInit() {
     this.renameData();
   }
   getName(nameFolder) {
     this.fileService.nameFolder(nameFolder);
-    nameFolder = '';
   }
 
   renameData() {

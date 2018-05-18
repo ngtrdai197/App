@@ -8,6 +8,7 @@ import { ShowAccountService } from '../../provider/showaccount.service';
 })
 export class HeaderComponent implements OnInit {
 
+  kt = 1;
   constructor(
     private showAccount: ShowAccountService,
   ) { }
@@ -16,7 +17,15 @@ export class HeaderComponent implements OnInit {
   }
 
   displayUser() {
-    const temp = 'show';
-    this.showAccount.show(temp);
+    if (this.kt === 1) {
+      const temp = 'show';
+      this.showAccount.show(temp);
+      this.kt = 2;
+    } else {
+      const temp = 'hidden';
+      this.showAccount.show(temp);
+      this.kt = 1;
+    }
+
   }
 }

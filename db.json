@@ -1,118 +1,155 @@
 {
   "sources": [
     {
-      "name": "NodeJs",
+      "name": "Angular 5",
       "type": "folder",
-      "date": "2018-04-25T06:19:29.132Z",
-      "stt": 2,
+      "date": "2018-05-13T04:59:47.911Z",
+      "daterepair": "2018-05-13T04:59:47.911Z",
+      "parentId": 0,
+      "id": 1
+    },
+    {
+      "name": "Document",
+      "type": "folder",
+      "date": "2018-05-13T05:00:13.389Z",
+      "daterepair": "2018-05-13T05:00:13.389Z",
+      "parentId": 1,
       "id": 2
     },
     {
-      "name": "Công nghệ phần mềm",
+      "name": "Docs",
       "type": "folder",
-      "date": "2018-04-25T06:20:20.157Z",
-      "stt": 3,
-      "id": 3
-    },
-    {
-      "name": "VueJS",
-      "type": "folder",
-      "date": "2018-04-25T06:22:12.092Z",
-      "stt": 4,
+      "date": "2018-05-13T05:01:09.560Z",
+      "daterepair": "2018-05-18T11:23:05.222Z",
+      "parentId": 0,
       "id": 4
     },
     {
-      "name": "Angular 5",
+      "name": "NodeJs",
       "type": "folder",
-      "date": "2018-04-29T22:52:17.710Z",
-      "id": 14
-    },
-    {
-      "name": "Java",
-      "type": "docx",
-      "date": "2018-04-29T23:15:38.131Z",
-      "id": 15
-    },
-    {
-      "name": "Music",
-      "type": "docx",
-      "date": "2018-04-29T23:37:00.337Z",
-      "id": 16,
-      "daterepair": "2018-04-30T12:48:55.880Z"
-    },
-    {
-      "name": "Ngôn ngữ lập trình C++",
-      "type": "folder",
-      "date": "2018-04-29T23:45:33.320Z",
+      "date": "2018-05-15T16:11:11.981Z",
+      "daterepair": "2018-05-15T16:11:11.981Z",
+      "parentId": 0,
       "id": 18
     },
     {
-      "name": "Reactive",
-      "type": "folder",
-      "date": "2018-04-29T23:45:51.881Z",
+      "name": "Thuyết trình",
+      "type": "pp",
+      "date": "2018-05-15T16:11:38.663Z",
+      "daterepair": "2018-05-15T16:11:38.663Z",
+      "parentId": "18",
       "id": 19
     },
     {
-      "name": "Python",
+      "name": "News",
       "type": "folder",
-      "date": "2018-04-29T23:46:02.351Z",
+      "date": "2018-05-15T16:12:32.855Z",
+      "daterepair": "2018-05-15T16:12:32.855Z",
+      "parentId": "1",
       "id": 20
     },
     {
-      "name": "AngularJs",
-      "type": "folder",
-      "date": "2018-04-30T12:30:32.783Z",
-      "id": 24,
-      "daterepair": "2018-05-06T12:24:51.998Z"
+      "name": "mean",
+      "type": "png",
+      "parentId": 0,
+      "date": "2018-05-18T03:38:23.335Z",
+      "daterepair": "2018-05-18T03:38:23.335Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2Fmean.png?alt=media&token=57986329-06e0-4d30-97ae-cc0b251c99eb",
+      "id": 21
     },
     {
-      "name": "Mongo DB",
-      "type": "folder",
-      "date": "2018-04-30T12:47:50.480Z",
-      "daterepair": "2018-04-30T12:48:13.222Z",
-      "id": 25
-    },
-    {
-      "name": "Authentication Email",
+      "name": "Báo cáo đề tài công nghệ phần mềm",
       "type": "docx",
-      "date": "2018-04-30T12:54:11.941Z",
-      "daterepair": "2018-05-06T12:35:23.970Z",
+      "parentId": 0,
+      "date": "2018-05-18T03:38:43.661Z",
+      "daterepair": "2018-05-18T03:38:43.661Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FB%C3%A1o%20c%C3%A1o%20%C4%91%E1%BB%81%20t%C3%A0i%20c%C3%B4ng%20ngh%E1%BB%87%20ph%E1%BA%A7n%20m%E1%BB%81m.docx?alt=media&token=b9656d0f-6524-4891-bec0-23afd0a17940",
+      "id": 22
+    },
+    {
+      "name": "22",
+      "type": "png",
+      "parentId": "20",
+      "date": "2018-05-18T04:10:46.649Z",
+      "daterepair": "2018-05-18T04:10:46.649Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2F22.png?alt=media&token=d45fd3b9-fa3c-4bb6-ae0c-2fa6886e70d6",
+      "id": 24
+    },
+    {
+      "name": "docs",
+      "type": "txt",
+      "parentId": "4",
+      "date": "2018-05-18T04:12:50.141Z",
+      "daterepair": "2018-05-18T04:12:50.141Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2Fdocs.txt?alt=media&token=2ce74952-14c2-47c3-9ff6-9831db7fe430",
       "id": 26
     },
     {
-      "name": "Danh sách điểm",
-      "type": "excel",
-      "date": "2018-05-06T16:03:51.679Z",
-      "daterepair": "2018-05-11T07:53:42.880Z",
+      "name": "333",
+      "type": "png",
+      "parentId": 0,
+      "date": "2018-05-18T05:55:19.922Z",
+      "daterepair": "2018-05-18T05:55:19.922Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2F333.png?alt=media&token=e89bd003-e6f0-4503-a822-dc29c5a057c9",
       "id": 27
     },
     {
-      "name": "Thuyết trình đề tài",
-      "type": "pp",
-      "date": "2018-05-06T16:06:49.587Z",
-      "daterepair": "2018-05-06T16:06:49.587Z",
-      "id": 28
-    },
-    {
-      "name": "JavaScript",
-      "type": "docx",
-      "date": "2018-05-06T16:20:47.439Z",
-      "daterepair": "2018-05-06T16:20:47.439Z",
+      "name": "4444",
+      "type": "png",
+      "parentId": "2",
+      "date": "2018-05-18T06:02:48.750Z",
+      "daterepair": "2018-05-18T06:02:48.750Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2F4444.png?alt=media&token=7abfde2d-5b38-43c5-90d1-e7e1d1b7aa98",
       "id": 29
     },
     {
-      "name": "Ruby",
-      "type": "docx",
-      "date": "2018-05-07T15:00:49.416Z",
-      "daterepair": "2018-05-07T15:00:49.416Z",
+      "name": "docs",
+      "type": "txt",
+      "parentId": "2",
+      "date": "2018-05-18T06:02:50.431Z",
+      "daterepair": "2018-05-18T06:02:50.431Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2Fdocs.txt?alt=media&token=000853a5-dc18-4162-9751-bb8bb73e40d2",
       "id": 30
+    },
+    {
+      "name": "React Js",
+      "type": "folder",
+      "date": "2018-05-18T10:49:57.986Z",
+      "daterepair": "2018-05-18T10:49:57.986Z",
+      "parentId": "Docs",
+      "id": 31
+    },
+    {
+      "name": "Library",
+      "type": "folder",
+      "date": "2018-05-18T10:58:12.237Z",
+      "daterepair": "2018-05-18T10:58:12.237Z",
+      "parentId": "4",
+      "id": 32
+    },
+    {
+      "name": "Nhạc",
+      "type": "folder",
+      "date": "2018-05-18T13:00:03.600Z",
+      "daterepair": "2018-05-18T13:00:03.600Z",
+      "parentId": 0,
+      "id": 33
+    },
+    {
+      "name": "Người Âm Phủ - OSAD, VRT - Bài hát, lyrics",
+      "type": "MP3",
+      "parentId": 33,
+      "date": "2018-05-18T13:00:20.966Z",
+      "daterepair": "2018-05-18T13:00:20.966Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FNg%C6%B0%E1%BB%9Di%20%C3%82m%20Ph%E1%BB%A7%20-%20OSAD%2C%20VRT%20-%20B%C3%A0i%20h%C3%A1t%2C%20lyrics.MP3?alt=media&token=95c04f5f-25ab-4b2a-a04a-036d23a7e11f",
+      "id": 34
     }
   ],
   "users": [
     {
       "email": "ngtrdai197@gmail.com",
       "passWord": "anhdaii1",
-      "userName": "ngtrdai197",
+      "userName": "ngtrdai111",
       "id": 1
     }
   ]

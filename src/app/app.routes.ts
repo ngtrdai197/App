@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { ContentComponent } from './content/content.component';
 import { FilesComponent } from './content/files/files.component';
 import { AutheGuard } from './provider/authe.guard';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 export const appRoutes: Routes = [
     { path: 'home', redirectTo: '/', pathMatch: 'full' },
@@ -17,13 +18,18 @@ export const appRoutes: Routes = [
       canActivate: [AutheGuard],
       children: [
         {
-          path: 'files/:fileName',
+          path: '',
           component: FilesComponent,
-          // children: [
-          //   { path: 'folder/:folderName', component: FileslistComponent },
-          // ]
+        },
+        {
+          path: ':folderId',
+          component: FilesComponent,
+        },
+        {
+          path: ':folderId/:fileName',
+          component: FilesComponent,
         }
       ] 
     },
-    { path: '**', component: HomeComponent },
+    { path: '**', component: PagenotfoundComponent },
   ];

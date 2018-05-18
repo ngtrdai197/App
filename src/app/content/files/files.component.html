@@ -36,16 +36,16 @@
                               "></span>
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li (click)="uploadFile.click()">
-                            Tệp
-                        </li>
                         <li (click)="uploadFolder.click()">
                             Thư mục
                         </li>
+                        <li (click)="uploadFile.click()">
+                            Tệp
+                        </li>
                     </ul>
                     <!-- Choose upload file -->
-                    <input type="file" #uploadFile style="display: none;">
-                    <input type="file" #uploadFolder style="display: none;">
+                    <input type="file" multiple directory="" webkitdirectory="" #uploadFolder style="display: none;" (change)="onChooseFolder($event)">
+                    <input type="file" #uploadFile style="display: none;" (change)="onChooseFile($event)">
 
                 </div>
             </div>
@@ -99,7 +99,8 @@
             </div>
         </div>
     </div>
-    <div class="loadfiles">
+    <div class="loadfiles" (click)="onLeftClick()">
+        <!-- Contain data -->
         <div class="example-container mat-elevation-z8">
             <mat-table #table [dataSource]="allFiles" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
                 <!-- Name Column -->
@@ -117,6 +118,12 @@
                         </span>
                         <span *ngIf="element.type === 'folder'">
                             <i class="far fa-folder"></i>
+                        </span>
+                        <span *ngIf="element.type === 'png'||element.type === 'jpg'">
+                            <i class="far fa-file-image"></i>
+                        </span>
+                        <span *ngIf="element.type === 'txt'">
+                            <i class="far fa-file-alt"></i>
                         </span>
                         {{element.name}}
                     </mat-cell>
@@ -145,11 +152,21 @@
                 </ng-container>
 
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;" class="statusDelete" id="dele{{row.id}}" (click)="getID(row)"></mat-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="statusDelete" id="dele{{row.id}}" (click)="getID(row)" (contextmenu)="getID(row)"
+                    (dblclick)="openFolder(row, row.type)" (contextmenu)="onRightClick($event, row)"></mat-row>
             </mat-table>
         </div>
-
-        <!-- </div> -->
+        <!-- Menu right -->
+        <div class="menu-right">
+            <ul>
+                <li (click)="deleteFolder()">Delete folder/file</li>
+                <li (click)="renameFolder()">Rename folder/file</li>
+                <li>
+                    <a href="{{linkImage}}" target="_blank">Download</a>
+                </li>
+                <li>Details folder/file</li>
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -157,9 +174,6 @@
     <div class="details">
         <div class="div">
             <p class="taikhoan">Tài khoản của tôi</p>
-            <p (click)="closeDetailUsers()">
-                <button>X</button>
-            </p>
         </div>
         <div *ngFor="let u of user">
             <p class="xinchao">Xin chào: {{u.userName}}</p>
