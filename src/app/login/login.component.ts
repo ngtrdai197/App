@@ -6,7 +6,6 @@ import { ThongTinUserService } from '../provider/thongtinuser.service';
 import { User } from '../interface/user';
 import { UserFireBaseService } from '../provider/usersfirebase.service';
 import { ToastrService } from '../provider/toastr.service';
-import { Observable } from 'rxjs/observable';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,29 +23,27 @@ export class LoginComponent implements OnInit {
     private thongTinUser: ThongTinUserService,
     private usersService: UserFireBaseService,
     private toastrService: ToastrService,
+    private canActivateRoute: ActivatedRoute,
   ) { }
 
-  ngOnInit() {
-
-  }
-
-  Warning() {
-    this.toastrService.Error('Thông tin không hợp lệ. Kiểm tra lại!');
-  }
+  ngOnInit() {  }
 
   onSubmit(userName, passWords) {
     let kiemtra = 0;
+    // kiem tra user da dang nhap chua
     this.thongTinUser.getUser().subscribe(userData => {
       this.userTemp = userData;
-      if (this.userTemp.length ===0) {
+      //neu length === 0 => data user = 0 => add new user
+      if (this.userTemp.length === 0) {
         const subscription = this.usersService.getUsers().subscribe(data => {
           this.usersArr = data;
           this.usersArr.forEach(user => {
+            // kiem tra user nhap vao co trong data user khong?
             if (user.userName === userName && user.passWord === passWords) {
               this.autheService.Login().subscribe(isAuthe => {
                 if (isAuthe === true) {
                   this.thongTinUser.addUser(user).subscribe(tt => {
-                    this.router.navigate(['file_root']);
+                    this.router.navigate(['/root']);
                   });
                 }
               });
@@ -57,18 +54,18 @@ export class LoginComponent implements OnInit {
           });
           subscription.unsubscribe();
           if (kiemtra === 0) {
-            this.Warning();
+            this.toastrService.Warning('Information enter invalid');
           }
         });
       } else {
-        this.autheService.Login().subscribe(stt =>{
-          if(stt){
-            this.router.navigate(['file_root']);
+        // neu data user !=0 => di vao file root
+        this.autheService.Login().subscribe(stt => {
+          if (stt) {
+            this.router.navigate(['/root']);
           }
         });
       }
     });
-
 
   }
 }

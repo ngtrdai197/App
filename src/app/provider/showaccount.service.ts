@@ -6,9 +6,7 @@ export class ShowAccountService {
     private showAccount = new BehaviorSubject(null);
     constructor() { }
 
-
     // lấy trạng thái khi click để hiện/ẩn đi thanh thông tin user
-    
     getShowAccount() {
         return this.showAccount.asObservable();
     }

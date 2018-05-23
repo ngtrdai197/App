@@ -17,7 +17,6 @@ import { ThongTinUserService } from '../../provider/thongtinuser.service';
 import { FolderComponent } from '../files/folder.component';
 import { ShowAccountService } from '../../provider/showaccount.service';
 import { FileData } from '../../interface/filedata';
-import { AutheService } from '../../provider/authe.service';
 import { ToastrService } from '../../provider/toastr.service';
 
 declare var $: any;
@@ -34,8 +33,8 @@ export class FilesComponent implements OnInit {
   idFolder: any;
   linkImage = '';
   checkCloseUser = '';
+  pathFiles = '';
   fileData: FileData[]; // mảng chứa data đổ từ server xuống, thực hiện tìm kiếm folder/file theo id trên server
-  recycleBinTemp: IFile[];
   displayedColumns = ['name', 'date', 'type', 'daterepair'];
   @ViewChild(MatSort) sort: MatSort;
 
@@ -49,7 +48,6 @@ export class FilesComponent implements OnInit {
     private usersService: UserFireBaseService,
     private thongTinUser: ThongTinUserService,
     private showAcc: ShowAccountService,
-    private autheService: AutheService,
     private toaStrService: ToastrService,
     private activateRoute: ActivatedRoute,
     private storage: AngularFireStorage,
@@ -69,11 +67,48 @@ export class FilesComponent implements OnInit {
   }
   // load file khi truy cap vao parentID (params thay doi)
   paramsFunction() {
-    this.activateRoute.params.subscribe(params => {
-      // this.parentId = +params.get('folderId') || 0;
-      this.parentId = +params['folderId'] || 0;
+    this.activateRoute.params.subscribe(() => {
+      let params = this.activateRoute.snapshot.params.folderId + '';
+      params = params.slice(0, params.lastIndexOf('.'));
+      this.parentId = +params || 0;
       this.loadFiles();
     });
+  }
+
+  // Conver URL
+  convertURL_Slug(str) {
+    // Chuyển hết sang chữ thường
+    str = str.toLowerCase();
+
+    // xóa dấu
+    str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
+    str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
+    str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
+    str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');
+    str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
+    str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
+    str = str.replace(/(đ)/g, 'd');
+
+    // Xóa ký tự đặc biệt
+    str = str.replace(/([^0-9a-z-\s])/g, '');
+
+    // Xóa khoảng trắng thay bằng ký tự -
+    str = str.replace(/(\s+)/g, '-');
+
+    // xóa phần dự - ở đầu
+    str = str.replace(/^-+/g, '');
+
+    // xóa phần dư - ở cuối
+    str = str.replace(/-+$/g, '');
+
+    // return
+    return str;
+  }
+
+  openFolder(row: any, typeFile: any) {
+    if (typeFile === 'folder') {
+      this.router.navigate(['root', this.convertURL_Slug(row.name), row.id + '.html']);
+    }
   }
 
   checkValueInputSearch() {
@@ -232,7 +267,7 @@ export class FilesComponent implements OnInit {
             if (checkName === true) {
               const newFolder: IFile = {
                 name: fileName,
-                type: 'excel',
+                type: 'xlxs',
                 date: new Date(Date.now()),
                 daterepair: new Date(Date.now()),
                 parentId: this.parentId,
@@ -277,7 +312,7 @@ export class FilesComponent implements OnInit {
             if (checkName === true) {
               const newFolder: IFile = {
                 name: fileName,
-                type: 'pp',
+                type: 'pptx',
                 date: new Date(Date.now()),
                 daterepair: new Date(Date.now()),
                 parentId: this.parentId,
@@ -299,19 +334,6 @@ export class FilesComponent implements OnInit {
         subscription.unsubscribe();
       }
     });
-  }
-
-  getID(dataRow) {
-    this.idFolder = dataRow.id;
-    this.statusDelete = true;
-    this.deleteService.statusDelete(this.statusDelete);
-    if (dataRow.id) {
-      $('.statusDelete').removeClass('active');
-      $('#dele' + dataRow.id).addClass('active');
-    }
-    this.fileService.nameFolder(dataRow.name);
-    this.fileService._idFolder(dataRow.id);
-
   }
 
   renameFolder() {
@@ -351,16 +373,25 @@ export class FilesComponent implements OnInit {
     });
   }
 
+  getID(dataRow) {
+    this.idFolder = dataRow.id;
+    this.statusDelete = true;
+    this.deleteService.statusDelete(this.statusDelete);
+    if (dataRow.id) {
+      $('.statusDelete').removeClass('active');
+      $('#dele' + dataRow.id).addClass('active');
+    }
+    this.fileService.nameFolder(dataRow.name);
+    this.fileService._idFolder(dataRow.id);
+
+  }
+
   deleteFolder() {
     let check = false;
     const subscription = this.fileService.getAllFile().subscribe(data => {
       this.fileData = data;
-      this.recycleBinTemp = data;
       for (let index = 0; index < this.fileData.length; index++) {
         if (this.idFolder === this.fileData[index].id) {
-          this.recycleBinTemp[0] = this.fileData[index];
-          this.recycleBinTemp.splice(1, this.recycleBinTemp.length - 1);
-          this.fileService._recycleBin(this.recycleBinTemp[0]);
           check = true;
           return;
         }
@@ -388,9 +419,9 @@ export class FilesComponent implements OnInit {
   userLogin() {
     this.thongTinUser.getUser().subscribe(user => {
       this.user = user;
-
     });
   }
+
   backToHome() {
     setTimeout(() => {
       this.thongTinUser.deleteUser(1).subscribe(() => {
@@ -414,17 +445,10 @@ export class FilesComponent implements OnInit {
     });
   }
 
-  openFolder(row: any, typeFile: any) {
-    if (typeFile === 'folder') {
-      this.router.navigate(['/file_root', row.id, row.name]);
-    }
-  }
-
   public async onChooseFolder(event) {
-    console.log(event);
 
     if ('getFilesAndDirectories' in event) {
-      console.log(await event.getFilesAndDirectories());
+      await event.getFilesAndDirectories()
       return;
     }
 
@@ -433,13 +457,10 @@ export class FilesComponent implements OnInit {
       return 0;
     }
     for (const file of files) {
-      console.log(file);
-      console.log(file.name);
 
       const uploadTask = this.storage.upload(`uploads/${file.name}`, file);
       // wait for upload done
-      console.log(await uploadTask.then());
-
+      await uploadTask.then()
       // check state upload task
       if (uploadTask.task.snapshot.state === 'success') {
         // lấy type file
@@ -499,6 +520,7 @@ export class FilesComponent implements OnInit {
     // event.preventDefault();
     $('.menu-right').removeClass('menu-right-active');
   }
+  
   public onRightClick(event, row) {
     // lấy link download của file
     this.fileService.getAllFile().subscribe(data => {

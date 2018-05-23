@@ -13,7 +13,7 @@ export const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     {
-      path: 'file_root',
+      path: 'root',
       component: ContentComponent,
       canActivate: [AutheGuard],
       children: [
@@ -26,7 +26,7 @@ export const appRoutes: Routes = [
           component: FilesComponent,
         },
         {
-          path: ':folderId/:fileName',
+          path: ':fileName/:folderId',
           component: FilesComponent,
         }
       ] 

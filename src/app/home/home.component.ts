@@ -33,17 +33,18 @@ export class HomeComponent implements OnInit {
   }
 
   accessFiles() {
-    this.thongTinUser.getUser().subscribe(user => {
-      this.user = user;
-      if (this.user.length != 0) {
-        this.autheService.Login().subscribe(() => {
-          this.router.navigate(['file_root']);
-        });
-      } else {
-        this.router.navigate(['login']);
-      }
+    // this.thongTinUser.getUser().subscribe(user => {
+    //   this.user = user;
+    //   if (this.user.length != 0) {
+    //     this.autheService.Login().subscribe(() => {
+    //       this.router.navigate(['root']);
+    //     });
+    //   } else {
+    //     this.router.navigate(['login']);
+    //   }
 
-    })
+    // })
+    this.router.navigate(['login']);
   }
 
   BackTop() {

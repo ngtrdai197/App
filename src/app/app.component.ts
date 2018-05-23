@@ -20,15 +20,6 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.ttUserService.getUser().subscribe(user => {
-      this.arrUser = user;
-      if (this.arrUser.length !== 0) {
-        this.autheService.Login().subscribe(stt => {
-          if (stt) {
-            this.router.navigate(['file_root']);
-          }
-        });
-      }
-    });
+
   }
 }

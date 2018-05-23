@@ -9,8 +9,8 @@ export class RegisterService {
     return new Observable((subscriber) => {
       setTimeout(
         () => {
-          if (form.email === 'aa@gmail.com') {
-            subscriber.error({ detail: { email: 'Đã bị trùng'} });
+          if (form.user === 'ngtrdai197') {
+            subscriber.error({ detail: { user: 'Đã bị trùng'} });
           } else {
             subscriber.next(form);
             subscriber.complete();
