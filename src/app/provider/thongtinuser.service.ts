@@ -32,7 +32,7 @@ export class ThongTinUserService {
     deleteUser(id): Observable<{}> {
         const url = `${this.API_Users}/${id}`;
         return this.http.delete(url, httpOptions);
-    } 
+    }
 
     getThongTin() {
         return this.thongtin.asObservable();

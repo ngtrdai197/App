@@ -6,6 +6,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ToastrService } from '../provider/toastr.service';
 import { UserFireBaseService } from '../provider/usersfirebase.service';
 import { User } from '../interface/user';
+import { AutheService } from '../provider/authe.service';
+import { Router } from '@angular/router';
+import { ThongTinUserService } from '../provider/thongtinuser.service';
 
 @Component({
   selector: 'app-register',
@@ -32,6 +35,9 @@ export class RegisterComponent implements OnInit {
     private registerService: RegisterService,
     private toastrService: ToastrService,
     private userFBService: UserFireBaseService,
+    private autheService: AutheService,
+    private router: Router,
+    private thongTinUser: ThongTinUserService,
   ) { }
 
   ngOnInit() {
@@ -40,12 +46,15 @@ export class RegisterComponent implements OnInit {
   }
 
   loadUser() {
+    this.userFBService.getUsers().subscribe(userFB => {
+      this.users = userFB;
+    });
 
   }
 
   creatAccount() {
 
-    let checkUser: any = true; //kiem tra user dang ki ton tai chua
+    let checkUser: any = true; // kiem tra user dang ki ton tai chua
 
     if (this.registerForm.get('userName').invalid) {
       this.toastrService.Error('User name nhập vào có độ dài từ 8 - 24 kí tự');
@@ -56,23 +65,16 @@ export class RegisterComponent implements OnInit {
     } else if (this.registerForm.get('passWordConfirm').invalid) {
       this.toastrService.Error('Mật khẩu nhập lại không trùng khớp với mật khẩu cũ');
     } else {
-      this.userFBService.getUsers().subscribe(userFB => {
-        this.users = userFB;
-      });
-
       this.users.forEach(user => {
         if (user.userName === this.user) {
           checkUser = false;
         }
-        console.log(user);
-
       });
       if (this.checked === false) {
         this.toastrService.Error('Check vào đồng ý với điều khoản của chúng tôi !');
       } else if (checkUser === false) {
         this.toastrService.Error('Tài khoản bạn nhập bị trùng. Thử tài khoản khác.');
-      }
-      else {
+      } else {
         const user: User = {
           userName: this.user,
           email: this.email,
@@ -80,6 +82,14 @@ export class RegisterComponent implements OnInit {
         };
         this.userFBService.addUser(user);
         this.toastrService.Success('Đăng kí thành công !');
+        this.autheService.Login().subscribe(isLogin => {
+          if (isLogin) {
+            this.thongTinUser.addUser(user).subscribe(tt => {
+              this.router.navigate(['/root']);
+            });
+          }
+
+        });
         this.user = '';
         this.pass = '';
         this.email = '';

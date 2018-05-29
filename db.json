@@ -33,83 +33,12 @@
       "id": 18
     },
     {
-      "name": "Thuyết trình",
-      "type": "pptx",
-      "date": "2018-05-15T16:11:38.663Z",
-      "daterepair": "2018-05-15T16:11:38.663Z",
-      "parentId": "18",
-      "id": 19
-    },
-    {
       "name": "News",
       "type": "folder",
       "date": "2018-05-15T16:12:32.855Z",
       "daterepair": "2018-05-15T16:12:32.855Z",
       "parentId": "1",
       "id": 20
-    },
-    {
-      "name": "mean",
-      "type": "png",
-      "parentId": 0,
-      "date": "2018-05-18T03:38:23.335Z",
-      "daterepair": "2018-05-18T03:38:23.335Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2Fmean.png?alt=media&token=57986329-06e0-4d30-97ae-cc0b251c99eb",
-      "id": 21
-    },
-    {
-      "name": "Báo cáo đề tài công nghệ phần mềm",
-      "type": "docx",
-      "parentId": 0,
-      "date": "2018-05-18T03:38:43.661Z",
-      "daterepair": "2018-05-18T03:38:43.661Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FB%C3%A1o%20c%C3%A1o%20%C4%91%E1%BB%81%20t%C3%A0i%20c%C3%B4ng%20ngh%E1%BB%87%20ph%E1%BA%A7n%20m%E1%BB%81m.docx?alt=media&token=b9656d0f-6524-4891-bec0-23afd0a17940",
-      "id": 22
-    },
-    {
-      "name": "22",
-      "type": "png",
-      "parentId": "20",
-      "date": "2018-05-18T04:10:46.649Z",
-      "daterepair": "2018-05-18T04:10:46.649Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2F22.png?alt=media&token=d45fd3b9-fa3c-4bb6-ae0c-2fa6886e70d6",
-      "id": 24
-    },
-    {
-      "name": "docs",
-      "type": "txt",
-      "parentId": "4",
-      "date": "2018-05-18T04:12:50.141Z",
-      "daterepair": "2018-05-18T04:12:50.141Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2Fdocs.txt?alt=media&token=2ce74952-14c2-47c3-9ff6-9831db7fe430",
-      "id": 26
-    },
-    {
-      "name": "333",
-      "type": "png",
-      "parentId": 0,
-      "date": "2018-05-18T05:55:19.922Z",
-      "daterepair": "2018-05-18T05:55:19.922Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2F333.png?alt=media&token=e89bd003-e6f0-4503-a822-dc29c5a057c9",
-      "id": 27
-    },
-    {
-      "name": "4444",
-      "type": "png",
-      "parentId": "2",
-      "date": "2018-05-18T06:02:48.750Z",
-      "daterepair": "2018-05-18T06:02:48.750Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2F4444.png?alt=media&token=7abfde2d-5b38-43c5-90d1-e7e1d1b7aa98",
-      "id": 29
-    },
-    {
-      "name": "docs",
-      "type": "txt",
-      "parentId": "2",
-      "date": "2018-05-18T06:02:50.431Z",
-      "daterepair": "2018-05-18T06:02:50.431Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2Fdocs.txt?alt=media&token=000853a5-dc18-4162-9751-bb8bb73e40d2",
-      "id": 30
     },
     {
       "name": "React Js",
@@ -136,64 +65,81 @@
       "id": 33
     },
     {
-      "name": "Người Âm Phủ - OSAD, VRT - Bài hát, lyrics",
-      "type": "MP3",
-      "parentId": 33,
-      "date": "2018-05-18T13:00:20.966Z",
-      "daterepair": "2018-05-18T13:00:20.966Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FNg%C6%B0%E1%BB%9Di%20%C3%82m%20Ph%E1%BB%A7%20-%20OSAD%2C%20VRT%20-%20B%C3%A0i%20h%C3%A1t%2C%20lyrics.MP3?alt=media&token=95c04f5f-25ab-4b2a-a04a-036d23a7e11f",
-      "id": 34
-    },
-    {
-      "name": "Front End",
-      "type": "folder",
-      "date": "2018-05-19T03:15:39.671Z",
-      "daterepair": "2018-05-19T03:15:39.671Z",
-      "parentId": 0,
-      "id": 35
-    },
-    {
-      "name": "index",
-      "type": "html",
-      "parentId": 35,
-      "date": "2018-05-19T03:17:06.923Z",
-      "daterepair": "2018-05-19T03:17:06.923Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2Findex.html?alt=media&token=87b5767d-f838-4156-8cb7-ac1c8d9a7a41",
-      "id": 37
-    },
-    {
-      "name": "Calculator",
-      "type": "xlsx",
-      "parentId": 32,
-      "date": "2018-05-19T03:20:35.457Z",
-      "daterepair": "2018-05-19T03:20:35.457Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FCalculator.xlsx?alt=media&token=18b79a14-9362-427a-92a7-59c9fa474675",
-      "id": 39
-    },
-    {
-      "name": "Microsoft PowerPoint",
-      "type": "pptx",
-      "parentId": 18,
-      "date": "2018-05-19T03:22:30.806Z",
-      "daterepair": "2018-05-19T03:25:23.408Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FMicrosoft%20PowerPoint%20Presentation.pptx?alt=media&token=cdeb99da-78f8-4899-9e38-908256b8697b",
-      "id": 40
-    },
-    {
       "name": "Giáo trình công nghệ phần mềm",
       "type": "folder",
       "date": "2018-05-19T12:34:49.668Z",
       "daterepair": "2018-05-19T12:34:49.668Z",
       "parentId": 1,
       "id": 41
+    },
+    {
+      "name": "Local",
+      "type": "folder",
+      "date": "2018-05-23T15:48:55.366Z",
+      "daterepair": "2018-05-23T15:48:55.366Z",
+      "parentId": 4,
+      "id": 45
+    },
+    {
+      "name": "Linux",
+      "type": "folder",
+      "date": "2018-05-28T04:33:01.998Z",
+      "daterepair": "2018-05-28T05:18:57.848Z",
+      "parentId": 0,
+      "id": 46
+    },
+    {
+      "name": "VeHHCN",
+      "type": "rar",
+      "parentId": 32,
+      "date": "2018-05-28T04:35:04.821Z",
+      "daterepair": "2018-05-28T04:35:04.821Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FVeHHCN.rar?alt=media&token=af17a96f-7555-4a8d-9cc1-6eb9a04c7d21",
+      "id": 47
+    },
+    {
+      "name": "Người Âm Phủ - OSAD, VRT - Bài hát, lyrics",
+      "type": "MP3",
+      "parentId": 33,
+      "date": "2018-05-28T05:13:42.271Z",
+      "daterepair": "2018-05-28T05:13:42.271Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FNg%C6%B0%E1%BB%9Di%20%C3%82m%20Ph%E1%BB%A7%20-%20OSAD%2C%20VRT%20-%20B%C3%A0i%20h%C3%A1t%2C%20lyrics.MP3?alt=media&token=a8e0b359-fc98-48c2-8dbf-ade8211f970c",
+      "id": 48
+    },
+    {
+      "name": "Linux command line Basics For Beginners - Udemy",
+      "type": "MP4",
+      "parentId": 46,
+      "date": "2018-05-28T05:20:16.813Z",
+      "daterepair": "2018-05-28T05:20:16.813Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FLinux%20command%20line%20Basics%20For%20Beginners%20-%20Udemy.MP4?alt=media&token=4f0d5312-d45c-4591-ab3f-f0170807fb9c",
+      "id": 49
+    },
+    {
+      "name": "word",
+      "type": "docx",
+      "date": "2018-05-28T05:29:30.837Z",
+      "daterepair": "2018-05-28T05:29:30.837Z",
+      "parentId": 0,
+      "id": 50
+    },
+    {
+      "name": "Người Âm Phủ - OSAD, VRT - Bài hát, lyrics",
+      "type": "MP3",
+      "parentId": 0,
+      "date": "2018-05-29T05:38:43.653Z",
+      "daterepair": "2018-05-29T05:38:43.653Z",
+      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FNg%C6%B0%E1%BB%9Di%20%C3%82m%20Ph%E1%BB%A7%20-%20OSAD%2C%20VRT%20-%20B%C3%A0i%20h%C3%A1t%2C%20lyrics.MP3?alt=media&token=deaeb4e5-9f3a-47ad-974c-731790d731d2",
+      "id": 51
+    },
+    {
+      "name": "New Folder",
+      "type": "folder",
+      "date": "2018-05-29T05:40:16.217Z",
+      "daterepair": "2018-05-29T05:40:16.217Z",
+      "parentId": 18,
+      "id": 52
     }
   ],
-  "users": [
-    {
-      "email": "ngtrdai197@gmail.com",
-      "passWord": "anhdaii1",
-      "userName": "ngtrdai111",
-      "id": 1
-    }
-  ]
+  "users": []
 }

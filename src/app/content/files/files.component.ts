@@ -33,7 +33,8 @@ export class FilesComponent implements OnInit {
   idFolder: any;
   linkImage = '';
   checkCloseUser = '';
-  pathFiles = '';
+  nameDelete = '';
+  checkStateProgress = false;
   fileData: FileData[]; // mảng chứa data đổ từ server xuống, thực hiện tìm kiếm folder/file theo id trên server
   displayedColumns = ['name', 'date', 'type', 'daterepair'];
   @ViewChild(MatSort) sort: MatSort;
@@ -66,7 +67,7 @@ export class FilesComponent implements OnInit {
     this.showAccount();
   }
   // load file khi truy cap vao parentID (params thay doi)
-  paramsFunction() {
+  public paramsFunction() {
     this.activateRoute.params.subscribe(() => {
       let params = this.activateRoute.snapshot.params.folderId + '';
       params = params.slice(0, params.lastIndexOf('.'));
@@ -76,7 +77,7 @@ export class FilesComponent implements OnInit {
   }
 
   // Conver URL
-  convertURL_Slug(str) {
+  public convertURL_Slug(str) {
     // Chuyển hết sang chữ thường
     str = str.toLowerCase();
 
@@ -112,7 +113,7 @@ export class FilesComponent implements OnInit {
   }
 
   checkValueInputSearch() {
-    //Kiểm tra giá trị trong thẻ input -search
+    // Kiểm tra giá trị trong thẻ input -search
     this.fileService.getValueSearchNull().subscribe(valueInputSearch => {
       const strSearch = valueInputSearch;
       // Nếu giá trị search = '' thì load data với parentID = 0
@@ -154,7 +155,7 @@ export class FilesComponent implements OnInit {
     this.allFiles.sort = this.sort;
   }
 
-  public openDiaLogFolder() {
+  public async openDiaLogFolder() {
     const dialogRef = this.diaLog.open(FolderComponent, {
       width: '300px',
     });
@@ -162,7 +163,7 @@ export class FilesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((isConfirm) => {
       if (isConfirm) {
         const subscription = this.fileService.getNameFolder().subscribe(folderName => {
-          this.fileService.getAllFile().subscribe(data => {
+          this.fileService.getAllFile().subscribe(async data => {
             this.allFiles = data;
             // kiểm tra tên folder đã tồn tại chưa
             let checkName = true;
@@ -182,20 +183,25 @@ export class FilesComponent implements OnInit {
               };
 
               this.fileService.addFolder(newFolder).subscribe(() => {
-                this.fileService.getFile(this.parentId).subscribe(data => {
-                  this.allFiles = new MatTableDataSource(data);
+                this.fileService.getFile(this.parentId).subscribe(dataParent => {
+                  this.allFiles = new MatTableDataSource(dataParent);
                   this.allFiles.sort = this.sort;
                 });
-                this.toaStrService.Success('Thêm folder thành công !')
+                this.toaStrService.Success('Thêm folder thành công !');
               });
+              // uploads to firebase
+              const storageRef = this.storage.storage.ref();
+              const uploadTask = storageRef.child(`uploads/${folderName}`).put(newFolder);
+
             } else {
-              this.fileService.getFile(this.parentId).subscribe(data => {
-                this.allFiles = new MatTableDataSource(data);
+              this.fileService.getFile(this.parentId).subscribe(dataParent => {
+                this.allFiles = new MatTableDataSource(dataParent);
               });
               this.toaStrService.Error('Tên folder nhập không hợp lệ. Kiểm tra lại !');
             }
           });
         });
+
         subscription.unsubscribe();
       }
     });
@@ -228,14 +234,14 @@ export class FilesComponent implements OnInit {
                 parentId: this.parentId,
               };
               this.fileService.addFolder(newFolder).subscribe(() => {
-                this.fileService.getFile(this.parentId).subscribe(data => {
-                  this.allFiles = new MatTableDataSource(data);
+                this.fileService.getFile(this.parentId).subscribe(dataParent => {
+                  this.allFiles = new MatTableDataSource(dataParent);
                   this.allFiles.sort = this.sort;
                 });
               });
             } else {
-              this.fileService.getFile(this.parentId).subscribe(data => {
-                this.allFiles = new MatTableDataSource(data);
+              this.fileService.getFile(this.parentId).subscribe(dataParent => {
+                this.allFiles = new MatTableDataSource(dataParent);
               });
               this.toaStrService.Error('Tên file nhập đã trùng. Vui lòng kiểm tra lại !');
             }
@@ -273,14 +279,14 @@ export class FilesComponent implements OnInit {
                 parentId: this.parentId,
               };
               this.fileService.addFolder(newFolder).subscribe(() => {
-                this.fileService.getFile(this.parentId).subscribe(data => {
-                  this.allFiles = new MatTableDataSource(data);
+                this.fileService.getFile(this.parentId).subscribe(dataParent => {
+                  this.allFiles = new MatTableDataSource(dataParent);
                   this.allFiles.sort = this.sort;
                 });
               });
             } else {
-              this.fileService.getFile(this.parentId).subscribe(data => {
-                this.allFiles = new MatTableDataSource(data);
+              this.fileService.getFile(this.parentId).subscribe(dataParent => {
+                this.allFiles = new MatTableDataSource(dataParent);
               });
               this.toaStrService.Error('Tên file nhập đã trùng. Vui lòng kiểm tra lại !');
             }
@@ -318,14 +324,14 @@ export class FilesComponent implements OnInit {
                 parentId: this.parentId,
               };
               this.fileService.addFolder(newFolder).subscribe(() => {
-                this.fileService.getFile(this.parentId).subscribe(data => {
-                  this.allFiles = new MatTableDataSource(data);
+                this.fileService.getFile(this.parentId).subscribe(dataParent => {
+                  this.allFiles = new MatTableDataSource(dataParent);
                   this.allFiles.sort = this.sort;
                 });
               });
             } else {
-              this.fileService.getFile(this.parentId).subscribe(data => {
-                this.allFiles = new MatTableDataSource(data);
+              this.fileService.getFile(this.parentId).subscribe(dataParent => {
+                this.allFiles = new MatTableDataSource(dataParent);
               });
               this.toaStrService.Error('Tên file nhập đã trùng. Vui lòng kiểm tra lại !');
             }
@@ -335,6 +341,109 @@ export class FilesComponent implements OnInit {
       }
     });
   }
+
+
+  public async onChooseFolder(event) {
+
+    if ('getFilesAndDirectories' in event) {
+      await event.getFilesAndDirectories();
+      return;
+    }
+
+    const files = Array.from(event.target.files) as File[];
+    if (files.length === 0) {
+      return 0;
+    }
+    for (const file of files) {
+
+      const uploadTask = this.storage.upload(`uploads/${file.name}`, file);
+
+      // wait for upload done
+      document.getElementById('stateProgress').style.opacity = '1';
+      await uploadTask.then();
+      const percentage = +(uploadTask.task.snapshot.bytesTransferred / uploadTask.task.snapshot.totalBytes) * 100;
+      document.getElementById('uploader').style.width = percentage + '%';
+      // check state upload task
+      if (uploadTask.task.snapshot.state === 'success') {
+
+        if (percentage === 100) {
+          document.getElementById('uploader').innerText = 'Tải lên thành công ...';
+
+          // hidden progress after 5s
+          setTimeout(() => {
+            document.getElementById('stateProgress').style.opacity = '0';
+          }, 5000);
+        }
+
+        // lấy type file
+        const typeFile = file.name.slice(file.name.lastIndexOf('.') + 1, file.name.length);
+        // lấy tên file
+        const fileName = file.name.slice(0, file.name.lastIndexOf('.'));
+        const newImage: IFile = {
+          name: fileName,
+          type: typeFile,
+          parentId: this.parentId,
+          date: new Date(Date.now()),
+          daterepair: new Date(Date.now()),
+          linkDownload: uploadTask.task.snapshot.downloadURL,
+        };
+        this.fileService.addFolder(newImage).subscribe(() => {
+          this.fileService.getFile(this.parentId).subscribe(data => {
+            this.allFiles = new MatTableDataSource(data);
+            this.allFiles.sort = this.sort;
+          });
+        });
+      }
+      // console.log(uploadTask.task.snapshot.downloadURL);
+
+    }
+  }
+
+  public async onChooseFile(event) {
+    const file = event.target.files[0];
+
+    const uploadTask = this.storage.upload(`uploads/${file.name}`, file);
+    document.getElementById('stateProgress').style.opacity = '1';
+    // await for update done
+    await uploadTask.then();
+
+    // check state upload task
+    const percentage = +(uploadTask.task.snapshot.bytesTransferred / uploadTask.task.snapshot.totalBytes) * 100;
+    document.getElementById('uploader').style.width = percentage + '%';
+
+
+    if (uploadTask.task.snapshot.state === 'success') {
+
+      if (percentage === 100) {
+        document.getElementById('uploader').innerText = 'Tải lên thành công ...';
+
+        // hidden progress after 5s
+        setTimeout(() => {
+          document.getElementById('stateProgress').style.opacity = '0';
+        }, 5000);
+      }
+
+      // lấy type file
+      const typeFile = file.name.slice(file.name.lastIndexOf('.') + 1, file.name.length);
+      // lấy tên file
+      const fileName = file.name.slice(0, file.name.lastIndexOf('.'));
+      const newImage: IFile = {
+        name: fileName,
+        type: typeFile,
+        parentId: this.parentId,
+        date: new Date(Date.now()),
+        daterepair: new Date(Date.now()),
+        linkDownload: uploadTask.task.snapshot.downloadURL,
+      };
+      this.fileService.addFolder(newImage).subscribe(() => {
+        this.fileService.getFile(this.parentId).subscribe(data => {
+          this.allFiles = new MatTableDataSource(data);
+          this.allFiles.sort = this.sort;
+        });
+      });
+    }
+  }
+
 
   renameFolder() {
     const dialogRef = this.diaLog.open(FolderComponent, {
@@ -383,6 +492,7 @@ export class FilesComponent implements OnInit {
     }
     this.fileService.nameFolder(dataRow.name);
     this.fileService._idFolder(dataRow.id);
+    this.nameDelete = `${dataRow.name}.${dataRow.type}`;
 
   }
 
@@ -404,6 +514,12 @@ export class FilesComponent implements OnInit {
           this.allFiles = new MatTableDataSource(data);
           this.allFiles.sort = this.sort;
         });
+      });
+      const desertRef = this.storage.ref(`uploads/${this.nameDelete}`);
+      desertRef.delete().toPromise().then(() => {
+        this.toaStrService.Success('Delete file successful');
+      }).catch(error => {
+        console.log(error);
       });
     }
   }
@@ -445,82 +561,11 @@ export class FilesComponent implements OnInit {
     });
   }
 
-  public async onChooseFolder(event) {
-
-    if ('getFilesAndDirectories' in event) {
-      await event.getFilesAndDirectories()
-      return;
-    }
-
-    const files = Array.from(event.target.files) as File[];
-    if (files.length === 0) {
-      return 0;
-    }
-    for (const file of files) {
-
-      const uploadTask = this.storage.upload(`uploads/${file.name}`, file);
-      // wait for upload done
-      await uploadTask.then()
-      // check state upload task
-      if (uploadTask.task.snapshot.state === 'success') {
-        // lấy type file
-        let typeFile = file.name.slice(file.name.lastIndexOf('.') + 1, file.name.length);
-        // lấy tên file
-        let fileName = file.name.slice(0, file.name.lastIndexOf('.'));
-        const newImage: IFile = {
-          name: fileName,
-          type: typeFile,
-          parentId: this.parentId,
-          date: new Date(Date.now()),
-          daterepair: new Date(Date.now()),
-          linkDownload: uploadTask.task.snapshot.downloadURL,
-        };
-        this.fileService.addFolder(newImage).subscribe(() => {
-          this.fileService.getFile(this.parentId).subscribe(data => {
-            this.allFiles = new MatTableDataSource(data);
-            this.allFiles.sort = this.sort;
-          });
-        });
-      }
-      // console.log(uploadTask.task.snapshot.downloadURL);
-
-    }
-  }
-
-  public async onChooseFile(event) {
-    const file = event.target.files[0];
-    const uploadTask = this.storage.upload(`uploads/${file.name}`, file);
-    // await for update done
-    await uploadTask.then();
-    // check state upload task
-
-    if (uploadTask.task.snapshot.state === 'success') {
-      // lấy type file
-      let typeFile = file.name.slice(file.name.lastIndexOf('.') + 1, file.name.length);
-      // lấy tên file
-      let fileName = file.name.slice(0, file.name.lastIndexOf('.'));
-      const newImage: IFile = {
-        name: fileName,
-        type: typeFile,
-        parentId: this.parentId,
-        date: new Date(Date.now()),
-        daterepair: new Date(Date.now()),
-        linkDownload: uploadTask.task.snapshot.downloadURL,
-      };
-      this.fileService.addFolder(newImage).subscribe(() => {
-        this.fileService.getFile(this.parentId).subscribe(data => {
-          this.allFiles = new MatTableDataSource(data);
-          this.allFiles.sort = this.sort;
-        });
-      });
-    }
-  }
-
   public onLeftClick() {
     // event.preventDefault();
     $('.menu-right').removeClass('menu-right-active');
   }
-  
+
   public onRightClick(event, row) {
     // lấy link download của file
     this.fileService.getAllFile().subscribe(data => {

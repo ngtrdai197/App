@@ -48,15 +48,15 @@ export class HomeComponent implements OnInit {
   }
 
   BackTop() {
-    $("html").animate({ scrollTop: 0 }, 700);
+    $('html').animate({ scrollTop: 0 }, 700);
   }
   dixuong() {
     const temp = $('.main-content').offset().top;
-    $("html").animate({ scrollTop: temp }, 700);
+    $('html').animate({ scrollTop: temp }, 700);
   }
   taiXuong() {
     const temp = $('.travel').offset().top;
-    $("html").animate({ scrollTop: temp }, 700);
+    $('html').animate({ scrollTop: temp }, 700);
   }
 
 }

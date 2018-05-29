@@ -29,7 +29,7 @@ export const appRoutes: Routes = [
           path: ':fileName/:folderId',
           component: FilesComponent,
         }
-      ] 
+      ]
     },
     { path: '**', component: PagenotfoundComponent },
   ];

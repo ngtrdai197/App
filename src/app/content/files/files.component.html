@@ -52,7 +52,7 @@
         </div>
 
         <div class="content-right">
-            <div *ngIf="statusDelete === true" class="delete float" (click)="deleteFolder()">
+            <!-- <div *ngIf="statusDelete === true" class="delete float" (click)="deleteFolder()">
                 <span class="btn btn-default glyphicon glyphicon-trash" aria-hidden="true">
                     <span>Xóa</span>
                 </span>
@@ -61,7 +61,7 @@
                 <span class="btn btn-default glyphicon glyphicon-pencil" aria-hidden="true">
                     <span>Đổi tên</span>
                 </span>
-            </div>
+            </div> -->
             <div class="sapxep float" title="Sắp xếp - hiển thị thư mục">
                 <div class="dropdown">
                     <span class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
@@ -100,6 +100,13 @@
         </div>
     </div>
     <div class="loadfiles" (click)="onLeftClick()">
+        <!-- Width for progress -->
+        <div class="progress" id="stateProgress" style="opacity: 0; width: 50%;">
+            <!-- Width for upload success -->
+            <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+                id="uploader"></div>
+        </div>
+        <!-- <progress value="0" max="100" id="uploader">Uploading ...</progress> -->
         <!-- Contain data -->
         <div class="example-container mat-elevation-z8">
             <mat-table #table [dataSource]="allFiles" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
@@ -109,6 +116,18 @@
                     <mat-cell *matCellDef="let element">
                         <span *ngIf="element.type === 'docx'">
                             <i class="far fa-file-word"></i>
+                        </span>
+                        <span *ngIf="element.type !== 'docx'&& element.type !== 'MP3' &&
+                        element.type !== 'xlsx'&& element.type !== 'pptx'&&
+                        element.type !== 'folder'&& element.type !== 'png'&&
+                        element.type !== 'jpg'&& element.type !== 'txt'&& element.type !== 'MP4'">
+                            <i class="far fa-file"></i>
+                        </span>
+                        <span *ngIf="element.type === 'MP3'">
+                            <i class="fas fa-file-audio"></i>
+                        </span>
+                        <span *ngIf="element.type === 'MP4'">
+                            <i class="far fa-file-video"></i>
                         </span>
                         <span *ngIf="element.type === 'xlsx'">
                             <i class="far fa-file-excel"></i>
@@ -159,12 +178,12 @@
         <!-- Menu right -->
         <div class="menu-right">
             <ul>
-                <li (click)="deleteFolder()">Delete folder/file</li>
-                <li (click)="renameFolder()">Rename folder/file</li>
+                <li class="item-menu-right" (click)="deleteFolder()">Delete folder/file</li>
+                <li class="item-menu-right" (click)="renameFolder()">Rename folder/file</li>
                 <li>
-                    <a href="{{linkImage}}" target="_blank">Download</a>
+                    <a class="download" href="{{linkImage}}" target="_blank">Download</a>
                 </li>
-                <li>Details folder/file</li>
+                <li class="item-menu-right">Details folder/file</li>
             </ul>
         </div>
     </div>
