@@ -31,7 +31,8 @@
                     <!-- <button [routerLink]="['/register']">Đăng kí ngay</button> -->
                     <a href="" style="text-decoration: underline;" class="btn btn-1" [routerLink]="['/register']">Đăng kí ngay</a>
                 </span>
-                <a class="btn btn-1">Đăng nhập bằng tài khoản DCloud khác</a>
+                <a class="btn btn-1" (click)="signInGoogle()">Sign in with Google</a>
+                <a class="btn btn-1" (click)="signInFacebook()">Sign in with Facebook</a>
             </form>
         </div>
     </div>

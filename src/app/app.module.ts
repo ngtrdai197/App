@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatTooltipModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
 import { AutheGuard } from './provider/authe.guard';
@@ -66,6 +66,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     AngularFireModule.initializeApp(environment.firebase),
     MatSortModule,
     AngularFireStorageModule,
+    MatTooltipModule,
   ],
   providers: [
     AutheGuard,

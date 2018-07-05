@@ -9,6 +9,8 @@ import { User } from '../interface/user';
 import { AutheService } from '../provider/authe.service';
 import { Router } from '@angular/router';
 import { ThongTinUserService } from '../provider/thongtinuser.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 @Component({
   selector: 'app-register',
@@ -16,10 +18,9 @@ import { ThongTinUserService } from '../provider/thongtinuser.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  checked: any = false;
   public registerForm: FormGroup;
-  public isSubmitting = false;
   users: User[];
+  usersDelete: User[];
   user: '';
   email: '';
   pass: '';
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
     userName: '',
     passWord: '',
     passWordConfirm: '',
+    checkbox: false,
   };
   constructor(
     private formBuilder: FormBuilder,
@@ -53,48 +55,27 @@ export class RegisterComponent implements OnInit {
   }
 
   creatAccount() {
-
-    let checkUser: any = true; // kiem tra user dang ki ton tai chua
-
-    if (this.registerForm.get('userName').invalid) {
-      this.toastrService.Error('User name nhập vào có độ dài từ 8 - 24 kí tự');
-    } else if (this.registerForm.get('email').invalid) {
-      this.toastrService.Error('Email nhập vào không hợp lệ. Và cần phải có kí tự @');
-    } else if (this.registerForm.get('passWord').invalid) {
-      this.toastrService.Error('Mật khẩu nhập vào có độ dài từ 8 - 16 kí tự');
-    } else if (this.registerForm.get('passWordConfirm').invalid) {
-      this.toastrService.Error('Mật khẩu nhập lại không trùng khớp với mật khẩu cũ');
-    } else {
-      this.users.forEach(user => {
-        if (user.userName === this.user) {
-          checkUser = false;
-        }
-      });
-      if (this.checked === false) {
-        this.toastrService.Error('Check vào đồng ý với điều khoản của chúng tôi !');
-      } else if (checkUser === false) {
-        this.toastrService.Error('Tài khoản bạn nhập bị trùng. Thử tài khoản khác.');
-      } else {
-        const user: User = {
-          userName: this.user,
-          email: this.email,
-          passWord: this.pass,
-        };
-        this.userFBService.addUser(user);
-        this.toastrService.Success('Đăng kí thành công !');
-        this.autheService.Login().subscribe(isLogin => {
-          if (isLogin) {
-            this.thongTinUser.addUser(user).subscribe(tt => {
-              this.router.navigate(['/root']);
-            });
-          }
-
-        });
-        this.user = '';
-        this.pass = '';
-        this.email = '';
-        this.passConfirm = '';
+    let checkUser = true;
+    this.users.forEach(user => {
+      if (user.userName === this.user) {
+        checkUser = false;
       }
+    });
+    if (checkUser = false) {
+      this.toastrService.Error('Tài khoản bạn nhập bị trùng. Thử tài khoản khác.');
+    } else {
+      const user: User = {
+        userName: this.user,
+        email: this.email,
+        passWords: this.pass,
+      };
+      this.userFBService.addUser(user);
+      this.toastrService.Success('Đăng kí thành công !');
+      this.router.navigate(['/login']);
+      this.user = '';
+      this.pass = '';
+      this.email = '';
+      this.passConfirm = '';
     }
   }
 
@@ -114,6 +95,9 @@ export class RegisterComponent implements OnInit {
       ]],
       passWordConfirm: ['', [
         Validators.required, Validators.minLength(8), Validators.maxLength(16), this.matchPassWord,
+      ]],
+      checkbox: [false, [
+        Validators.requiredTrue,
       ]]
     });
     this.registerForm.valueChanges.subscribe(() => {
@@ -139,14 +123,6 @@ export class RegisterComponent implements OnInit {
     if (!pwd || !cpwd) { return; }
     if (pwd.value !== cpwd.value) {
       return { invalid: true };
-    }
-  }
-
-  checkedBox() {
-    if (this.checked === false) {
-      this.checked = true;
-    } else if (this.checked === true) {
-      this.checked = false;
     }
   }
 

@@ -33,18 +33,14 @@ export class HomeComponent implements OnInit {
   }
 
   accessFiles() {
-    // this.thongTinUser.getUser().subscribe(user => {
-    //   this.user = user;
-    //   if (this.user.length != 0) {
-    //     this.autheService.Login().subscribe(() => {
-    //       this.router.navigate(['root']);
-    //     });
-    //   } else {
-    //     this.router.navigate(['login']);
-    //   }
-
-    // })
-    this.router.navigate(['login']);
+    const stateUser = sessionStorage.getItem('userName');
+    if (stateUser) {
+      this.autheService.Login().subscribe(isLogin => {
+        if (isLogin) { this.router.navigate(['/root']); }
+      });
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   BackTop() {

@@ -49,3 +49,10 @@
     border: transparent;
 }
 
+.photoURL img{
+    height: 50px;
+    width: 50;
+    border-radius: 50%;
+    padding-left: 10px;
+    cursor: pointer;
+}

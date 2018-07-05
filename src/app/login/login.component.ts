@@ -6,7 +6,10 @@ import { ThongTinUserService } from '../provider/thongtinuser.service';
 import { User } from '../interface/user';
 import { UserFireBaseService } from '../provider/usersfirebase.service';
 import { ToastrService } from '../provider/toastr.service';
-import { Subscription } from 'rxjs/Subscription';
+
+// import * as firebase from 'firebase';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +18,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class LoginComponent implements OnInit {
   // Check file delete
   checkStatus: false;
-  usersArr: User[];
+  users: User[];
   userTemp: User[];
   pathLogin: '';
   constructor(
@@ -27,45 +30,53 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.thongTinUser.getUser().subscribe(userData => {
-      this.userTemp = userData;
+    this.usersService.getUsers().subscribe(user => {
+      this.users = user;
     });
+    console.log('log ');
+    
   }
 
   onSubmit(userName, passWords) {
-    let kiemtra = 0;
-    // neu length === 0 => data user = 0 => add new user
-    if (this.userTemp.length === 0) {
-      const subscription = this.usersService.getUsers().subscribe(data => {
-        this.usersArr = data;
-        this.usersArr.forEach(user => {
-          // kiem tra user nhap vao co trong data user khong?
-          if (user.userName === userName && user.passWord === passWords) {
-            this.autheService.Login().subscribe(isLogin => {
-              if (isLogin) {
-                this.thongTinUser.addUser(user).subscribe(tt => {
-                  this.router.navigate(['/root']);
-                });
-              }
-            });
-            kiemtra = 1;
-          } else {
-            this.autheService.status(this.checkStatus);
+    let state = 0;
+    this.users.forEach(e => {
+      if (e.userName === userName && e.passWords === passWords) {
+        state = 1;
+        this.autheService.Login().subscribe(isLogin => {
+          if (isLogin) {
+            sessionStorage.setItem('userName', e.userName);
+            sessionStorage.setItem('userEmail', e.email);
+            this.router.navigate(['/root']);
           }
         });
-        subscription.unsubscribe();
-        if (kiemtra === 0) {
-          this.toastrService.Warning('Information enter invalid');
-        }
-      });
-    } else {
-      // neu data user !=0 => di vao file root
-      this.autheService.Login().subscribe(isLogin => {
-        if (isLogin) {
-          this.router.navigate(['/root']);
-        }
-      });
-    }
-
+      }
+    });
+    if (state === 0) { this.toastrService.Warning('Information enter invalid'); }
   }
+
+  // signInGoogle() {
+  //   const provider = new firebase.auth.GoogleAuthProvider();
+  //   firebase.auth().signInWithPopup(provider).then(result => {
+  //     sessionStorage.clear();
+  //     this.autheService.isLogin = true;
+  //     this.router.navigate(['/root']);
+  //     sessionStorage.setItem('userName', result.user.displayName);
+  //     sessionStorage.setItem('userEmail', result.user.email);
+  //     sessionStorage.setItem('photoURL', result.user.photoURL);
+  //     console.log(result);
+
+  //   }).catch((err) => {
+  //     console.log(err);
+  //     console.log('fail');
+  //   });
+  // }
+
+  // signInFacebook() {
+  //   const provider = new firebase.auth.FacebookAuthProvider();
+  //   firebase.auth().signInWithPopup(provider).then(result => {
+  //   }).catch((err) => {
+  //     console.log(err);
+  //     console.log('fail');
+  //   });
+  // }
 }

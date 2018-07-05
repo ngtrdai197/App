@@ -290,6 +290,11 @@
         color: #4e4eec;
         font-size: 17px;
     }
+    .photoURL img{
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+    }
 }
 .show{
     display: block;

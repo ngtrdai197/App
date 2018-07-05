@@ -3,142 +3,26 @@
     {
       "name": "Angular 5",
       "type": "folder",
-      "date": "2018-05-13T04:59:47.911Z",
-      "daterepair": "2018-05-13T04:59:47.911Z",
+      "date": "2018-06-02T11:57:03.415Z",
+      "daterepair": "2018-06-02T11:57:03.415Z",
       "parentId": 0,
-      "id": 1
+      "id": 6
     },
     {
-      "name": "Document",
+      "name": "23333",
       "type": "folder",
-      "date": "2018-05-13T05:00:13.389Z",
-      "daterepair": "2018-05-13T05:00:13.389Z",
-      "parentId": 1,
-      "id": 2
-    },
-    {
-      "name": "Docs",
-      "type": "folder",
-      "date": "2018-05-13T05:01:09.560Z",
-      "daterepair": "2018-05-18T11:23:05.222Z",
+      "date": "2018-06-06T15:22:47.692Z",
+      "daterepair": "2018-06-10T06:41:53.281Z",
       "parentId": 0,
-      "id": 4
+      "id": 8
     },
     {
-      "name": "NodeJs",
+      "name": "dssss",
       "type": "folder",
-      "date": "2018-05-15T16:11:11.981Z",
-      "daterepair": "2018-05-15T16:11:11.981Z",
+      "date": "2018-06-06T16:09:52.547Z",
+      "daterepair": "2018-06-10T06:41:59.213Z",
       "parentId": 0,
-      "id": 18
-    },
-    {
-      "name": "News",
-      "type": "folder",
-      "date": "2018-05-15T16:12:32.855Z",
-      "daterepair": "2018-05-15T16:12:32.855Z",
-      "parentId": "1",
-      "id": 20
-    },
-    {
-      "name": "React Js",
-      "type": "folder",
-      "date": "2018-05-18T10:49:57.986Z",
-      "daterepair": "2018-05-18T10:49:57.986Z",
-      "parentId": "Docs",
-      "id": 31
-    },
-    {
-      "name": "Library",
-      "type": "folder",
-      "date": "2018-05-18T10:58:12.237Z",
-      "daterepair": "2018-05-18T10:58:12.237Z",
-      "parentId": "4",
-      "id": 32
-    },
-    {
-      "name": "Nhạc",
-      "type": "folder",
-      "date": "2018-05-18T13:00:03.600Z",
-      "daterepair": "2018-05-18T13:00:03.600Z",
-      "parentId": 0,
-      "id": 33
-    },
-    {
-      "name": "Giáo trình công nghệ phần mềm",
-      "type": "folder",
-      "date": "2018-05-19T12:34:49.668Z",
-      "daterepair": "2018-05-19T12:34:49.668Z",
-      "parentId": 1,
-      "id": 41
-    },
-    {
-      "name": "Local",
-      "type": "folder",
-      "date": "2018-05-23T15:48:55.366Z",
-      "daterepair": "2018-05-23T15:48:55.366Z",
-      "parentId": 4,
-      "id": 45
-    },
-    {
-      "name": "Linux",
-      "type": "folder",
-      "date": "2018-05-28T04:33:01.998Z",
-      "daterepair": "2018-05-28T05:18:57.848Z",
-      "parentId": 0,
-      "id": 46
-    },
-    {
-      "name": "VeHHCN",
-      "type": "rar",
-      "parentId": 32,
-      "date": "2018-05-28T04:35:04.821Z",
-      "daterepair": "2018-05-28T04:35:04.821Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FVeHHCN.rar?alt=media&token=af17a96f-7555-4a8d-9cc1-6eb9a04c7d21",
-      "id": 47
-    },
-    {
-      "name": "Người Âm Phủ - OSAD, VRT - Bài hát, lyrics",
-      "type": "MP3",
-      "parentId": 33,
-      "date": "2018-05-28T05:13:42.271Z",
-      "daterepair": "2018-05-28T05:13:42.271Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FNg%C6%B0%E1%BB%9Di%20%C3%82m%20Ph%E1%BB%A7%20-%20OSAD%2C%20VRT%20-%20B%C3%A0i%20h%C3%A1t%2C%20lyrics.MP3?alt=media&token=a8e0b359-fc98-48c2-8dbf-ade8211f970c",
-      "id": 48
-    },
-    {
-      "name": "Linux command line Basics For Beginners - Udemy",
-      "type": "MP4",
-      "parentId": 46,
-      "date": "2018-05-28T05:20:16.813Z",
-      "daterepair": "2018-05-28T05:20:16.813Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FLinux%20command%20line%20Basics%20For%20Beginners%20-%20Udemy.MP4?alt=media&token=4f0d5312-d45c-4591-ab3f-f0170807fb9c",
-      "id": 49
-    },
-    {
-      "name": "word",
-      "type": "docx",
-      "date": "2018-05-28T05:29:30.837Z",
-      "daterepair": "2018-05-28T05:29:30.837Z",
-      "parentId": 0,
-      "id": 50
-    },
-    {
-      "name": "Người Âm Phủ - OSAD, VRT - Bài hát, lyrics",
-      "type": "MP3",
-      "parentId": 0,
-      "date": "2018-05-29T05:38:43.653Z",
-      "daterepair": "2018-05-29T05:38:43.653Z",
-      "linkDownload": "https://firebasestorage.googleapis.com/v0/b/dcloud-bdb23.appspot.com/o/uploads%2FNg%C6%B0%E1%BB%9Di%20%C3%82m%20Ph%E1%BB%A7%20-%20OSAD%2C%20VRT%20-%20B%C3%A0i%20h%C3%A1t%2C%20lyrics.MP3?alt=media&token=deaeb4e5-9f3a-47ad-974c-731790d731d2",
-      "id": 51
-    },
-    {
-      "name": "New Folder",
-      "type": "folder",
-      "date": "2018-05-29T05:40:16.217Z",
-      "daterepair": "2018-05-29T05:40:16.217Z",
-      "parentId": 18,
-      "id": 52
+      "id": 10
     }
   ],
   "users": []

@@ -194,12 +194,12 @@
         <div class="div">
             <p class="taikhoan">Tài khoản của tôi</p>
         </div>
-        <div *ngFor="let u of user">
-            <p class="xinchao">Xin chào: {{u.userName}}</p>
-            <p class="email">Địa chỉ Email: {{u.email}}</p>
+        <div *ngIf="stateUser === true">
+            <p class="xinchao">Xin chào: {{stateUserName}}</p>
+            <p class="email">Địa chỉ Email: {{stateEmail}}</p>
             <p class="hoso">Hồ sơ của tôi</p>
             <p class="taikhoancuatoi">Tài khoản của tôi</p>
-            <p class="dangxuat" (click)="backToHome()">Đăng xuất</p>
+            <p class="dangxuat" (click)="logOut()">Đăng xuất</p>
         </div>
     </div>
 </div>

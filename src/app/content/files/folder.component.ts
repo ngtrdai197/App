@@ -13,15 +13,16 @@ import { log } from 'util';
   selector: 'app-folder',
   template: `
       <h2 mat-dialog-title>Thư mục</h2>
-      <mat-form-field>
+      <mat-form-field style="width:100%">
       <input id="folderName" #folder [(ngModel)]="dataFolder" matInput placeholder="Enter your folder name ...">
     </mat-form-field>
-    <mat-dialog-actions>
-      <button mat-button mat-raised-button [mat-dialog-close]="false">No</button>
+    <mat-dialog-actions style="justify-content:flex-end;">
+      <button mat-button mat-raised-button [mat-dialog-close]="false" style="margin-right: 20px;">No</button>
       <button mat-button mat-raised-button color="primary" [mat-dialog-close]="true"
       (click)="getName(folder.value)">Yes</button>
     </mat-dialog-actions>
     `
+
 })
 
 export class FolderComponent implements OnInit {
@@ -29,7 +30,7 @@ export class FolderComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<FolderComponent>,
     private fileService: FilesService,
-    ) { }
+  ) { }
   ngOnInit() {
     this.renameData();
   }

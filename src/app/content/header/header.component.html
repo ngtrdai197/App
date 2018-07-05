@@ -29,8 +29,11 @@
 
     <!-- <div class="exit item" (click)="backToHome()">Log out</div> -->
     <div class="item2" (click)="displayUser()" style="color: #ffffff;">
-      <span style="font-size: 45px;line-height: 59px;cursor: pointer;padding-left: 7px;" title="Thông tin của bạn">
+      <span style="font-size: 45px;line-height: 59px;cursor: pointer;padding-left: 7px;" title="Thông tin của bạn" *ngIf="checkShowPhoto === false">
         <i class="fa fa-user-circle"></i>
+      </span>
+      <span *ngIf="checkShowPhoto === true" class="photoURL">
+        <img src="{{photoURL}}" alt="photoURL">
       </span>
     </div>
   </div>

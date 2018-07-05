@@ -4,4 +4,6 @@ export interface FileData {
     date: Date;
     id: number;
     daterepair: Date;
+    parentId?: number;
+    linkDownload?: string;
 }

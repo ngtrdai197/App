@@ -8,30 +8,44 @@
             <form [formGroup]="registerForm">
                 <div class="taikhoan">
                     <div class="the-p">
-                        <input type="text" id="userName" placeholder="Nhập tài khoản ..." formControlName="userName" [(ngModel)]="user">
+                        <div class="cover-input">
+                            <input type="text" id="userName" placeholder="Nhập tài khoản ..." formControlName="userName" [(ngModel)]="user">
+                            <span *ngIf="registerForm.controls.userName.invalid && registerForm.controls.userName.touched" class="invalid">User name nhập vào có độ dài từ 8 - 24 kí tự</span>
+                        </div>
                     </div>
                 </div>
                 <div class="email">
                     <div class="the-p">
-                        <input type="email" name="" id="email" placeholder="Nhập địa chỉ email của bạn ... " formControlName="email" [(ngModel)]="email">
+                        <div class="cover-input">
+                            <input type="email" name="" id="email" placeholder="Nhập địa chỉ email của bạn ... " formControlName="email" [(ngModel)]="email">
+                            <span *ngIf="registerForm.controls.email.invalid && registerForm.controls.email.touched" class="invalid">Email nhập vào không hợp lệ. Và cần phải có kí tự @</span>
+                        </div>
                     </div>
                 </div>
                 <div class="matkhau">
                     <div class="the-p">
-                        <input type="password" id="passWord" placeholder="Nhập mật khẩu ..." formControlName="passWord" [(ngModel)]="pass">
+                        <div class="cover-input">
+                            <input type="password" id="passWord" placeholder="Nhập mật khẩu ..." formControlName="passWord" [(ngModel)]="pass">
+                            <span *ngIf="registerForm.controls.passWord.invalid && registerForm.controls.passWord.touched" class="invalid">Mật khẩu nhập vào có độ dài từ 8 - 16 kí tự</span>
+                        </div>
                     </div>
                 </div>
                 <div class="matkhauconfirm">
                     <div class="the-p">
-                        <input type="password" id="passWordConfirm" placeholder="Nhập lại mật khẩu ..." formControlName="passWordConfirm" [(ngModel)]="passConfirm">
+                        <div class="cover-input">
+                            <input type="password" id="passWordConfirm" placeholder="Nhập lại mật khẩu ..." formControlName="passWordConfirm" [(ngModel)]="passConfirm">
+                            <span *ngIf="registerForm.controls.passWordConfirm.invalid && registerForm.controls.passWordConfirm.dirty" class="invalid">Mật khẩu nhập lại không trùng khớp với mật khẩu cũ</span>
+                        </div>
                     </div>
                 </div>
                 <div class="check">
-                    <input type="checkbox" [name]="checked" (click)="checkedBox()">
-                    <span>Tôi đồng ý với điều khoản của DCloud</span>
+                    <div class="the-p">
+                        <input type="checkbox" [name]="checked" (click)="checkedBox()" formControlName="checkbox">
+                        <span>Tôi đồng ý với điều khoản của DCloud</span>
+                    </div>
                 </div>
                 <div class="click-dangnhap">
-                    <button (click)="creatAccount()">Create an account</button>
+                    <button (click)="creatAccount()" [disabled]="registerForm.invalid">Create an account</button>
                 </div>
                 <a class="btn btn-1" [routerLink]="['/login']">Đăng nhập bằng tài khoản DCloud khác</a>
                 <p class="signin-google">

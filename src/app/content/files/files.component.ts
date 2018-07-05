@@ -9,6 +9,11 @@ import { MatDialog } from '@angular/material';
 import { MatTableDataSource, MatSort, MatSortable } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Observable } from 'rxjs/Observable';
+
+// tslint:disable-next-line:import-blacklist
+import 'rxjs/Rx';
+// import * as firebase from 'firebase';
 
 import { DeleteFileService } from '../../provider/delete.service';
 import { UserFireBaseService } from '../../provider/usersfirebase.service';
@@ -18,6 +23,7 @@ import { FolderComponent } from '../files/folder.component';
 import { ShowAccountService } from '../../provider/showaccount.service';
 import { FileData } from '../../interface/filedata';
 import { ToastrService } from '../../provider/toastr.service';
+import { AutheService } from '../../provider/authe.service';
 
 declare var $: any;
 
@@ -29,6 +35,10 @@ declare var $: any;
 export class FilesComponent implements OnInit {
   allFiles: any;
   statusDelete = false;
+  stateUser = false;
+  stateUserName = '';
+  stateEmail = '';
+  statePhotoURL = '';
   user: User[];
   idFolder: any;
   linkImage = '';
@@ -52,6 +62,7 @@ export class FilesComponent implements OnInit {
     private toaStrService: ToastrService,
     private activateRoute: ActivatedRoute,
     private storage: AngularFireStorage,
+    private authe: AutheService,
   ) { }
 
   ngOnInit() {
@@ -65,7 +76,17 @@ export class FilesComponent implements OnInit {
     this.reLoadFiles();
     this.userLogin();
     this.showAccount();
+    this.intervalData();
   }
+
+  public intervalData() {
+    const getData = Observable.interval(2500).subscribe(() => {
+      this.fileService.getFile(this.parentId).subscribe(data => {
+        this.allFiles = new MatTableDataSource(data);
+      });
+    });
+  }
+
   // load file khi truy cap vao parentID (params thay doi)
   public paramsFunction() {
     this.activateRoute.params.subscribe(() => {
@@ -73,6 +94,7 @@ export class FilesComponent implements OnInit {
       params = params.slice(0, params.lastIndexOf('.'));
       this.parentId = +params || 0;
       this.loadFiles();
+      console.log(params);
     });
   }
 
@@ -155,15 +177,15 @@ export class FilesComponent implements OnInit {
     this.allFiles.sort = this.sort;
   }
 
-  public async openDiaLogFolder() {
+  public openDiaLogFolder() {
     const dialogRef = this.diaLog.open(FolderComponent, {
-      width: '300px',
+      width: '420px',
     });
     this.fileService.nameFolder('');
     dialogRef.afterClosed().subscribe((isConfirm) => {
       if (isConfirm) {
         const subscription = this.fileService.getNameFolder().subscribe(folderName => {
-          this.fileService.getAllFile().subscribe(async data => {
+          this.fileService.getAllFile().subscribe(data => {
             this.allFiles = data;
             // kiểm tra tên folder đã tồn tại chưa
             let checkName = true;
@@ -182,17 +204,7 @@ export class FilesComponent implements OnInit {
                 parentId: this.parentId,
               };
 
-              this.fileService.addFolder(newFolder).subscribe(() => {
-                this.fileService.getFile(this.parentId).subscribe(dataParent => {
-                  this.allFiles = new MatTableDataSource(dataParent);
-                  this.allFiles.sort = this.sort;
-                });
-                this.toaStrService.Success('Thêm folder thành công !');
-              });
-              // uploads to firebase
-              const storageRef = this.storage.storage.ref();
-              const uploadTask = storageRef.child(`uploads/${folderName}`).put(newFolder);
-
+              this.fileService.addFolder(newFolder).subscribe();
             } else {
               this.fileService.getFile(this.parentId).subscribe(dataParent => {
                 this.allFiles = new MatTableDataSource(dataParent);
@@ -209,7 +221,7 @@ export class FilesComponent implements OnInit {
 
   public openDiaLogFile() {
     const dialogRef = this.diaLog.open(FolderComponent, {
-      width: '300px',
+      width: '420px',
     });
     this.fileService.nameFolder('');
     dialogRef.afterClosed().subscribe((isConfirm) => {
@@ -236,8 +248,8 @@ export class FilesComponent implements OnInit {
               this.fileService.addFolder(newFolder).subscribe(() => {
                 this.fileService.getFile(this.parentId).subscribe(dataParent => {
                   this.allFiles = new MatTableDataSource(dataParent);
-                  this.allFiles.sort = this.sort;
                 });
+                this.toaStrService.Success('Thêm file thành công !');
               });
             } else {
               this.fileService.getFile(this.parentId).subscribe(dataParent => {
@@ -254,7 +266,7 @@ export class FilesComponent implements OnInit {
 
   public openDiaLogFileExcel() {
     const dialogRef = this.diaLog.open(FolderComponent, {
-      width: '300px',
+      width: '420px',
     });
     this.fileService.nameFolder('');
     dialogRef.afterClosed().subscribe((isConfirm) => {
@@ -281,8 +293,8 @@ export class FilesComponent implements OnInit {
               this.fileService.addFolder(newFolder).subscribe(() => {
                 this.fileService.getFile(this.parentId).subscribe(dataParent => {
                   this.allFiles = new MatTableDataSource(dataParent);
-                  this.allFiles.sort = this.sort;
                 });
+                this.toaStrService.Success('Thêm file thành công !');
               });
             } else {
               this.fileService.getFile(this.parentId).subscribe(dataParent => {
@@ -299,7 +311,7 @@ export class FilesComponent implements OnInit {
 
   public openDiaLogFilePowerPoint() {
     const dialogRef = this.diaLog.open(FolderComponent, {
-      width: '300px',
+      width: '420px',
     });
     this.fileService.nameFolder('');
     dialogRef.afterClosed().subscribe((isConfirm) => {
@@ -326,8 +338,8 @@ export class FilesComponent implements OnInit {
               this.fileService.addFolder(newFolder).subscribe(() => {
                 this.fileService.getFile(this.parentId).subscribe(dataParent => {
                   this.allFiles = new MatTableDataSource(dataParent);
-                  this.allFiles.sort = this.sort;
                 });
+                this.toaStrService.Success('Thêm file thành công !');
               });
             } else {
               this.fileService.getFile(this.parentId).subscribe(dataParent => {
@@ -358,8 +370,9 @@ export class FilesComponent implements OnInit {
 
       const uploadTask = this.storage.upload(`uploads/${file.name}`, file);
 
-      // wait for upload done
       document.getElementById('stateProgress').style.opacity = '1';
+
+      // wait for upload done
       await uploadTask.then();
       const percentage = +(uploadTask.task.snapshot.bytesTransferred / uploadTask.task.snapshot.totalBytes) * 100;
       document.getElementById('uploader').style.width = percentage + '%';
@@ -438,12 +451,10 @@ export class FilesComponent implements OnInit {
       this.fileService.addFolder(newImage).subscribe(() => {
         this.fileService.getFile(this.parentId).subscribe(data => {
           this.allFiles = new MatTableDataSource(data);
-          this.allFiles.sort = this.sort;
         });
       });
     }
   }
-
 
   renameFolder() {
     const dialogRef = this.diaLog.open(FolderComponent, {
@@ -497,31 +508,42 @@ export class FilesComponent implements OnInit {
   }
 
   deleteFolder() {
-    let check = false;
-    const subscription = this.fileService.getAllFile().subscribe(data => {
+    let check = 0;
+    let checkFirebase = 0;
+    this.fileService.getAllFile().subscribe(data => {
       this.fileData = data;
       for (let index = 0; index < this.fileData.length; index++) {
         if (this.idFolder === this.fileData[index].id) {
-          check = true;
-          return;
+          check = 1;
+          if (this.fileData[index].linkDownload !== undefined) {
+            checkFirebase = 1;
+          }
         }
       }
-      subscription.unsubscribe();
-    });
-    if (check = true) {
-      this.fileService.deleteFolder(this.idFolder).subscribe(() => {
-        this.fileService.getFile(this.parentId).subscribe(data => {
-          this.allFiles = new MatTableDataSource(data);
-          this.allFiles.sort = this.sort;
+      if (check === 1 && checkFirebase === 0) {
+        this.fileService.deleteFolder(this.idFolder).subscribe(() => {
+          this.fileService.getFile(this.parentId).subscribe(dataParentId => {
+            this.allFiles = new MatTableDataSource(dataParentId);
+          });
+          this.toaStrService.Success('Delete file successful');
         });
-      });
-      const desertRef = this.storage.ref(`uploads/${this.nameDelete}`);
-      desertRef.delete().toPromise().then(() => {
-        this.toaStrService.Success('Delete file successful');
-      }).catch(error => {
-        console.log(error);
-      });
-    }
+      }
+      if (check === 1 && checkFirebase === 1) {
+        this.fileService.deleteFolder(this.idFolder).subscribe(() => {
+          this.fileService.getFile(this.parentId).subscribe(dataParentId => {
+            this.allFiles = new MatTableDataSource(dataParentId);
+          });
+        });
+        const desertRef = this.storage.ref(`uploads/${this.nameDelete}`);
+        desertRef.delete().toPromise().then(() => {
+          this.toaStrService.Success('Delete file successful');
+        }).catch(error => {
+          console.log(error);
+        });
+
+      }
+    });
+
   }
 
   // check row được chọn và đánh dấu để xóa
@@ -533,31 +555,37 @@ export class FilesComponent implements OnInit {
 
   // lấy thông tin của user đăng nhập vào để hiển thị chi tiết thông tin user
   userLogin() {
-    this.thongTinUser.getUser().subscribe(user => {
-      this.user = user;
-    });
+    this.stateUser = true;
+    this.stateUserName = sessionStorage.getItem('userName');
+    this.stateEmail = sessionStorage.getItem('userEmail');
   }
 
-  backToHome() {
-    setTimeout(() => {
-      this.thongTinUser.deleteUser(1).subscribe(() => {
-        this.router.navigate(['home']);
-      });
-    }, 500);
-  }
+  // logOut() {
+  //   firebase.auth().signOut().then(result => {
+  //     console.log('Logout success');
+  //   }).catch(err => {
+  //     console.log(err);
+  //   });
+  //   this.router.navigate(['/']);
+  //   sessionStorage.clear();
+  //   this.authe.isLogin = false;
+  // }
 
   // đóng-mở thông tin chi tiết của user
   showAccount() {
     this.showAcc.getShowAccount().subscribe(showIFUser => {
       const strCheck = showIFUser;
-      if (strCheck === 'show') {
-        $('.details-user').addClass('show');
-        $('.content-files').addClass('hien');
-      } else if (strCheck === 'hidden') {
-        $('.details-user').removeClass('show');
-        $('.content-files').removeClass('hien');
+      if (this.authe.isLogin === true) {
+        if (strCheck === 'show') {
+          $('.details-user').addClass('show');
+          $('.content-files').addClass('hien');
+        } else if (strCheck === 'hidden') {
+          $('.details-user').removeClass('show');
+          $('.content-files').removeClass('hien');
+        }
+        this.checkCloseUser = strCheck;
       }
-      this.checkCloseUser = strCheck;
+
     });
   }
 

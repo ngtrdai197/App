@@ -67,7 +67,9 @@
             }
             .the-p{
                 margin: 10px 0;
-                input{
+                .cover-input{
+                    position: relative;
+                    input{
                     height: 40px;
                     width: 315px;
                     padding: 15px 0 15px 5px;
@@ -76,14 +78,28 @@
                     outline: none;
                     
                 }
-                input:focus{
-                    border-bottom: 1px solid blue;
+                    input:focus{
+                        border-bottom: 1px solid blue;
+                    }
+                    p{
+                        margin: 20px 0 4px;
+                        color: #000;
+                        font-size: 18px;
+                    }
+
+                    .invalid{
+                        position: absolute;
+                        bottom: 7px;
+                        z-index: 1000;
+                        font-size: 12px;
+                        color: red;
+                        background: #e8e8e8;
+                        padding: 5px 10px;
+                        border-radius: 22px;
+                        right: -90%;
+                    }
                 }
-                p{
-                    margin: 20px 0 4px;
-                    color: #000;
-                    font-size: 18px;
-                }
+                
             }
             .signin-google{
                 width: 100%;
