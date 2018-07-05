@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { IFile } from '../interface/IFile';
-import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+// tslint:disable-next-line:import-blacklist
+import { BehaviorSubject, Observable } from 'rxjs';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -25,11 +26,11 @@ export class FilesService {
     }
 
     getFile(parentId = 0): any {
-        const url =`${this.API}?parentId=${parentId}`;
+        const url = `${this.API}?parentId=${parentId}`;
         return this.http.get(url);
     }
-    
-    getAllFile(): any{
+
+    getAllFile(): any {
         return this.http.get(this.API);
     }
 

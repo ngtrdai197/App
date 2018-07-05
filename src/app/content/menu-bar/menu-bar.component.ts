@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FilesService } from '../../provider/files.service';
 import { IFile } from '../../interface/IFile';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription ,  BehaviorSubject } from 'rxjs';
 import { MatTableDataSource } from '@angular/material';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DeleteFileService } from '../../provider/delete.service';
 
 @Component({

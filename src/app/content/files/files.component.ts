@@ -3,7 +3,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 
 import { FilesService } from '../../provider/files.service';
 import { IFile } from '../../interface/IFile';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material';
 import { MatTableDataSource, MatSort, MatSortable } from '@angular/material';

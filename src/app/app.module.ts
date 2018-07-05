@@ -3,7 +3,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AutheGuard, ReverseAutheGuard } from './provider/authe.guard';
 import { AutheService } from './provider/authe.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
