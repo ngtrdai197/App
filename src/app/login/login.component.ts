@@ -6,7 +6,7 @@ import { ThongTinUserService } from '../provider/thongtinuser.service';
 import { User } from '../interface/user';
 import { UserFireBaseService } from '../provider/usersfirebase.service';
 import { ToastrService } from '../provider/toastr.service';
-import { Observable } from 'rxjs/observable';
+// import { Observable } from 'rxjs/observable';
 
 @Component({
   selector: 'app-login',

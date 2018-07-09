@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { RegisterService } from './register.service';
-import { element } from 'protractor';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+// import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ToastrService } from '../provider/toastr.service';
 import { UserFireBaseService } from '../provider/usersfirebase.service';
 import { User } from '../interface/user';
